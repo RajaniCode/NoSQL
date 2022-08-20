@@ -1,0 +1,31 @@
+mongod --version
+
+
+#MongoDB Default Directory: "/<root>/db/data" viz. "/c/db/data" #OR "<Root>:\db\data" viz. "C:\db\data"
+rm -rf "/e/WT" #OR rm -rf "E:\WT"
+
+mkdir -p "/e/WT" #OR mkdir -p "E:\WT"
+
+
+#MongoDB Server #runserver #mongod -dbpath <Directory>/WT --storageEngine <storage engine>
+#MongoDB 3.2 Default Storage Engine WiredTiger defaullt port 27017:
+mongod -dbpath "/e/WT" --storageEngine wiredTiger
+
+#MongoDB 3.2 Default Storage Engine WiredTiger non-default port 27018:
+mongod -dbpath "/e/WT" --storageEngine wiredTiger --port 27018
+
+#MongoDB 3.0 Storage Engine MMAPv1 defaullt port 27017:
+mongod -dbpath "/e/MMAP" --storageEngine mmapv1
+
+#MongoDB 3.0 Storage Engine MMAPv1 non-default port 27018:
+mongod -dbpath "/e/MMAP" --storageEngine mmapv1 --port 27018
+
+
+#MongoDB mongo Shell
+mongo
+#OR
+winpty mongo
+db.version()
+quit()
+#OR
+exit

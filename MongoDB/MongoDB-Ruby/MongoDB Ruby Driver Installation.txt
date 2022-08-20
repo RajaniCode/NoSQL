@@ -1,0 +1,15 @@
+Installation
+
+The Ruby driver is bundled as a gem and is hosted on Rubygems [https://rubygems.org/gems/mongo].
+
+Install the gem
+
+The driver can be installed manually or with bundler.
+
+To install the gem manually:
+
+gem install mongo
+
+To install the gem with bundler, include the following in your Gemfile:
+
+gem 'mongo', '~> 2.4'
