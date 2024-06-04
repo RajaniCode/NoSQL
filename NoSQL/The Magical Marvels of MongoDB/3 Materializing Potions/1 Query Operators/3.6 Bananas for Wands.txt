@@ -1,0 +1,23 @@
+3.6 Bananas for Wands
+
+
+Wands come in a variety of lengths, and the magic folk use bananas for measurement. We've added a new lengths field to each wand that contains an array of the different lengths a wand comes in.
+
+To find a proper wand, we'll need one that fits our size.
+
+Write a query that will find any wands that contain lengths that are greater than or equal to 2.5 but less than 3. Remember, arrays can be tricky!
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+Answer:
+
+Shell Editor
+
+db.wands.find(
+  { "lengths": { "$elemMatch": { "$gte": 2.5, "$lt": 3 } } }
+)

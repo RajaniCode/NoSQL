@@ -1,0 +1,28 @@
+3.4 All You Need Is Love
+
+
+Wands can only have a few powers, so it's important to make sure your wand doesn't contain any powers you don't like.
+
+Write a query for wands that do not include "Love Burst" in their powers.
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "powers": {"$ne": "Love Burst" } }
+)
+
+Also:
+
+db.wands.find(
+  { "powers": {"$not": "Love Burst" } }
+)
+

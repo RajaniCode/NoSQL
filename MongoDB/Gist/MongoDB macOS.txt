@@ -1,0 +1,184 @@
+###########################################################################################################################
+
+# MongoDB
+
+###########################################################################################################################
+
+% brew --version
+% brew update
+% brew upgrade
+% brew --prefix
+% brew tap mongodb/brew
+[
+% brew untap mongodb/brew && brew tap mongodb/brew
+]
+% 
+# % brew install mongodb-community
+% mongod --version
+% where mongod
+% which mongod
+% type mongod
+
+% brew services start mongodb-community
+% brew services list
+% ps aux | grep -v grep | grep mongod
+[
+% brew services stop mongodb-community
+% brew services restart mongodb-community
+]
+
+[
+% brew uninstall mongodb-community
+
+% ls /opt/homebrew/var/log/mongodb/mongo.log
+% cat /opt/homebrew/var/log/mongodb/mongo.log
+% rm -rf /opt/homebrew/var/log/mongodb/mongo.log
+% ls /opt/homebrew/var/log/mongodb
+% rm -rf /opt/homebrew/var/log/mongodb
+
+% ls /opt/homebrew/var/mongodb
+% rm -rf /opt/homebrew/var/mongodb
+
+% ls /opt/homebrew/var/homebrew/linked/mongodb-database-tools
+% rm -rf /opt/homebrew/var/homebrew/linked/mongodb-database-tools
+% ls /opt/homebrew/var/homebrew/linked/mongosh
+% rm -rf /opt/homebrew/var/homebrew/linked/mongosh
+
+% ls /opt/homebrew/etc/mongod.conf
+% rm -rf /opt/homebrew/etc/mongod.conf
+
+% ls /opt/homebrew/Cellar/mongodb-database-tools
+% rm -rf /opt/homebrew/Cellar/mongodb-database-tools
+% ls /opt/homebrew/Cellar/mongosh
+% rm -rf /opt/homebrew/Cellar/mongosh
+
+% ls /opt/homebrew/opt/mongodb-database-tools
+% rm -rf /opt/homebrew/opt/mongodb-database-tools
+% ls /opt/homebrew/opt/mongosh
+% rm -rf /opt/homebrew/opt/mongosh
+
+# mongod # mongodump # mongoexport # mongofiles # mongoimport # mongorestore # mongos # mongosh # mongostat # mongotop
+% ls /opt/homebrew/bin/mongod
+% rm -rf /opt/homebrew/bin/mongod
+
+% ls /opt/homebrew/bin/mongodump
+% rm -rf /opt/homebrew/bin/mongodump
+
+% ls /opt/homebrew/bin/mongoexport
+% rm -rf /opt/homebrew/bin/mongoexport
+
+% ls /opt/homebrew/bin/mongofiles
+% rm -rf /opt/homebrew/bin/mongofiles
+
+% ls /opt/homebrew/bin/mongoimport
+% rm -rf /opt/homebrew/bin/mongoimport
+
+% ls /opt/homebrew/bin/mongorestore
+% rm -rf /opt/homebrew/bin/mongorestore
+
+% ls /opt/homebrew/bin/mongos
+% rm -rf /opt/homebrew/bin/mongos
+
+% ls /opt/homebrew/bin/mongosh
+% rm -rf /opt/homebrew/bin/mongosh
+
+% ls /opt/homebrew/bin/mongostat
+% rm -rf /opt/homebrew/bin/mongostat
+
+% ls /opt/homebrew/bin/mongotop
+% rm -rf /opt/homebrew/bin/mongotop
+]
+
+# log file
+/opt/homebrew/var/log/mongodb/mongo.log
+# log directory
+/opt/homebrew/var/log/mongodb
+# data directory
+/opt/homebrew/var/mongodb
+# configuration file
+/opt/homebrew/etc/mongod.conf
+
+[
+% ls /opt/homebrew/var
+% ls /opt/homebrew/var/mongodb
+% ls /opt/homebrew/var/log
+% ls /opt/homebrew/var/log/mongodb/mongo.log
+% ls /opt/homebrew/var/log/mongodb
+% ls /opt/homebrew/var/homebrew/linked
+% ls /opt/homebrew/var/homebrew/linked/mongodb-community
+% ls /opt/homebrew/var/homebrew/linked/mongodb-database-tools
+% ls /opt/homebrew/var/homebrew/linked/mongosh
+
+% ls /opt/homebrew/etc
+% ls /opt/homebrew/etc/mongod.conf
+
+% ls /opt/homebrew/Cellar
+% ls /opt/homebrew/Cellar/mongodb-community
+% ls /opt/homebrew/Cellar/mongodb-database-tools
+% ls /opt/homebrew/Cellar/mongosh
+
+% ls /opt/homebrew/opt
+% ls /opt/homebrew/opt/mongodb-community
+% ls /opt/homebrew/opt/mongodb-community@7.0
+% ls /opt/homebrew/opt/mongodb-database-tools
+% ls /opt/homebrew/opt/mongosh
+]
+
+# mongod # mongodump # mongoexport # mongofiles # mongoimport # mongorestore # mongos # mongosh # mongostat # mongotop
+% ls /opt/homebrew/bin
+
+# % pgrep mongo # % pkill mongo
+# % pgrep mongod # % pkill mongod
+# % ps -A | grep mongod | awk '{print $1}' # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod | awk '{print $2}' # kill <mongod pid>
+% ls /opt/homebrew/var/mongodb
+% ls /opt/homebrew/var/log/mongodb/mongo.log
+% mongod --dbpath /opt/homebrew/var/mongodb --logpath /opt/homebrew/var/log/mongodb/mongo.log --fork
+
+# % pgrep mongo # % pkill mongo
+# % pgrep mongod # % pkill mongod
+# % ps -A | grep mongod | awk '{print $1}' # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod | awk '{print $2}' # kill <mongod pid>
+% ls /opt/homebrew/etc/mongod.conf
+% sudo nano /opt/homebrew/etc/mongod.conf
+% cat /opt/homebrew/etc/mongod.conf 
+% mongod --config /opt/homebrew/etc/mongod.conf --fork
+
+% mongosh --version
+% where mongosh
+% which mongosh
+% type mongosh
+
+# REPL
+% mongosh
+> db.version()
+> exit
+
+% mongos --version
+% where mongos
+% which mongos
+% type mongos
+
+% mongoimport --version
+% where mongoimport
+% which mongoimport
+% type mongoimport
+
+% mongoexport --version
+% where mongoexport
+% which mongoexport
+% type mongoexport
+
+% mongodump --version
+% where mongodump
+% which mongodump
+% type mongodump
+
+% mongotop --version
+% where mongotop    
+% which mongotop  
+% type mongotop
+
+###########################################################################################################################

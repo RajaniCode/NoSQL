@@ -1,0 +1,19 @@
+1.4 Waving the Wand
+
+
+We're proud of the shiny new wand we've just purchased, so let's add it to the wands collection. Our wand's name is "Dream Bender" and its creator is "Foxmond".
+
+Write a command to insert our wand into the wands collection.
+
+
+Answer: db.wands.insert( {  "name": "Dream Bender", "creator": "Foxmond" } )
+
+Type help to see the help menu
+
+> db.wands.insert( {  "name": "Dream Bender", "creator": "Foxmond" } )
+
+WriteResult({ 'nInserted' : 1 })
+
+Congratulations, you're correct!
+
+> 

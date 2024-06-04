@@ -1,0 +1,14 @@
+4.13 Bewitched Access
+
+
+Which data modeling route allows us to access our data independently instead of having to use something like dot notation to get information?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Referencing
+
+Note: Data embedded within another document only exists within that document.

@@ -1,0 +1,19 @@
+# MongoDB Shell % mongosh --version
+% mongosh
+test> db.version()
+test> db.serverStatus().storageEngine
+test> show databases
+test> db.getMongo().getDBNames()
+test> db.adminCommand('listDatabases')
+test> show collections
+test> show tables
+test> db.getCollectionNames()
+test> use sampledb
+sampledb> show dbs
+sampledb> db.example.insertOne( {name: "MongoDB", version: "6.0.6", number: 6} )
+sampledb> show collections
+sampledb> show tables
+sampledb> db.getCollectionNames()
+sampledb> show dbs
+sampledb> db
+sampledb> exit

@@ -1,0 +1,45 @@
+1.9 Finding the Perfect Wand
+
+
+We've upgraded our wands with data for all of the new fields. Now we can write fun queries to find out — for example — which wands have "Fire" in their list of powers. Try writing a query based on this.
+
+
+Answer: db.wands.find( { "powers": "Fire" } )
+
+Type help to see the help menu
+
+> db.wands.find( { "powers": "Fire" } )
+{
+  "_id": ObjectId('f01a4524a6de4c8f98d4e8bf'),
+  "name": "Journey End",
+  "creator": "Foxmond",
+  "level_required": 1,
+  "price": 4.99,
+  "powers": [
+    "Molten",
+    "Fire"
+  ],
+  "damage": {
+    "magic": 0.7,
+    "melee": 0.6
+  }
+}
+{
+  "_id": ObjectId('2db8f9de713b486cb6196340'),
+  "name": "Destiny Fire",
+  "creator": "Sageseer",
+  "level_required": 2,
+  "price": 24.99,
+  "powers": [
+    "Fire",
+    "Spark"
+  ],
+  "damage": {
+    "magic": 2,
+    "melee": 2.6
+  }
+}
+
+Congratulations, you're correct!
+
+>

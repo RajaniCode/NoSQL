@@ -1,0 +1,66 @@
+3.7 Merlin's Mythical Madness
+
+
+Now that we're getting pretty good at finding wands, let's find the perfect wand for our friend Merlin.
+
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+1. Merlin's first requirement is the wand must not be made by "Foxmond". Write the query to find wands that don't have "Foxmond" as the maker.
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "maker": { "$ne": "Foxmond" } }
+)
+
+2. Next, Merlin's level is 75 so we'll want to add a query for a level_required that is less than or equal to 75.
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "maker": { "$ne": "Foxmond" }, "level_required": { "$lte": 75 } }
+)
+
+3. Merlin doesn't want to spend more than 50 gems. Add another query that makes sure the price is less than 50.
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "maker": { "$ne": "Foxmond" }, "level_required": {"$lte": 75 },
+  "price": {"$lt": 50}
+})
+
+4. Lastly, make sure the wand is 3 to 4 banana lengths. Remember, arrays can be tricky!
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "maker": { "$ne": "Foxmond" }, "level_required": {"$lte": 75 },
+  "price": {"$lt": 50} 
+})
+
+5.
+
+Answer: 
+
+Shell Editor
+
+db.wands.find(
+  { "maker": { "$ne": "Foxmond" }, "level_required": {"$lte": 75 },
+  "price": {"$lt": 50},
+ "lengths": { "$elemMatch": { "$gte": 3, "$lte": 4 } } 
+})

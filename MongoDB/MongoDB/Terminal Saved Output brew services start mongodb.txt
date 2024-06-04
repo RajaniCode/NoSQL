@@ -1,0 +1,138 @@
+Last login: Fri Jul 21 15:00:13 on console
+rajaniapple@Rajanis-MacBook-Pro ~ % brew --version
+Homebrew 4.1.0
+rajaniapple@Rajanis-MacBook-Pro ~ % brew --prefix
+/opt/homebrew
+rajaniapple@Rajanis-MacBook-Pro ~ % brew tap mongodb/brew
+rajaniapple@Rajanis-MacBook-Pro ~ % brew update
+Already up-to-date.
+rajaniapple@Rajanis-MacBook-Pro ~ % brew install mongodb-community@6.0
+==> Fetching dependencies for mongodb/brew/mongodb-community: mongodb/brew/mongodb-database-tools and mongosh
+==> Fetching mongodb/brew/mongodb-database-tools
+==> Downloading https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.7.3.zip
+Already downloaded: /Users/rajaniapple/Library/Caches/Homebrew/downloads/320fffd33638cf76b75125c59e1b4d39af9b24730cd4572214c4b89675fc896f--mongodb-database-tools-macos-arm64-100.7.3.zip
+==> Fetching mongosh
+==> Downloading https://ghcr.io/v2/homebrew/core/mongosh/manifests/1.10.1
+Already downloaded: /Users/rajaniapple/Library/Caches/Homebrew/downloads/2806c3f98b1a93a14ac268e2c0bf902ca1c0ff760c7253007407b5c190da61b3--mongosh-1.10.1.bottle_manifest.json
+==> Downloading https://ghcr.io/v2/homebrew/core/mongosh/blobs/sha256:2752d76ab512cd64c353853f8c9002893c11dd2c07487bce86580ba9fc0b4b7a
+Already downloaded: /Users/rajaniapple/Library/Caches/Homebrew/downloads/d0bd48275f7d40e865d88975722a4f0baf19ce6d68e9b6d435752d98659eeec0--mongosh--1.10.1.arm64_ventura.bottle.tar.gz
+==> Fetching mongodb/brew/mongodb-community
+==> Downloading https://fastdl.mongodb.org/osx/mongodb-macos-arm64-6.0.6.tgz
+Already downloaded: /Users/rajaniapple/Library/Caches/Homebrew/downloads/ab9dd9ef46c6f25730f2f5cb96ce513edce06aa144bfd476d6e4f5c0084f8dde--mongodb-macos-arm64-6.0.6.tgz
+==> Installing mongodb-community from mongodb/brew
+==> Installing dependencies for mongodb/brew/mongodb-community: mongodb/brew/mongodb-database-tools and mongosh
+==> Installing mongodb/brew/mongodb-community dependency: mongodb/brew/mongodb-database-tools
+🍺  /opt/homebrew/Cellar/mongodb-database-tools/100.7.3: 13 files, 111.9MB, built in 2 seconds
+==> Installing mongodb/brew/mongodb-community dependency: mongosh
+==> Pouring mongosh--1.10.1.arm64_ventura.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/mongosh/1.10.1: 9,828 files, 47.6MB
+==> Installing mongodb/brew/mongodb-community
+==> Caveats
+To start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+==> Summary
+🍺  /opt/homebrew/Cellar/mongodb-community/6.0.6: 11 files, 200.8MB, built in 3 seconds
+==> Running `brew cleanup mongodb-community`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+==> Caveats
+==> mongodb-community
+To start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services start mongodb/brew/mongodb-community
+==> Successfully started `mongodb-community` (label: homebrew.mxcl.mongodb-community)
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --version
+db version v6.0.6
+Build Info: {
+    "version": "6.0.6",
+    "gitVersion": "26b4851a412cc8b9b4a18cdb6cd0f9f642e06aa7",
+    "modules": [],
+    "allocator": "system",
+    "environment": {
+        "distarch": "aarch64",
+        "target_arch": "aarch64"
+    }
+}
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services list
+Name              Status  User        File
+mongodb-community started rajaniapple ~/Library/LaunchAgents/homebrew.mxcl.mongodb-community.plist
+rajaniapple@Rajanis-MacBook-Pro ~ % ps aux | grep -v grep | grep mongod
+rajaniapple       2305   1.8  0.4 411333424  74944   ??  S     3:02PM   0:01.09 /opt/homebrew/opt/mongodb-community/bin/mongod --config /opt/homebrew/etc/mongod.conf
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --version
+1.10.1
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh
+Current Mongosh Log ID:	64ba5101d2c0776ce491c037
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.1
+Using MongoDB:		6.0.6
+Using Mongosh:		1.10.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-07-21T15:02:27.195+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.version()
+6.0.6
+test> db.serverStatus().storageEngine
+{
+  name: 'wiredTiger',
+  supportsCommittedReads: true,
+  oldestRequiredTimestampForCrashRecovery: Timestamp({ t: 0, i: 0 }),
+  supportsPendingDrops: true,
+  dropPendingIdents: Long("0"),
+  supportsSnapshotReadConcern: true,
+  readOnly: false,
+  persistent: true,
+  backupCursorOpen: false
+}
+test> show databases
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+test> db.getMongo().getDBNames()
+[ 'admin', 'config', 'local' ]
+test> db.adminCommand('listDatabases')
+{
+  databases: [
+    { name: 'admin', sizeOnDisk: Long("40960"), empty: false },
+    { name: 'config', sizeOnDisk: Long("12288"), empty: false },
+    { name: 'local', sizeOnDisk: Long("40960"), empty: false }
+  ],
+  totalSize: Long("94208"),
+  totalSizeMb: Long("0"),
+  ok: 1
+}
+test> show collections
+
+test> show tables
+
+test> db.getCollectionNames()
+[]
+test> use sampledb
+switched to db sampledb
+sampledb> show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+sampledb> db.example.insertOne( {name: "MongoDB", version: "6.0.6", number: 6} )
+{
+  acknowledged: true,
+  insertedId: ObjectId("64ba516ad2c0776ce491c038")
+}
+sampledb> show collections
+example
+sampledb> show tables
+example
+sampledb> db.getCollectionNames()
+[ 'example' ]
+sampledb> show dbs
+admin     40.00 KiB
+config    12.00 KiB
+local     40.00 KiB
+sampledb   8.00 KiB
+sampledb> db
+sampledb
+sampledb> exit
+rajaniapple@Rajanis-MacBook-Pro ~ % 

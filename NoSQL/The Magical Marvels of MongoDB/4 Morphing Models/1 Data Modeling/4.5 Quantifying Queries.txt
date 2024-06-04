@@ -1,0 +1,13 @@
+4.5 Quantifying Queries
+
+
+What's the minimum number of queries we'd have to write in order to retrieve a document and its referenced data?
+
+[Single Answer]
+
+1
+2
+3
+
+
+Answer: 2

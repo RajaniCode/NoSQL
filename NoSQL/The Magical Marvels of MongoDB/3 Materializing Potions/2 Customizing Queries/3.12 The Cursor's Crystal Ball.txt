@@ -1,0 +1,9 @@
+3.12 The Cursor's Crystal Ball
+
+
+Finish the code below so that only 8 wands are returned by the cursor for each page:
+
+db.wands.find({}).skip(0).[ ]
+
+
+Answer: limit(8)

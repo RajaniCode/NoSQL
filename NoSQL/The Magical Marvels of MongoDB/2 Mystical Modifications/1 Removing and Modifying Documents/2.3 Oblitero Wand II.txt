@@ -1,0 +1,16 @@
+2.3 Oblitero Wand II
+
+
+When we removed the "Doom Bringer" wand, we noticed that it had a power of "Death", and we don't want any wands like that in our database. To be safe, let's remove any wands containing that in their powers.
+
+
+Answer: db.wands.remove( { "powers": "Death" } )
+
+
+Type help to see the help menu
+
+> db.wands.remove( { "powers": "Death" } )
+
+Congratulations, you're correct!
+
+> 

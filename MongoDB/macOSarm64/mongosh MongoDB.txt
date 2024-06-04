@@ -1,0 +1,199 @@
+% brew services start mongodb-community
+[
+% brew services list
+% brew services stop mongodb-community
+% brew services restart mongodb-community
+]
+
+# % pgrep mongo # % pkill mongo
+# % pgrep mongod # % pkill mongod
+# % ps -A | grep mongod | awk '{print $1}' # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod | awk '{print $2}' # kill <mongod pid>
+% ls /opt/homebrew/var/mongodb
+% ls /opt/homebrew/var/log/mongodb/mongo.log
+% mongod --dbpath /opt/homebrew/var/mongodb --logpath /opt/homebrew/var/log/mongodb/mongo.log --fork
+
+# % pgrep mongo # % pkill mongo
+# % pgrep mongod # % pkill mongod
+# % ps -A | grep mongod | awk '{print $1}' # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod # kill <mongod pid>
+# % ps aux | grep -v grep | grep mongod | awk '{print $2}' # kill <mongod pid>
+% ls /opt/homebrew/etc/mongod.conf
+% sudo nano /opt/homebrew/etc/mongod.conf
+% cat /opt/homebrew/etc/mongod.conf 
+% mongod --config /opt/homebrew/etc/mongod.conf --fork
+
+# MongoDB Shell % mongosh --version
+% mongosh
+
+test> db.version()
+
+# Current storage engine
+test> db.serverStatus().storageEngine
+
+# Configuration details of wiredTiger
+test> db.serverStatus().wiredTiger
+
+test> show databases
+test> show dbs
+test> db.getMongo().getDBNames()
+test> db.adminCommand('listDatabases')
+
+test> use sampledb
+sampledb> db.createCollection("example")
+sampledb> show tables
+sampledb> show collections
+sampledb> db.getCollectionNames()
+sampledb> db.example.insertOne( { "Name" : "Mongo" } )
+sampledb> db.example.find()
+sampledb> db.example.find({}).sort({_id:1}).limit(1).next()._id.getTimestamp()
+sampledb> for (var key in db.example.findOne()) { print (key, typeof key) }
+
+/*
+test> var dbs = db.getMongo().getDBNames()
+for (var i in dbs) {
+    db = db.getMongo().getDB( dbs[i] );
+    if(db.getName() != "admin" && db.getName() != "config" && db.getName() != "local") {
+        print( "dropping db " + db.getName() );
+        db.dropDatabase();
+    }
+}
+*/
+
+test> exit
+
+# $MongoDB@7.0.2
+# use test
+test> db.createUser(
+  {
+    user: "RajaniMongoDB",
+    pwd:  passwordPrompt(),   // or cleartext password
+    roles: [ { role: "readWrite", db: "test" },
+             { role: "read", db: "reporting" } ]
+  }
+)
+
+# use test
+test> db.changeUserPassword("RajaniMongoDB", passwordPrompt())
+
+% mongosh --port 27017 -u "RajaniMongoDB" \
+    --authenticationDatabase "test" -p
+
+test> db.getUser("RajaniMongoDB")
+
+test> db.getUser( "RajaniMongoDB", {
+   showCredentials: true,
+   showCustomData: true,
+   showPrivileges: true,
+   showAuthenticationRestrictions: true,
+   // filter: <document>
+} )
+
+test> db.getUser( "RajaniMongoDB", {
+   showCredentials: true,
+   showCustomData: true,
+   // showPrivileges: true,
+   // showAuthenticationRestrictions: true,
+    filter: {
+        "roles.role": "readWrite"
+    }
+})
+
+test> db.getUsers( {
+    filter: {
+        "roles.role": "readWrite"
+    }
+})
+
+
+
+
+## MongoDB # Replica Set
+# Convert a Standalone to a Replica Set #
+% npm install run-rs -g
+
+
+% npm list -g
+
+
+% brew services stop mongodb-community
+
+
+% brew services list
+
+
+# Use Existing MongoDB Installation # --mongod
+% sudo run-rs --mongod
+
+
+# In another terminal window
+% mongosh
+rs [direct: primary] test> rs.conf()
+[
+{
+  _id: 'rs',
+  version: 1,
+  term: 1,
+  members: [
+    {
+      _id: 1,
+      host: 'localhost:27017',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long("0"),
+      votes: 1
+    },
+    {
+      _id: 2,
+      host: 'localhost:27018',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long("0"),
+      votes: 1
+    },
+    {
+      _id: 3,
+      host: 'localhost:27019',
+      arbiterOnly: false,
+      buildIndexes: true,
+      hidden: false,
+      priority: 1,
+      tags: {},
+      secondaryDelaySecs: Long("0"),
+      votes: 1
+    }
+  ],
+  protocolVersion: Long("1"),
+  writeConcernMajorityJournalDefault: true,
+  settings: {
+    chainingAllowed: true,
+    heartbeatIntervalMillis: 2000,
+    heartbeatTimeoutSecs: 10,
+    electionTimeoutMillis: 10000,
+    catchUpTimeoutMillis: -1,
+    catchUpTakeoverDelayMillis: 30000,
+    getLastErrorModes: {},
+    getLastErrorDefaults: { w: 1, wtimeout: 0 },
+    replicaSetId: ObjectId("65457c96cc14c5f01f4de4d7")
+  }
+}
+]
+rs [direct: primary] test> exit
+
+
+# Stop the terminal running run-rs command
+# control + c
+
+
+# Revert Replica Set to Standalone #
+% brew services start mongodb-community
+
+% mongosh
+test> exit

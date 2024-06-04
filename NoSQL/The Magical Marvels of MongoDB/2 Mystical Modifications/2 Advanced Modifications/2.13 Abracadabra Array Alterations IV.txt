@@ -1,0 +1,37 @@
+2.13 Abracadabra Array Alterations IV
+
+
+Example document:
+
+{
+  "_id": ObjectId("56016414959123c11810f9ad"),
+  "name": "Dream Bender",
+  "creator": "Foxmond",
+  "level_required": 10,
+  "price": 34.9,
+  "powers": ["Fire Deflection", "Love Buster", "Spell Casting"],
+  "damage": {"magic": 4, "melee": 2}
+}
+
+Shell Editor
+
+db.wands.update(
+  {},
+  
+  {"multi": true}
+)
+
+
+Let's go ahead and add "Spell Casting" to every wand's powers array, but only if that power doesn't already exist.
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {},
+  { "$addToSet": {"powers": "Spell Casting"} },
+  {"multi": true}
+)
+

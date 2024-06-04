@@ -1,0 +1,33 @@
+2.12 Abracadabra Array Alterations III
+
+
+While some people may know that wands can cast spells, others may think they're just fancy sticks. Let's add "Spell Casting" to the list of powers for the "Dream Bender" wand.
+
+{
+  "_id": ObjectId("56016414959123c11810f9ad"),
+  "name": "Dream Bender",
+  "creator": "Foxmond",
+  "level_required": 10,
+  "price": 34.9,
+  "powers": ["Fire Deflection", "Love Buster"],
+  "damage": {"magic": 4, "melee": 2}
+}
+
+Shell Editor
+
+db.wands.update(
+  {"name": "Dream Bender"},
+  
+)
+
+Add the update parameter that will add "Spell Casting" to the end of the powers array for this wand.
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {"name": "Dream Bender"},
+  { "$push": { "powers": "Spell Casting" } } 
+)

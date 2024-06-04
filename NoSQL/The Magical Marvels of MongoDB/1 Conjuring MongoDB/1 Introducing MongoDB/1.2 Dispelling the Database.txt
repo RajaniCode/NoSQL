@@ -1,0 +1,20 @@
+1.2 Dispelling the Database
+
+
+We've inherited a database that stores information about magic wands.
+
+A MongoDB shell has been started below, so write the command that will set the current database to wandRecorder.
+
+Remember, if you ever forget a command, you can use help.
+
+
+Answer: use wandRecorder
+
+Type help to see the help menu
+
+> use wandRecorder
+
+switched to db wandRecorder
+
+Congratulations, you're correct!
+> 

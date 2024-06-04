@@ -1,0 +1,13 @@
+4.4 Lookout Incantations
+
+
+For what reason might we want to consider referencing maker information instead of embedding it within each wand?
+
+[Single Answer]
+
+Atomic Writes
+Duplicate Data
+Single Query Access
+
+
+Answer: Duplicate Data

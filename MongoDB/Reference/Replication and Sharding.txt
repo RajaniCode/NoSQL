@@ -1,0 +1,10 @@
+What is the difference between replication and sharding?
+• Replication: The primary server node copies data onto secondary server nodes. This can help increase data availability and act as a backup, in case if the primary server fails.
+
+• Sharding: Handles horizontal scaling across servers using a shard key. This means that rather than copying data holistically, sharding copies pieces of the data (or “shards”) across multiple replica sets. These replica sets work together to utilize all of the data.
+
+NB
+Database replica will replicate the database in different servers to keep the database more available and avoid losing data. It's even possible to replicate servers in different countries for disaster recovery. Database sharding will break the database into separate partitions and give faster data access.
+
+NB
+Replication: A replica set in MongoDB is a group of mongod processes that maintain the same data set. Sharding: Sharding is a method for storing data across multiple machines

@@ -1,0 +1,40 @@
+Last login: Fri Jul 21 16:03:06 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --version
+db version v6.0.6
+Build Info: {
+    "version": "6.0.6",
+    "gitVersion": "26b4851a412cc8b9b4a18cdb6cd0f9f642e06aa7",
+    "modules": [],
+    "allocator": "system",
+    "environment": {
+        "distarch": "aarch64",
+        "target_arch": "aarch64"
+    }
+}
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --config /opt/homebrew/etc/mongod.conf --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5509
+ERROR: child process failed, exited with 48
+To see additional information in this output, start without the "--fork" option.
+rajaniapple@Rajanis-MacBook-Pro ~ % ps -A | grep mongod | awk '{print $1}'              
+5228
+5511
+rajaniapple@Rajanis-MacBook-Pro ~ % kill 5228                                           
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --config /opt/homebrew/etc/mongod.conf --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5517
+child process started successfully, parent exiting
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --dbpath /opt/homebrew/var/mongodb --logpath /opt/homebrew/var/log/mongodb/mongo.log --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5521
+ERROR: child process failed, exited with 48
+To see additional information in this output, start without the "--fork" option.
+rajaniapple@Rajanis-MacBook-Pro ~ % ps -A | grep mongod | awk '{print $1}'                                                            
+5517
+5524
+rajaniapple@Rajanis-MacBook-Pro ~ % kill 5517
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --dbpath /opt/homebrew/var/mongodb --logpath /opt/homebrew/var/log/mongodb/mongo.log --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5529
+child process started successfully, parent exiting
+rajaniapple@Rajanis-MacBook-Pro ~ % 

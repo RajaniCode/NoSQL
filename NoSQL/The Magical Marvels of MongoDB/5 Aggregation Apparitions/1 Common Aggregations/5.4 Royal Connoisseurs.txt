@@ -1,0 +1,27 @@
+5.4 Royal Connoisseurs
+
+
+Our site is a popular resource for wand collectors to find wands by makers they don't yet have. One ambitious connoisseur has asked how much it would cost to buy all the wands for each vendor. Let's find out!
+
+Shell Editor
+
+
+1. Write an aggregate that groups our wands by the maker field.
+
+Answer:
+
+Shell Editor
+
+db.wands.aggregate([
+  { "$group": {"_id": "$maker" } }
+])
+
+2. Add an accumulator with the total_cost field that sums the price for each wand per maker.
+
+Answer:
+
+Shell Editor
+
+db.wands.aggregate([
+  { "$group": {"_id": "$maker", "total_cost": {"$sum": "$price" } } }
+])

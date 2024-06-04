@@ -1,0 +1,36 @@
+
+Aspire@Acer MINGW64 ~
+$ ruby --version
+ruby 2.2.4p230 (2015-12-16 revision 53155) [i386-mingw32]
+
+Aspire@Acer MINGW64 ~
+$ gem --version
+2.6.7
+
+Aspire@Acer MINGW64 ~
+$ rake --version
+rake, version 12.0.0
+
+Aspire@Acer MINGW64 ~
+$ rails --version
+Rails 5.0.1
+
+Aspire@Acer MINGW64 ~
+$ bundler --version
+Bundler version 1.13.5
+
+Aspire@Acer MINGW64 ~
+$ mongod --version
+db version v3.2.8
+git version: ed70e33130c977bda0024c125b56d159573dbaf0
+OpenSSL version: OpenSSL 1.0.1p-fips 9 Jul 2015
+allocator: tcmalloc
+modules: none
+build environment:
+    distmod: 2008plus-ssl
+    distarch: x86_64
+    target_arch: x86_64
+
+Aspire@Acer MINGW64 ~
+$
+

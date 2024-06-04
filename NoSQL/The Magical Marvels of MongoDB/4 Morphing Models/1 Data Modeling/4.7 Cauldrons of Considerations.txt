@@ -1,0 +1,14 @@
+4.7 Cauldrons of Considerations
+
+
+Which data modeling decision doesn't have default support for atomic writes across multiple documents and should be utilized with care?
+
+[Single Answer]
+
+Embedded
+Referenced
+
+
+Answer: Referenced
+
+Note: Embedded documents support atomic writes for all the data within.

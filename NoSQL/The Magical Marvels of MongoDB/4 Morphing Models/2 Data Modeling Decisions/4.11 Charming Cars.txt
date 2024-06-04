@@ -1,0 +1,14 @@
+4.11 Charming Cars
+
+
+We'd like to store information about cars, and each car can have a few hundred parts. Most of the time, we won't be needing specific information about each part. Which data modeling route should we take?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Referencing
+
+Note: Embedding all those parts in each car can be difficult to maintain, especially if the part information changes.

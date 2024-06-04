@@ -1,0 +1,3 @@
+# Downloading the Dataset for Use on Your Local Machine
+
+wget https://atlas-education.s3.amazonaws.com/sampledata.archive

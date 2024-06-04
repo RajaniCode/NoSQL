@@ -1,0 +1,2 @@
+# Downloading the Dataset for Use on Your Local Machine
+curl https://atlas-education.s3.amazonaws.com/sampledata.archive -o sampledata.archive

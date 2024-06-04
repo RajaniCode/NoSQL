@@ -1,0 +1,21 @@
+3.3 Supernatural Stats
+
+
+Believe it or not, some lower-level wands have better stats than those that are equal to our current level.
+
+Write a query for wands that have a level_required that is less than or equal to 5.
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+Answer:
+
+Shell Editor
+
+db.wands.find(
+  { "level_required": {"$lte": 5 } }
+)

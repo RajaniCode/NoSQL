@@ -1,0 +1,159 @@
+
+Aspire@Acer MINGW64 ~
+$ ruby --version
+ruby 2.2.4p230 (2015-12-16 revision 53155) [i386-mingw32]
+
+Aspire@Acer MINGW64 ~
+$ gem --version
+2.6.7
+
+Aspire@Acer MINGW64 ~
+$ rake --version
+rake, version 12.0.0
+
+Aspire@Acer MINGW64 ~
+$ rails --version
+Rails 5.0.1
+
+Aspire@Acer MINGW64 ~
+$ bundler --version
+Bundler version 1.13.5
+
+Aspire@Acer MINGW64 ~
+$ gem install mongo
+Temporarily enhancing PATH to include DevKit...
+Building native extensions.  This could take a while...
+Successfully installed bson-4.2.1
+Successfully installed mongo-2.4.1
+Parsing documentation for bson-4.2.1
+Installing ri documentation for bson-4.2.1
+Parsing documentation for mongo-2.4.1
+Installing ri documentation for mongo-2.4.1
+Done installing documentation for bson, mongo after 45 seconds
+2 gems installed
+
+Aspire@Acer MINGW64 ~
+$ gem list mongo
+mongo (2.4.1)
+
+Aspire@Acer MINGW64 ~
+$ mongo --version
+MongoDB shell version: 3.2.8
+
+Aspire@Acer MINGW64 ~
+$ cd "E:\Working\MongoDB\MongoDB University\MongoDB-Ruby"
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby
+$ mkdir -p WT
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby
+$ mongod -dbpath "/e/Working/MongoDB/MongoDB University/MongoDB-Ruby/WT" --storageEngine wiredTiger
+2017-03-21T11:18:47.610+0530 I CONTROL  [initandlisten] MongoDB starting : pid=43248 port=27017 dbpath=E:/Working/MongoDB/MongoDB University/MongoDB-Ruby/WT 64-bit host=Acer
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] db version v3.2.8
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] git version: ed70e33130c977bda0024c125b56d159573dbaf0
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1p-fips 9 Jul 2015
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] allocator: tcmalloc
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] modules: none
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] build environment:
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten]     distarch: x86_64
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten]     target_arch: x86_64
+2017-03-21T11:18:47.611+0530 I CONTROL  [initandlisten] options: { storage: { dbPath: "E:/Working/MongoDB/MongoDB University/MongoDB-Ruby/WT", engine: "wiredTiger" } }
+2017-03-21T11:18:47.627+0530 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=1G,session_max=20000,eviction=(threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2017-03-21T11:18:48.586+0530 I NETWORK  [HostnameCanonicalizationWorker] Starting hostname canonicalization worker
+2017-03-21T11:18:48.586+0530 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory 'E:/Working/MongoDB/MongoDB University/MongoDB-Ruby/WT/diagnostic.data'
+2017-03-21T11:18:48.791+0530 I NETWORK  [initandlisten] waiting for connections on port 27017
+2017-03-21T11:23:04.630+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50327 #1 (1 connection now open)
+2017-03-21T11:23:04.631+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50328 #2 (2 connections now open)
+2017-03-21T11:23:04.742+0530 I NETWORK  [conn1] end connection 127.0.0.1:50327 (1 connection now open)
+2017-03-21T11:23:04.778+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50329 #3 (2 connections now open)
+2017-03-21T11:23:05.329+0530 I COMMAND  [conn3] command music.artists command: insert { insert: "artists", documents: [ { name: "FKA Twigs", _id: ObjectId('58d0bfc01fafb488c4f79a6e') } ], ordered: true } ninserted:1 keyUpdates:0 writeConflicts:0 numYields:0 reslen:40 locks:{ Global: { acquireCount: { r: 2, w: 2 } }, Database: { acquireCount: { w: 1, W: 1 } }, Collection: { acquireCount: { W: 1 } } } protocol:op_query 538ms
+2017-03-21T11:23:05.367+0530 I NETWORK  [conn2] end connection 127.0.0.1:50328 (1 connection now open)
+2017-03-21T11:23:05.370+0530 I NETWORK  [conn3] end connection 127.0.0.1:50329 (0 connections now open)
+2017-03-21T11:23:15.882+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50330 #4 (1 connection now open)
+2017-03-21T11:23:15.882+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50331 #5 (2 connections now open)
+2017-03-21T11:23:15.883+0530 I NETWORK  [conn4] end connection 127.0.0.1:50330 (1 connection now open)
+2017-03-21T11:23:15.888+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50332 #6 (2 connections now open)
+2017-03-21T11:23:16.004+0530 I NETWORK  [conn5] end connection 127.0.0.1:50331 (1 connection now open)
+2017-03-21T11:23:16.005+0530 I NETWORK  [conn6] end connection 127.0.0.1:50332 (0 connections now open)
+2017-03-21T11:23:31.701+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50334 #7 (1 connection now open)
+2017-03-21T11:23:31.701+0530 I NETWORK  [conn7] end connection 127.0.0.1:50334 (0 connections now open)
+2017-03-21T11:23:31.702+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50335 #8 (2 connections now open)
+2017-03-21T11:23:31.707+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50336 #9 (2 connections now open)
+2017-03-21T11:23:31.764+0530 I NETWORK  [conn8] end connection 127.0.0.1:50335 (1 connection now open)
+2017-03-21T11:23:31.766+0530 I NETWORK  [conn9] end connection 127.0.0.1:50336 (0 connections now open)
+2017-03-21T11:23:41.557+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50337 #10 (1 connection now open)
+2017-03-21T11:23:41.559+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50338 #11 (2 connections now open)
+2017-03-21T11:23:41.559+0530 I NETWORK  [conn10] end connection 127.0.0.1:50337 (1 connection now open)
+2017-03-21T11:23:41.575+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50339 #12 (2 connections now open)
+2017-03-21T11:23:41.600+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50340 #13 (3 connections now open)
+2017-03-21T11:23:41.601+0530 I NETWORK  [conn13] end connection 127.0.0.1:50340 (2 connections now open)
+2017-03-21T11:23:41.601+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50341 #14 (3 connections now open)
+2017-03-21T11:23:41.606+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50342 #15 (4 connections now open)
+2017-03-21T11:23:41.653+0530 I NETWORK  [conn14] end connection 127.0.0.1:50341 (3 connections now open)
+2017-03-21T11:23:41.653+0530 I NETWORK  [conn11] end connection 127.0.0.1:50338 (3 connections now open)
+2017-03-21T11:23:41.655+0530 I NETWORK  [conn12] end connection 127.0.0.1:50339 (1 connection now open)
+2017-03-21T11:23:41.655+0530 I NETWORK  [conn15] end connection 127.0.0.1:50342 (1 connection now open)
+2017-03-21T11:23:49.753+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50343 #16 (1 connection now open)
+2017-03-21T11:23:49.754+0530 I NETWORK  [conn16] end connection 127.0.0.1:50343 (0 connections now open)
+2017-03-21T11:23:49.755+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50344 #17 (1 connection now open)
+2017-03-21T11:23:49.761+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50345 #18 (2 connections now open)
+2017-03-21T11:23:49.888+0530 I NETWORK  [conn17] end connection 127.0.0.1:50344 (1 connection now open)
+2017-03-21T11:23:49.890+0530 I NETWORK  [conn18] end connection 127.0.0.1:50345 (0 connections now open)
+2017-03-21T11:24:00.921+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50346 #19 (1 connection now open)
+2017-03-21T11:24:00.922+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50347 #20 (2 connections now open)
+2017-03-21T11:24:00.922+0530 I NETWORK  [conn19] end connection 127.0.0.1:50346 (1 connection now open)
+2017-03-21T11:24:00.928+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50348 #21 (2 connections now open)
+2017-03-21T11:24:01.047+0530 I NETWORK  [conn20] end connection 127.0.0.1:50347 (1 connection now open)
+2017-03-21T11:24:01.049+0530 I NETWORK  [conn21] end connection 127.0.0.1:50348 (0 connections now open)
+2017-03-21T11:24:09.142+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50349 #22 (1 connection now open)
+2017-03-21T11:24:09.143+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50350 #23 (2 connections now open)
+2017-03-21T11:24:09.143+0530 I NETWORK  [conn22] end connection 127.0.0.1:50349 (0 connections now open)
+2017-03-21T11:24:09.159+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50351 #24 (2 connections now open)
+2017-03-21T11:24:09.220+0530 I NETWORK  [conn23] end connection 127.0.0.1:50350 (1 connection now open)
+2017-03-21T11:24:09.221+0530 I NETWORK  [conn24] end connection 127.0.0.1:50351 (0 connections now open)
+2017-03-21T11:24:26.825+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50353 #25 (1 connection now open)
+2017-03-21T11:24:26.826+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50354 #26 (2 connections now open)
+2017-03-21T11:24:26.826+0530 I NETWORK  [conn25] end connection 127.0.0.1:50353 (1 connection now open)
+2017-03-21T11:24:26.830+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50355 #27 (2 connections now open)
+2017-03-21T11:24:27.132+0530 I COMMAND  [conn27] command muse.arts command: create { create: "arts", capped: true, size: 1024 } keyUpdates:0 writeConflicts:0 numYields:0 reslen:37 locks:{ Global: { acquireCount: { r: 1, w: 1 } }, Database: { acquireCount: { W: 1 } } } protocol:op_query 289ms
+2017-03-21T11:24:27.138+0530 I NETWORK  [conn26] end connection 127.0.0.1:50354 (1 connection now open)
+2017-03-21T11:24:27.140+0530 I NETWORK  [conn27] end connection 127.0.0.1:50355 (0 connections now open)
+2017-03-21T11:24:34.878+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50357 #28 (1 connection now open)
+2017-03-21T11:24:34.879+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50358 #29 (2 connections now open)
+2017-03-21T11:24:34.879+0530 I NETWORK  [conn28] end connection 127.0.0.1:50357 (0 connections now open)
+2017-03-21T11:24:34.894+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50359 #30 (2 connections now open)
+2017-03-21T11:24:34.918+0530 I NETWORK  [conn29] end connection 127.0.0.1:50358 (1 connection now open)
+2017-03-21T11:24:34.919+0530 I NETWORK  [conn30] end connection 127.0.0.1:50359 (0 connections now open)
+2017-03-21T11:24:42.995+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50360 #31 (1 connection now open)
+2017-03-21T11:24:42.996+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50361 #32 (2 connections now open)
+2017-03-21T11:24:42.996+0530 I NETWORK  [conn31] end connection 127.0.0.1:50360 (0 connections now open)
+2017-03-21T11:24:43.002+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50362 #33 (2 connections now open)
+2017-03-21T11:24:43.014+0530 I COMMAND  [conn33] CMD: drop music.arts
+2017-03-21T11:24:43.027+0530 I NETWORK  [conn32] end connection 127.0.0.1:50361 (1 connection now open)
+2017-03-21T11:24:43.029+0530 I NETWORK  [conn33] end connection 127.0.0.1:50362 (0 connections now open)
+2017-03-21T11:24:52.909+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50363 #34 (1 connection now open)
+2017-03-21T11:24:52.910+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50364 #35 (2 connections now open)
+2017-03-21T11:24:52.910+0530 I NETWORK  [conn34] end connection 127.0.0.1:50363 (0 connections now open)
+2017-03-21T11:24:52.916+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50365 #36 (2 connections now open)
+2017-03-21T11:24:52.940+0530 I NETWORK  [conn35] end connection 127.0.0.1:50364 (1 connection now open)
+2017-03-21T11:24:52.941+0530 I NETWORK  [conn36] end connection 127.0.0.1:50365 (0 connections now open)
+2017-03-21T11:25:01.060+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50366 #37 (1 connection now open)
+2017-03-21T11:25:01.061+0530 I NETWORK  [conn37] end connection 127.0.0.1:50366 (0 connections now open)
+2017-03-21T11:25:01.062+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50367 #38 (2 connections now open)
+2017-03-21T11:25:01.067+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50368 #39 (2 connections now open)
+2017-03-21T11:25:01.081+0530 I NETWORK  [conn38] end connection 127.0.0.1:50367 (1 connection now open)
+2017-03-21T11:25:01.082+0530 I NETWORK  [conn39] end connection 127.0.0.1:50368 (0 connections now open)
+2017-03-21T11:25:11.036+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50369 #40 (1 connection now open)
+2017-03-21T11:25:11.037+0530 I NETWORK  [conn40] end connection 127.0.0.1:50369 (0 connections now open)
+2017-03-21T11:25:11.038+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50370 #41 (2 connections now open)
+2017-03-21T11:25:11.043+0530 I NETWORK  [initandlisten] connection accepted from 127.0.0.1:50371 #42 (2 connections now open)
+2017-03-21T11:25:11.069+0530 I COMMAND  [conn42] dropDatabase muse starting
+2017-03-21T11:25:11.096+0530 I COMMAND  [conn42] dropDatabase muse finished
+2017-03-21T11:25:11.111+0530 I NETWORK  [conn41] end connection 127.0.0.1:50370 (1 connection now open)
+2017-03-21T11:25:11.112+0530 I NETWORK  [conn42] end connection 127.0.0.1:50371 (0 connections now open)
+
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby
+$

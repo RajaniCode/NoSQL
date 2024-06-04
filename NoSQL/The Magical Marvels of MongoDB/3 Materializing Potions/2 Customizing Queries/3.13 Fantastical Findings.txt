@@ -1,0 +1,31 @@
+3.13 Fantastical Findings
+
+
+Some really famous wizards and sorceresses are interested in finding out information about the most expensive wands we have. Let's pull the data on our top three most expensive wands.
+
+Shell Editor
+
+
+1. First, let's write a query to match all wands.
+
+Answer:
+
+Shell Editor
+
+db.wands.find()
+
+2. Next, add a cursor method to sort the wands in descending order by their price field.
+
+Answer:
+
+Shell Editor
+
+db.wands.find().sort({"price": -1})
+
+3. Lastly, add another cursor method to limit the results to only 3 documents.
+
+Answer:
+
+Shell Editor
+
+db.wands.find().sort({"price": -1}).limit(3)

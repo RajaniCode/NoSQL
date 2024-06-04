@@ -1,0 +1,141 @@
+Manage mongod Processes
+
+MongoDB runs as a standard program. You can start MongoDB from a command line by issuing the mongod command and specifying options. For a list of options, see the mongod reference. MongoDB can also run as a Windows service. For details, see Configure a Windows Service for MongoDB. To install MongoDB, see Install MongoDB.
+
+The following examples assume the directory containing the mongod process is in your system paths. The mongod process is the primary database process that runs on an individual server. mongos provides a coherent MongoDB interface equivalent to a mongod from the perspective of a client. The mongo binary provides the administrative shell.
+
+This document discusses the mongod process; however, some portions of this document may be applicable to mongos instances.
+
+
+Start mongod Processes
+
+By default, MongoDB stores data in the /data/db directory. On Windows, MongoDB stores data in C:\data\db. On all platforms, MongoDB listens for connections from clients on port 27017.
+
+To start MongoDB using all defaults, issue the following command at the system shell:
+
+
+mongod
+
+
+
+Specify a Data Directory
+
+If you want mongod to store data files at a path other than /data/db you can specify a dbPath. The dbPath must exist before you start mongod. If it does not exist, create the directory and the permissions so that mongod can read and write data to this path. For more information on permissions, see the security operations documentation.
+
+To specify a dbPath for mongod to use as a data directory, use the --dbpath option. The following invocation will start a mongod instance and store data in the /srv/mongodb path
+
+
+mongod --dbpath /srv/mongodb/
+
+
+
+Specify a TCP Port
+
+Only a single process can listen for connections on a network interface at a time. If you run multiple mongod processes on a single machine, or have other processes that must use this port, you must assign each a different port to listen on for client connections.
+
+To specify a port to mongod, use the --port option on the command line. The following command starts mongod listening on port 12345:
+
+
+mongod --port 12345
+
+
+Use the default port number when possible, to avoid confusion.
+
+
+Start mongod as a Daemon
+
+To run a mongod process as a daemon (i.e. fork), and write its output to a log file, use the --fork and --logpath options. You must create the log directory; however, mongod will create the log file if it does not exist.
+
+The following command starts mongod as a daemon and records log output to /var/log/mongodb.log.
+
+
+mongod --fork --logpath /var/log/mongodb.log
+
+
+
+Additional Configuration Options
+
+For an overview of common configurations and deployments for common use cases, see Run-time Database Configuration.
+
+
+Stop mongod Processes
+
+In a clean shutdown a mongod completes all pending operations, flushes all data to data files, and closes all data files. Other shutdowns are unclean and can compromise the validity of the data files.
+
+To ensure a clean shutdown, always shutdown mongod instances using one of the following methods:
+
+
+Use shutdownServer()
+
+Shut down the mongod from the mongo shell using the db.shutdownServer() method as follows:
+
+
+use admin
+db.shutdownServer()
+
+
+Calling the same method from a init script accomplishes the same result.
+
+For systems with authorization enabled, users may only issue db.shutdownServer() when authenticated to the admin database or via the localhost interface on systems without authentication enabled.
+
+
+Use --shutdown
+
+From the Linux command line, shut down the mongod using the --shutdown option in the following command:
+
+
+mongod --shutdown
+
+
+
+Use CTRL-C
+
+When running the mongod instance in interactive mode (i.e. without --fork), issue Control-C to perform a clean shutdown.
+
+
+Use kill
+
+From the Linux command line, shut down a specific mongod instance using the following command:
+
+
+kill <mongod process ID>
+
+
+
+Warning:
+
+Never use kill -9 (i.e. SIGKILL) to terminate a mongod instance.
+
+
+Stop a Replica Set
+
+
+Procedure
+
+If the mongod is the primary in a replica set, the shutdown process for this mongod instance has the following steps:
+1.Check how up-to-date the secondaries are.
+2.If no secondary is within 10 seconds of the primary, mongod will return a message that it will not shut down. You can pass the shutdown command a timeoutSecs argument to wait for a secondary to catch up.
+3.If there is a secondary within 10 seconds of the primary, the primary will step down and wait for the secondary to catch up.
+4.After 60 seconds or once the secondary has caught up, the primary will shut down.
+
+
+Force Replica Set Shutdown
+
+If there is no up-to-date secondary and you want the primary to shut down, issue the shutdown command with the force argument, as in the following mongo shell operation:
+
+
+db.adminCommand({shutdown : 1, force : true})
+
+
+To keep checking the secondaries for a specified number of seconds if none are immediately up-to-date, issue shutdown with the timeoutSecs argument. MongoDB will keep checking the secondaries for the specified number of seconds if none are immediately up-to-date. If any of the secondaries catch up within the allotted time, the primary will shut down. If no secondaries catch up, it will not shut down.
+
+The following command issues shutdown with timeoutSecs set to 5:
+
+
+db.adminCommand({shutdown : 1, timeoutSecs : 5})
+
+
+Alternately you can use the timeoutSecs argument with the db.shutdownServer() method:
+
+
+db.shutdownServer({timeoutSecs : 5})

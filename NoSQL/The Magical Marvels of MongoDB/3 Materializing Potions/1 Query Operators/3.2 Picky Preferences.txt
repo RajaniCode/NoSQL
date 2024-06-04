@@ -1,0 +1,27 @@
+3.2 Picky Preferences
+
+
+When it comes to wands, it's okay to be picky about which one we want.
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+1. First, find all the wands where the maker is "Moonsap".
+
+Answer: 
+
+Shell Editor
+
+db.wands.find( {"maker": "Moonsap"} )
+
+2. Now, update the query to only retrieve wands that have a level_required of 5.
+
+Answer: 
+
+Shell Editor
+
+db.wands.find( {"maker": "Moonsap", "level_required": 5 } )

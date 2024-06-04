@@ -1,0 +1,37 @@
+2.5 Magical Regulations
+
+
+The Grand House of Magic recently passed a law that all wands with "Fire" in their list of powers must increase their level_required field by 2. We need to update all wands that have been affected by the new law.
+
+Shell Editor
+
+db.wands.update(
+
+)
+
+1. First, let's add the query parameter to find all wands that include "Fire" in their powers.
+
+Answer:
+
+Shell Editor
+
+db.wands.update( { "powers": "Fire" } 
+
+)
+
+2. 
+
+Answer:
+
+Shell Editor
+
+db.wands.update( { "powers": "Fire" }, { "$inc": { "level_required": 2 } } )
+
+3. 
+
+Answer:
+
+Shell Editor
+ 
+db.wands.update( {"powers": "Fire" }, {"$inc": { "level_required": 2 } }, { multi: 1 } )
+

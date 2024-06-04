@@ -1,0 +1,88 @@
+Last login: Sat Nov  4 04:43:50 on ttys002
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --eval "db.getMongo().getDBNames()"
+(node:11287) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Current Mongosh Log ID:	6545809f7cb88dabd0fb46e0
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Using MongoDB:		7.0.2
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-11-04T04:34:51.810+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-11-04T04:34:51.810+05:30: You are running this process as the root user, which is not recommended
+------
+
+(node:11287) [DEP0174] DeprecationWarning: Calling promisify on a function that returns a Promise is likely a mistake.
+[ 'admin', 'config', 'local' ]
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --eval "EJSON.stringify(db.getMongo().getDBNames())"
+(node:11294) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Current Mongosh Log ID:	654580a5f2bae2ba1231bb0f
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Using MongoDB:		7.0.2
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-11-04T04:34:51.810+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-11-04T04:34:51.810+05:30: You are running this process as the root user, which is not recommended
+------
+
+(node:11294) [DEP0174] DeprecationWarning: Calling promisify on a function that returns a Promise is likely a mistake.
+["admin","config","local"]
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --eval "EJSON.stringify(rs.status().members.map( \
+          m => ({'id':m._id, 'name':m.name, 'stateStr':m.stateStr})));"
+(node:11295) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Current Mongosh Log ID:	654580ae83717320da9900f6
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Using MongoDB:		7.0.2
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-11-04T04:34:51.810+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-11-04T04:34:51.810+05:30: You are running this process as the root user, which is not recommended
+------
+
+(node:11295) [DEP0174] DeprecationWarning: Calling promisify on a function that returns a Promise is likely a mistake.
+[{"id":1,"name":"localhost:27017","stateStr":"PRIMARY"},{"id":2,"name":"localhost:27018","stateStr":"SECONDARY"},{"id":3,"name":"localhost:27019","stateStr":"SECONDARY"}]
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --quiet  --host rs/localhost --port 27018 \
+        --eval "EJSON.stringify(rs.status().members.map( \
+          m => ({'id':m._id, 'name':m.name, 'stateStr':m.stateStr})));"
+(node:11296) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:11296) [DEP0174] DeprecationWarning: Calling promisify on a function that returns a Promise is likely a mistake.
+[{"id":1,"name":"localhost:27017","stateStr":"PRIMARY"},{"id":2,"name":"localhost:27018","stateStr":"SECONDARY"},{"id":3,"name":"localhost:27019","stateStr":"SECONDARY"}]
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --quiet  --host rs/localhost --port 27018 \
+        --eval "EJSON.stringify(rs.status().members.map( \
+          m => ({'id':m._id, 'name':m.name, 'stateStr':m.stateStr})));" \
+| jq
+(node:11297) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:11297) [DEP0174] DeprecationWarning: Calling promisify on a function that returns a Promise is likely a mistake.
+[
+  {
+    "id": 1,
+    "name": "localhost:27017",
+    "stateStr": "PRIMARY"
+  },
+  {
+    "id": 2,
+    "name": "localhost:27018",
+    "stateStr": "SECONDARY"
+  },
+  {
+    "id": 3,
+    "name": "localhost:27019",
+    "stateStr": "SECONDARY"
+  }
+]
+rajaniapple@Rajanis-MacBook-Pro ~ % 
