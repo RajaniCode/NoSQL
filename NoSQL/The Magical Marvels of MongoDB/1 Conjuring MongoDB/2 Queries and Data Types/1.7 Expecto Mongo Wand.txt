@@ -1,0 +1,62 @@
+1.7 Expecto Mongo Wand
+
+
+Merlin must be losing his marbles, because he actually wanted us to search for any wand created by "Moonsap".
+
+Write a query that finds all wands where the creator is "Moonsap".
+
+
+Answer: db.wands.find( { "creator": "Moonsap" } , { } )
+
+Type help to see the help menu
+
+> db.wands.find( { "creator": "Moonsap" } , { } )
+{
+  "_id": ObjectId('5609e753bd62caa811c9abbd'),
+  "name": "Riddle Bolt",
+  "creator": "Moonsap",
+  "level_required": 5,
+  "price": 30.99,
+  "powers": [
+    "Earth",
+    "Isolate"
+  ],
+  "damage": {
+    "magic": 1.4,
+    "melee": 0.4
+  }
+}
+{
+  "_id": ObjectId('7aa48b7bccb84f29bdc859b4'),
+  "name": "Cometfell",
+  "creator": "Moonsap",
+  "level_required": 10,
+  "price": 150.95,
+  "powers": [
+    "Solar",
+    "Love"
+  ],
+  "damage": {
+    "magic": 1.7,
+    "melee": 2.3
+  }
+}
+{
+  "_id": ObjectId('5404bf9eb971425e86832c93'),
+  "name": "Sacred Sun",
+  "creator": "Moonsap",
+  "level_required": 13,
+  "price": 33.99,
+  "powers": [
+    "Solar",
+    "Bless"
+  ],
+  "damage": {
+    "magic": 1.7,
+    "melee": 2.3
+  }
+}
+
+Congratulations, you're correct!
+
+> 

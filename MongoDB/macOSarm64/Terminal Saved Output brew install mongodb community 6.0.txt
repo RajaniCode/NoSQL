@@ -1,0 +1,714 @@
+Last login: Thu Jul 20 09:42:37 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % brew tap mongodb/brew
+
+==> Tapping mongodb/brew
+Cloning into '/opt/homebrew/Library/Taps/mongodb/homebrew-brew'...
+remote: Enumerating objects: 1235, done.
+remote: Counting objects: 100% (520/520), done.
+remote: Compressing objects: 100% (170/170), done.
+remote: Total 1235 (delta 396), reused 421 (delta 349), pack-reused 715
+Receiving objects: 100% (1235/1235), 268.33 KiB | 897.00 KiB/s, done.
+Resolving deltas: 100% (691/691), done.
+Tapped 14 formulae (32 files, 343.2KB).
+rajaniapple@Rajanis-MacBook-Pro ~ % brew update
+
+Already up-to-date.
+rajaniapple@Rajanis-MacBook-Pro ~ % brew install mongodb-community@6.0
+
+==> Fetching dependencies for mongodb/brew/mongodb-community: mongodb/brew/mongodb-database-tools
+==> Fetching mongodb/brew/mongodb-database-tools
+==> Downloading https://fastdl.mongodb.org/tools/db/mongodb-database-tools-macos-arm64-100.7.3.zip
+######################################################################################################################################################### 100.0%
+==> Fetching mongodb/brew/mongodb-community
+==> Downloading https://fastdl.mongodb.org/osx/mongodb-macos-arm64-6.0.6.tgz
+######################################################################################################################################################### 100.0%
+==> Installing mongodb-community from mongodb/brew
+==> Installing dependencies for mongodb/brew/mongodb-community: mongodb/brew/mongodb-database-tools
+==> Installing mongodb/brew/mongodb-community dependency: mongodb/brew/mongodb-database-tools
+🍺  /opt/homebrew/Cellar/mongodb-database-tools/100.7.3: 13 files, 111.9MB, built in 3 seconds
+==> Installing mongodb/brew/mongodb-community
+==> Caveats
+To start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+==> Summary
+🍺  /opt/homebrew/Cellar/mongodb-community/6.0.6: 11 files, 200.8MB, built in 3 seconds
+==> Running `brew cleanup mongodb-community`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+==> Caveats
+==> mongodb-community
+To start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+rajaniapple@Rajanis-MacBook-Pro ~ % brew --prefix
+/opt/homebrew
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services start mongodb-community@6.0
+==> Tapping homebrew/services
+Cloning into '/opt/homebrew/Library/Taps/homebrew/homebrew-services'...
+remote: Enumerating objects: 2462, done.
+remote: Counting objects: 100% (313/313), done.
+remote: Compressing objects: 100% (104/104), done.
+remote: Total 2462 (delta 228), reused 231 (delta 209), pack-reused 2149
+Receiving objects: 100% (2462/2462), 676.09 KiB | 1.01 MiB/s, done.
+Resolving deltas: 100% (1141/1141), done.
+Tapped 1 command (45 files, 845.1KB).
+==> Successfully started `mongodb-community` (label: homebrew.mxcl.mongodb-community)
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --version
+db version v6.0.6
+Build Info: {
+    "version": "6.0.6",
+    "gitVersion": "26b4851a412cc8b9b4a18cdb6cd0f9f642e06aa7",
+    "modules": [],
+    "allocator": "system",
+    "environment": {
+        "distarch": "aarch64",
+        "target_arch": "aarch64"
+    }
+}
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --config /opt/homebrew/etc/mongod.conf --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5536
+ERROR: child process failed, exited with 14
+To see additional information in this output, start without the "--fork" option.
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh
+Current Mongosh Log ID:	64b8da0972663550797f325f
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.1
+Using MongoDB:		6.0.6
+Using Mongosh:		1.10.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2023-07-20T11:55:03.630+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-07-20T11:55:03.630+05:30: You are running this process as the root user, which is not recommended
+------
+
+test> db.version()
+6.0.6
+test> db.serverStatus().storageEngine
+{
+  name: 'wiredTiger',
+  supportsCommittedReads: true,
+  oldestRequiredTimestampForCrashRecovery: Timestamp({ t: 0, i: 0 }),
+  supportsPendingDrops: true,
+  dropPendingIdents: Long("0"),
+  supportsSnapshotReadConcern: true,
+  readOnly: false,
+  persistent: true,
+  backupCursorOpen: false
+}
+test> db.serverStatus().wiredTiger
+{
+  uri: 'statistics:',
+  autocommit: {
+    'retries for readonly operations': 0,
+    'retries for update operations': 0
+  },
+  'block-cache': {
+    'cached blocks updated': 0,
+    'cached bytes updated': 0,
+    'evicted blocks': 0,
+    'file size causing bypass': 0,
+    lookups: 0,
+    'number of blocks not evicted due to overhead': 0,
+    'number of bypasses because no-write-allocate setting was on': 0,
+    'number of bypasses due to overhead on put': 0,
+    'number of bypasses on get': 0,
+    'number of bypasses on put because file is too small': 0,
+    'number of eviction passes': 0,
+    'number of hits': 0,
+    'number of misses': 0,
+    'number of put bypasses on checkpoint I/O': 0,
+    'removed blocks': 0,
+    'total blocks': 0,
+    'total blocks inserted on read path': 0,
+    'total blocks inserted on write path': 0,
+    'total bytes': 0,
+    'total bytes inserted on read path': 0,
+    'total bytes inserted on write path': 0
+  },
+  'block-manager': {
+    'blocks pre-loaded': 0,
+    'blocks read': 30,
+    'blocks written': 160,
+    'bytes read': 122880,
+    'bytes read via memory map API': 0,
+    'bytes read via system call API': 0,
+    'bytes written': 1146880,
+    'bytes written for checkpoint': 1146880,
+    'bytes written via memory map API': 0,
+    'bytes written via system call API': 0,
+    'mapped blocks read': 0,
+    'mapped bytes read': 0,
+    'number of times the file was remapped because it changed size via fallocate or truncate': 0,
+    'number of times the region was remapped via write': 0
+  },
+  cache: {
+    'application threads page read from disk to cache count': 0,
+    'application threads page read from disk to cache time (usecs)': 0,
+    'application threads page write from cache to disk count': 80,
+    'application threads page write from cache to disk time (usecs)': 24224,
+    'bytes allocated for updates': 52004,
+    'bytes belonging to page images in the cache': 0,
+    'bytes belonging to the history store table in the cache': 191,
+    'bytes currently in the cache': 58340,
+    'bytes dirty in the cache cumulative': 1070437,
+    'bytes not belonging to page images in the cache': 58340,
+    'bytes read into cache': 0,
+    'bytes written from cache': 565004,
+    'checkpoint blocked page eviction': 0,
+    'checkpoint of history store file blocked non-history store page eviction': 0,
+    'eviction calls to get a page': 70,
+    'eviction calls to get a page found queue empty': 70,
+    'eviction calls to get a page found queue empty after locking': 0,
+    'eviction currently operating in aggressive mode': 0,
+    'eviction empty score': 0,
+    'eviction gave up due to detecting an out of order on disk value behind the last update on the chain': 0,
+    'eviction gave up due to detecting an out of order tombstone ahead of the selected on disk update': 0,
+    'eviction gave up due to detecting an out of order tombstone ahead of the selected on disk update after validating the update chain': 0,
+    'eviction gave up due to detecting out of order timestamps on the update chain after the selected on disk update': 0,
+    'eviction gave up due to needing to remove a record from the history store but checkpoint is running': 0,
+    'eviction passes of a file': 0,
+    'eviction server candidate queue empty when topping up': 0,
+    'eviction server candidate queue not empty when topping up': 0,
+    'eviction server evicting pages': 0,
+    'eviction server slept, because we did not make progress with eviction': 0,
+    'eviction server unable to reach eviction goal': 0,
+    'eviction server waiting for a leaf page': 0,
+    'eviction state': 64,
+    'eviction walk most recent sleeps for checkpoint handle gathering': 0,
+    'eviction walk target pages histogram - 0-9': 0,
+    'eviction walk target pages histogram - 10-31': 0,
+    'eviction walk target pages histogram - 128 and higher': 0,
+    'eviction walk target pages histogram - 32-63': 0,
+    'eviction walk target pages histogram - 64-128': 0,
+    'eviction walk target pages reduced due to history store cache pressure': 0,
+    'eviction walk target strategy both clean and dirty pages': 0,
+    'eviction walk target strategy only clean pages': 0,
+    'eviction walk target strategy only dirty pages': 0,
+    'eviction walks abandoned': 0,
+    'eviction walks gave up because they restarted their walk twice': 0,
+    'eviction walks gave up because they saw too many pages and found no candidates': 0,
+    'eviction walks gave up because they saw too many pages and found too few candidates': 0,
+    'eviction walks reached end of tree': 0,
+    'eviction walks restarted': 0,
+    'eviction walks started from root of tree': 0,
+    'eviction walks started from saved location in tree': 0,
+    'eviction worker thread active': 4,
+    'eviction worker thread created': 0,
+    'eviction worker thread evicting pages': 0,
+    'eviction worker thread removed': 0,
+    'eviction worker thread stable number': 0,
+    'files with active eviction walks': 0,
+    'files with new eviction walks started': 0,
+    'force re-tuning of eviction workers once in a while': 0,
+    'forced eviction - history store pages failed to evict while session has history store cursor open': 0,
+    'forced eviction - history store pages selected while session has history store cursor open': 0,
+    'forced eviction - history store pages successfully evicted while session has history store cursor open': 0,
+    'forced eviction - pages evicted that were clean count': 0,
+    'forced eviction - pages evicted that were clean time (usecs)': 0,
+    'forced eviction - pages evicted that were dirty count': 0,
+    'forced eviction - pages evicted that were dirty time (usecs)': 0,
+    'forced eviction - pages selected because of a large number of updates to a single item': 0,
+    'forced eviction - pages selected because of too many deleted items count': 0,
+    'forced eviction - pages selected count': 0,
+    'forced eviction - pages selected unable to be evicted count': 0,
+    'forced eviction - pages selected unable to be evicted time': 0,
+    'hazard pointer blocked page eviction': 0,
+    'hazard pointer check calls': 0,
+    'hazard pointer check entries walked': 0,
+    'hazard pointer maximum array length': 0,
+    'history store table insert calls': 0,
+    'history store table insert calls that returned restart': 0,
+    'history store table max on-disk size': 0,
+    'history store table on-disk size': 4096,
+    'history store table out-of-order resolved updates that lose their durable timestamp': 0,
+    'history store table out-of-order updates that were fixed up by reinserting with the fixed timestamp': 0,
+    'history store table reads': 0,
+    'history store table reads missed': 0,
+    'history store table reads requiring squashed modifies': 0,
+    'history store table truncation by rollback to stable to remove an unstable update': 0,
+    'history store table truncation by rollback to stable to remove an update': 0,
+    'history store table truncation to remove an update': 0,
+    'history store table truncation to remove range of updates due to key being removed from the data page during reconciliation': 0,
+    'history store table truncation to remove range of updates due to out-of-order timestamp update on data page': 0,
+    'history store table writes requiring squashed modifies': 0,
+    'in-memory page passed criteria to be split': 0,
+    'in-memory page splits': 0,
+    'internal pages evicted': 0,
+    'internal pages queued for eviction': 0,
+    'internal pages seen by eviction walk': 0,
+    'internal pages seen by eviction walk that are already queued': 0,
+    'internal pages split during eviction': 0,
+    'leaf pages split during eviction': 0,
+    'maximum bytes configured': Long("8053063680"),
+    'maximum page size seen at eviction': 0,
+    'maximum seconds spent at a single eviction': 0,
+    'modified pages evicted': 0,
+    'modified pages evicted by application threads': 0,
+    'operations timed out waiting for space in cache': 0,
+    'overflow pages read into cache': 0,
+    'page split during eviction deepened the tree': 0,
+    'page written requiring history store records': 0,
+    'pages currently held in the cache': 21,
+    'pages evicted by application threads': 0,
+    'pages evicted in parallel with checkpoint': 0,
+    'pages queued for eviction': 0,
+    'pages queued for eviction post lru sorting': 0,
+    'pages queued for urgent eviction': 0,
+    'pages queued for urgent eviction during walk': 0,
+    'pages queued for urgent eviction from history store due to high dirty content': 0,
+    'pages read into cache': 0,
+    'pages read into cache after truncate': 10,
+    'pages read into cache after truncate in prepare state': 0,
+    'pages requested from the cache': 793,
+    'pages seen by eviction walk': 0,
+    'pages seen by eviction walk that are already queued': 0,
+    'pages selected for eviction unable to be evicted': 0,
+    'pages selected for eviction unable to be evicted because of active children on an internal page': 0,
+    'pages selected for eviction unable to be evicted because of failure in reconciliation': 0,
+    'pages selected for eviction unable to be evicted because of race between checkpoint and out of order timestamps handling': 0,
+    'pages walked for eviction': 0,
+    'pages written from cache': 80,
+    'pages written requiring in-memory restoration': 0,
+    'percentage overhead': 8,
+    'the number of times full update inserted to history store': 0,
+    'the number of times reverse modify inserted to history store': 0,
+    'tracked bytes belonging to internal pages in the cache': 5299,
+    'tracked bytes belonging to leaf pages in the cache': 53041,
+    'tracked dirty bytes in the cache': 0,
+    'tracked dirty pages in the cache': 0,
+    'unmodified pages evicted': 0
+  },
+  capacity: {
+    'background fsync file handles considered': 0,
+    'background fsync file handles synced': 0,
+    'background fsync time (msecs)': 0,
+    'bytes read': 0,
+    'bytes written for checkpoint': 562880,
+    'bytes written for eviction': 0,
+    'bytes written for log': 36352,
+    'bytes written total': 599232,
+    'threshold to call fsync': 0,
+    'time waiting due to total capacity (usecs)': 0,
+    'time waiting during checkpoint (usecs)': 0,
+    'time waiting during eviction (usecs)': 0,
+    'time waiting during logging (usecs)': 0,
+    'time waiting during read (usecs)': 0
+  },
+  'checkpoint-cleanup': {
+    'pages added for eviction': 0,
+    'pages removed': 0,
+    'pages skipped during tree walk': 0,
+    'pages visited': 40
+  },
+  connection: {
+    'auto adjusting condition resets': 57,
+    'auto adjusting condition wait calls': 10612,
+    'auto adjusting condition wait raced to update timeout and skipped updating': 0,
+    'detected system time went backwards': 0,
+    'files currently open': 14,
+    'hash bucket array size for data handles': 512,
+    'hash bucket array size general': 512,
+    'memory allocations': 68054,
+    'memory frees': 67049,
+    'memory re-allocations': 7467,
+    'pthread mutex condition wait calls': 22673,
+    'pthread mutex shared lock read-lock calls': 27891,
+    'pthread mutex shared lock write-lock calls': 1870,
+    'total fsync I/Os': 232,
+    'total read I/Os': 77,
+    'total write I/Os': 284
+  },
+  cursor: {
+    'Total number of entries skipped by cursor next calls': 0,
+    'Total number of entries skipped by cursor prev calls': 0,
+    'Total number of entries skipped to position the history store cursor': 0,
+    'Total number of times a search near has exited due to prefix config': 0,
+    'cached cursor count': 13,
+    'cursor bulk loaded cursor insert calls': 0,
+    'cursor close calls that result in cache': 14101,
+    'cursor create calls': 70,
+    'cursor insert calls': 128,
+    'cursor insert key and value bytes': 47762,
+    'cursor modify calls': 0,
+    'cursor modify key and value bytes affected': 0,
+    'cursor modify value bytes modified': 0,
+    'cursor next calls': 71,
+    'cursor next calls that skip due to a globally visible history store tombstone': 0,
+    'cursor next calls that skip greater than or equal to 100 entries': 0,
+    'cursor next calls that skip less than 100 entries': 71,
+    'cursor operation restarted': 0,
+    'cursor prev calls': 36,
+    'cursor prev calls that skip due to a globally visible history store tombstone': 0,
+    'cursor prev calls that skip greater than or equal to 100 entries': 0,
+    'cursor prev calls that skip less than 100 entries': 36,
+    'cursor remove calls': 0,
+    'cursor remove key bytes removed': 0,
+    'cursor reserve calls': 0,
+    'cursor reset calls': 14822,
+    'cursor search calls': 295,
+    'cursor search history store calls': 0,
+    'cursor search near calls': 40,
+    'cursor sweep buckets': 21381,
+    'cursor sweep cursors closed': 0,
+    'cursor sweep cursors examined': 288,
+    'cursor sweeps': 2190,
+    'cursor truncate calls': 0,
+    'cursor update calls': 0,
+    'cursor update key and value bytes': 0,
+    'cursor update value size change': 0,
+    'cursors reused from cache': 14088,
+    'open cursor count': 6
+  },
+  'data-handle': {
+    'connection data handle size': 464,
+    'connection data handles currently active': 21,
+    'connection sweep candidate became referenced': 0,
+    'connection sweep dhandles closed': 0,
+    'connection sweep dhandles removed from hash list': 5,
+    'connection sweep time-of-death sets': 240,
+    'connection sweeps': 182,
+    'connection sweeps skipped due to checkpoint gathering handles': 0,
+    'session dhandles swept': 9,
+    'session sweep attempts': 563
+  },
+  lock: {
+    'checkpoint lock acquisitions': 30,
+    'checkpoint lock application thread wait time (usecs)': 2,
+    'checkpoint lock internal thread wait time (usecs)': 0,
+    'dhandle lock application thread time waiting (usecs)': 0,
+    'dhandle lock internal thread time waiting (usecs)': 0,
+    'dhandle read lock acquisitions': 6993,
+    'dhandle write lock acquisitions': 33,
+    'durable timestamp queue lock application thread time waiting (usecs)': 0,
+    'durable timestamp queue lock internal thread time waiting (usecs)': 0,
+    'durable timestamp queue read lock acquisitions': 0,
+    'durable timestamp queue write lock acquisitions': 0,
+    'metadata lock acquisitions': 30,
+    'metadata lock application thread wait time (usecs)': 0,
+    'metadata lock internal thread wait time (usecs)': 0,
+    'read timestamp queue lock application thread time waiting (usecs)': 0,
+    'read timestamp queue lock internal thread time waiting (usecs)': 0,
+    'read timestamp queue read lock acquisitions': 0,
+    'read timestamp queue write lock acquisitions': 0,
+    'schema lock acquisitions': 42,
+    'schema lock application thread wait time (usecs)': 0,
+    'schema lock internal thread wait time (usecs)': 0,
+    'table lock application thread time waiting for the table lock (usecs)': 0,
+    'table lock internal thread time waiting for the table lock (usecs)': 0,
+    'table read lock acquisitions': 0,
+    'table write lock acquisitions': 10,
+    'txn global lock application thread time waiting (usecs)': 0,
+    'txn global lock internal thread time waiting (usecs)': 0,
+    'txn global read lock acquisitions': 66,
+    'txn global write lock acquisitions': 73
+  },
+  log: {
+    'busy returns attempting to switch slots': 0,
+    'force log remove time sleeping (usecs)': 0,
+    'log bytes of payload data': 26320,
+    'log bytes written': 36224,
+    'log files manually zero-filled': 0,
+    'log flush operations': 11809,
+    'log force write operations': 13716,
+    'log force write operations skipped': 13679,
+    'log records compressed': 60,
+    'log records not compressed': 4,
+    'log records too small to compress': 73,
+    'log release advances write LSN': 41,
+    'log scan operations': 0,
+    'log scan records requiring two reads': 0,
+    'log server thread advances write LSN': 37,
+    'log server thread write LSN walk skipped': 2708,
+    'log sync operations': 78,
+    'log sync time duration (usecs)': 372722,
+    'log sync_dir operations': 1,
+    'log sync_dir time duration (usecs)': 4591,
+    'log write operations': 137,
+    'logging bytes consolidated': 35712,
+    'maximum log file size': 104857600,
+    'number of pre-allocated log files to create': 2,
+    'pre-allocated log files not ready and missed': 1,
+    'pre-allocated log files prepared': 2,
+    'pre-allocated log files used': 0,
+    'records processed by log scan': 0,
+    'slot close lost race': 0,
+    'slot close unbuffered waits': 0,
+    'slot closures': 78,
+    'slot join atomic update races': 0,
+    'slot join calls atomic updates raced': 0,
+    'slot join calls did not yield': 137,
+    'slot join calls found active slot closed': 0,
+    'slot join calls slept': 0,
+    'slot join calls yielded': 0,
+    'slot join found active slot closed': 0,
+    'slot joins yield time (usecs)': 0,
+    'slot transitions unable to find free slot': 0,
+    'slot unbuffered writes': 0,
+    'total in-memory size of compressed records': 48433,
+    'total log buffer size': 33554432,
+    'total size of compressed records': 23738,
+    'written slots coalesced': 0,
+    'yields waiting for previous log file close': 0
+  },
+  perf: {
+    'file system read latency histogram (bucket 1) - 10-49ms': 0,
+    'file system read latency histogram (bucket 2) - 50-99ms': 0,
+    'file system read latency histogram (bucket 3) - 100-249ms': 0,
+    'file system read latency histogram (bucket 4) - 250-499ms': 0,
+    'file system read latency histogram (bucket 5) - 500-999ms': 0,
+    'file system read latency histogram (bucket 6) - 1000ms+': 0,
+    'file system write latency histogram (bucket 1) - 10-49ms': 0,
+    'file system write latency histogram (bucket 2) - 50-99ms': 0,
+    'file system write latency histogram (bucket 3) - 100-249ms': 0,
+    'file system write latency histogram (bucket 4) - 250-499ms': 0,
+    'file system write latency histogram (bucket 5) - 500-999ms': 0,
+    'file system write latency histogram (bucket 6) - 1000ms+': 0,
+    'operation read latency histogram (bucket 1) - 100-249us': 0,
+    'operation read latency histogram (bucket 2) - 250-499us': 0,
+    'operation read latency histogram (bucket 3) - 500-999us': 0,
+    'operation read latency histogram (bucket 4) - 1000-9999us': 0,
+    'operation read latency histogram (bucket 5) - 10000us+': 0,
+    'operation write latency histogram (bucket 1) - 100-249us': 0,
+    'operation write latency histogram (bucket 2) - 250-499us': 0,
+    'operation write latency histogram (bucket 3) - 500-999us': 0,
+    'operation write latency histogram (bucket 4) - 1000-9999us': 0,
+    'operation write latency histogram (bucket 5) - 10000us+': 0
+  },
+  reconciliation: {
+    'approximate byte size of timestamps in pages written': 0,
+    'approximate byte size of transaction IDs in pages written': 584,
+    'fast-path pages deleted': 0,
+    'leaf-page overflow keys': 0,
+    'maximum seconds spent in a reconciliation call': 0,
+    'maximum seconds spent in building a disk image in a reconciliation': 0,
+    'maximum seconds spent in moving updates to the history store in a reconciliation': 0,
+    'page reconciliation calls': 80,
+    'page reconciliation calls for eviction': 0,
+    'page reconciliation calls that resulted in values with prepared transaction metadata': 0,
+    'page reconciliation calls that resulted in values with timestamps': 0,
+    'page reconciliation calls that resulted in values with transaction ids': 29,
+    'pages deleted': 0,
+    'pages written including an aggregated newest start durable timestamp ': 0,
+    'pages written including an aggregated newest stop durable timestamp ': 0,
+    'pages written including an aggregated newest stop timestamp ': 0,
+    'pages written including an aggregated newest stop transaction ID': 0,
+    'pages written including an aggregated newest transaction ID ': 0,
+    'pages written including an aggregated oldest start timestamp ': 0,
+    'pages written including an aggregated prepare': 0,
+    'pages written including at least one prepare state': 0,
+    'pages written including at least one start durable timestamp': 0,
+    'pages written including at least one start timestamp': 0,
+    'pages written including at least one start transaction ID': 29,
+    'pages written including at least one stop durable timestamp': 0,
+    'pages written including at least one stop timestamp': 0,
+    'pages written including at least one stop transaction ID': 0,
+    'records written including a prepare state': 0,
+    'records written including a start durable timestamp': 0,
+    'records written including a start timestamp': 0,
+    'records written including a start transaction ID': 73,
+    'records written including a stop durable timestamp': 0,
+    'records written including a stop timestamp': 0,
+    'records written including a stop transaction ID': 0,
+    'split bytes currently awaiting free': 0,
+    'split objects currently awaiting free': 0
+  },
+  session: {
+    'attempts to remove a local object and the object is in use': 0,
+    'flush_tier operation calls': 0,
+    'flush_tier tables skipped due to no checkpoint': 0,
+    'flush_tier tables switched': 0,
+    'local objects removed': 0,
+    'open session count': 15,
+    'session query timestamp calls': 0,
+    'table alter failed calls': 0,
+    'table alter successful calls': 0,
+    'table alter triggering checkpoint calls': 0,
+    'table alter unchanged and skipped': 0,
+    'table compact failed calls': 0,
+    'table compact failed calls due to cache pressure': 0,
+    'table compact running': 0,
+    'table compact skipped as process would not reduce file size': 0,
+    'table compact successful calls': 0,
+    'table compact timeout': 0,
+    'table create failed calls': 0,
+    'table create successful calls': 9,
+    'table drop failed calls': 0,
+    'table drop successful calls': 0,
+    'table rename failed calls': 0,
+    'table rename successful calls': 0,
+    'table salvage failed calls': 0,
+    'table salvage successful calls': 0,
+    'table truncate failed calls': 0,
+    'table truncate successful calls': 0,
+    'table verify failed calls': 0,
+    'table verify successful calls': 0,
+    'tiered operations dequeued and processed': 0,
+    'tiered operations scheduled': 0,
+    'tiered storage local retention time (secs)': 0
+  },
+  'thread-state': {
+    'active filesystem fsync calls': 0,
+    'active filesystem read calls': 0,
+    'active filesystem write calls': 0
+  },
+  'thread-yield': {
+    'application thread time evicting (usecs)': 0,
+    'application thread time waiting for cache (usecs)': 0,
+    'connection close blocked waiting for transaction state stabilization': 0,
+    'connection close yielded for lsm manager shutdown': 0,
+    'data handle lock yielded': 0,
+    'get reference for page index and slot time sleeping (usecs)': 0,
+    'page access yielded due to prepare state change': 0,
+    'page acquire busy blocked': 0,
+    'page acquire eviction blocked': 0,
+    'page acquire locked blocked': 0,
+    'page acquire read blocked': 0,
+    'page acquire time sleeping (usecs)': 0,
+    'page delete rollback time sleeping for state change (usecs)': 0,
+    'page reconciliation yielded due to child modification': 0
+  },
+  transaction: {
+    'Number of prepared updates': 0,
+    'Number of prepared updates committed': 0,
+    'Number of prepared updates repeated on the same key': 0,
+    'Number of prepared updates rolled back': 0,
+    'prepared transactions': 0,
+    'prepared transactions committed': 0,
+    'prepared transactions currently active': 0,
+    'prepared transactions rolled back': 0,
+    'query timestamp calls': 1741,
+    'race to read prepared update retry': 0,
+    'rollback to stable calls': 0,
+    'rollback to stable history store records with stop timestamps older than newer records': 0,
+    'rollback to stable inconsistent checkpoint': 0,
+    'rollback to stable keys removed': 0,
+    'rollback to stable keys restored': 0,
+    'rollback to stable pages visited': 0,
+    'rollback to stable restored tombstones from history store': 0,
+    'rollback to stable restored updates from history store': 0,
+    'rollback to stable skipping delete rle': 0,
+    'rollback to stable skipping stable rle': 0,
+    'rollback to stable sweeping history store keys': 0,
+    'rollback to stable tree walk skipping pages': 0,
+    'rollback to stable updates aborted': 0,
+    'rollback to stable updates removed from history store': 0,
+    'sessions scanned in each walk of concurrent sessions': 30331,
+    'set timestamp calls': 0,
+    'set timestamp durable calls': 0,
+    'set timestamp durable updates': 0,
+    'set timestamp oldest calls': 0,
+    'set timestamp oldest updates': 0,
+    'set timestamp stable calls': 0,
+    'set timestamp stable updates': 0,
+    'transaction begins': 66,
+    'transaction checkpoint currently running': 0,
+    'transaction checkpoint currently running for history store file': 0,
+    'transaction checkpoint generation': 31,
+    'transaction checkpoint history store file duration (usecs)': 3,
+    'transaction checkpoint max time (msecs)': 53,
+    'transaction checkpoint min time (msecs)': 20,
+    'transaction checkpoint most recent duration for gathering all handles (usecs)': 87,
+    'transaction checkpoint most recent duration for gathering applied handles (usecs)': 57,
+    'transaction checkpoint most recent duration for gathering skipped handles (usecs)': 12,
+    'transaction checkpoint most recent handles applied': 4,
+    'transaction checkpoint most recent handles skipped': 6,
+    'transaction checkpoint most recent handles walked': 25,
+    'transaction checkpoint most recent time (msecs)': 36,
+    'transaction checkpoint prepare currently running': 0,
+    'transaction checkpoint prepare max time (msecs)': 0,
+    'transaction checkpoint prepare min time (msecs)': 0,
+    'transaction checkpoint prepare most recent time (msecs)': 0,
+    'transaction checkpoint prepare total time (msecs)': 0,
+    'transaction checkpoint scrub dirty target': 0,
+    'transaction checkpoint scrub time (msecs)': 0,
+    'transaction checkpoint stop timing stress active': 0,
+    'transaction checkpoint total time (msecs)': 821,
+    'transaction checkpoints': 30,
+    'transaction checkpoints due to obsolete pages': 0,
+    'transaction checkpoints skipped because database was clean': 0,
+    'transaction failures due to history store': 0,
+    'transaction fsync calls for checkpoint after allocating the transaction ID': 30,
+    'transaction fsync duration for checkpoint after allocating the transaction ID (usecs)': 16196,
+    'transaction range of IDs currently pinned': 0,
+    'transaction range of IDs currently pinned by a checkpoint': 0,
+    'transaction range of timestamps currently pinned': 0,
+    'transaction range of timestamps pinned by a checkpoint': 0,
+    'transaction range of timestamps pinned by the oldest active read timestamp': 0,
+    'transaction range of timestamps pinned by the oldest timestamp': 0,
+    'transaction read timestamp of the oldest active reader': 0,
+    'transaction rollback to stable currently running': 0,
+    'transaction walk of concurrent sessions': 2022,
+    'transactions committed': 9,
+    'transactions rolled back': 57,
+    'update conflicts': 0
+  },
+  concurrentTransactions: {
+    write: { out: 0, available: 128, totalTickets: 128 },
+    read: { out: 0, available: 128, totalTickets: 128 }
+  },
+  'snapshot-window-settings': {
+    'total number of SnapshotTooOld errors': Long("0"),
+    'minimum target snapshot window size in seconds': 300,
+    'current available snapshot window size in seconds': 0,
+    'latest majority snapshot timestamp available': 'Jan  1 05:30:00:0',
+    'oldest majority snapshot timestamp available': 'Jan  1 05:30:00:0',
+    'pinned timestamp requests': 0,
+    'min pinned timestamp': Timestamp({ t: -1, i: -1 })
+  },
+  oplog: { 'visibility timestamp': Timestamp({ t: 0, i: 0 }) }
+}
+test> show databases
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+test> show dbs
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+test> db.getMongo().getDBNames()
+[ 'admin', 'config', 'local' ]
+test> db.adminCommand('listDatabases')
+{
+  databases: [
+    { name: 'admin', sizeOnDisk: Long("40960"), empty: false },
+    { name: 'config', sizeOnDisk: Long("61440"), empty: false },
+    { name: 'local', sizeOnDisk: Long("40960"), empty: false }
+  ],
+  totalSize: Long("143360"),
+  totalSizeMb: Long("0"),
+  ok: 1
+}
+test> show collections
+
+test> show tables
+
+test> db.getCollectionNames()
+[]
+test> use sampledb
+switched to db sampledb
+sampledb> show dbs
+admin   40.00 KiB
+config  92.00 KiB
+local   40.00 KiB
+sampledb> db.example.insertOne({name: "MongoDB", version: "6.0.6"})
+{
+  acknowledged: true,
+  insertedId: ObjectId("64b8de6372663550797f3261")
+}
+sampledb> db.getCollectionNames()
+[ 'example' ]
+sampledb> show dbs
+admin          40.00 KiB
+config        108.00 KiB
+local          40.00 KiB
+sampledb   40.00 KiB
+sampledb> db
+sampledb
+sampledb> exit
+rajaniapple@Rajanis-MacBook-Pro ~ % 

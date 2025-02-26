@@ -1,0 +1,14 @@
+4.9 Casting Choices
+
+
+In general, what's the best option to first consider for modeling your related data?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Embedding
+
+Note: MongoDB does really well with embedded data - you should consider that as the first option.

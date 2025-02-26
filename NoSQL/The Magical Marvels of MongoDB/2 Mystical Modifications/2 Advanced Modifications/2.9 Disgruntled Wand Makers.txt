@@ -1,0 +1,25 @@
+2.9 Disgruntled Wand Makers
+
+
+We've been getting some complaints from wand makers that the term "creator" doesn't properly convey the true nature of their craft. To make them happy, we need to change the field creator to maker.
+
+Shell Editor
+
+db.wands.update(
+  {},
+  
+  {"multi": true}
+)
+
+
+Add the update parameter that will rename the creator field to "maker" for all documents.
+
+Answer: 
+
+Shell Editor
+
+db.wands.update(
+  {},
+  { "$rename": { "creator": "maker"  } }, 
+  {"multi": true}
+)

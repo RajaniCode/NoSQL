@@ -1,0 +1,35 @@
+1.10 Bad Magic
+
+
+You're doing a great job inserting and querying data from the database. Occasionally, though, you may run into some bad data.
+
+Case in point, the following 2 documents are problematic. Can you tell which validation they break?
+
+
+{
+  "_id": ObjectId("1234567"),
+  "name": "Dream Bender",
+  "creator": "Foxmond",
+  "level_required": 10,
+  "price": 34.9,
+  "powers": ["Fire", "Love"],
+  "damage": {"magic": 4, "melee": 2}
+},
+{
+  "_id": ObjectId("1234567"),
+  "name": "Lightbane",
+  "creator": "Elvira",
+  "level_required": 4,
+  "price": 4.2,
+  "powers": ["Light", "Darkness"],
+  "damage": {"magic": 10, "melee": 0}
+}
+
+[Single Answer]
+
+Unique _id
+Valid syntax
+Size less than 16 MB
+
+
+Answer: Unique _id

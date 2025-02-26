@@ -1,0 +1,502 @@
+mongod --version
+
+
+#MongoDB Default Directory: "/<root>/db/data" viz. "/c/db/data" #OR "<Root>:\db\data" viz. "C:\db\data"
+rm -rf "/e/WT" #OR rm -rf "E:\WT"
+
+mkdir -p "/e/WT" #OR mkdir -p "E:\WT"
+
+
+#MongoDB Server #runserver #mongod -dbpath <Directory>/WT --storageEngine <storage engine>
+#MongoDB 3.2 Default Storage Engine WiredTiger defaullt port 27017:
+mongod -dbpath "/e/WT" --storageEngine wiredTiger
+
+#MongoDB 3.2 Default Storage Engine WiredTiger non-default port 27018:
+mongod -dbpath "/e/WT" --storageEngine wiredTiger --port 27018
+
+#MongoDB 3.0 Storage Engine MMAPv1 defaullt port 27017:
+mongod -dbpath "/e/MMAP" --storageEngine mmapv1
+
+#MongoDB 3.0 Storage Engine MMAPv1 non-default port 27018:
+mongod -dbpath "/e/MMAP" --storageEngine mmapv1 --port 27018
+
+
+#MongoDB restore from dump dir
+mongorestore dump
+#mongorestore --drop --gzip
+#MongoDB University/2017/M034 New Features and Tools in MongoDB 3.4/Chapter 1 Read-only Views/Units/4 Lab Creating a View/Download Handouts
+mongorestore --drop --gzip m034-views-mongodump
+
+
+#MongoDB import json
+#mongoimport -d <database> -c <collection> defaullt port 27017:
+mongoimport -d course -c grades grades.json
+#Note: <
+mongoimport -d course -c grades < grades.json
+
+#mongoimport -d <database> -c <collection> non-default port 27018:
+mongoimport -d course -c grades grades.json --port 27018
+#Note: <
+mongoimport -d course -c grades < grades.json --port 27018
+
+
+#wget and mongoimport
+wget https://data.nasa.gov/api/views/9kcy-zwvn/rows.csv?accessType=DOWNLOAD -O eva.csv
+mongoimport --headerline --file eva.csv --type csv --db nasa --collection eva
+
+
+#mongo <database> --eval "db.getCollectionNames()"
+mongo nasa --eval "db.getCollectionNames()"
+#mongo <database> --eval "db.getCollectionNames().join('\n')"
+mongo nasa --eval "db.getCollectionNames().join('\n')"\
+
+
+#MongoDB Shell
+#mongo defaullt port 27017:
+mongo
+
+#mongo non-default 27018:
+mongo --port 27018
+
+
+#MongoDB mongo Shell
+mongo
+#OR
+winpty mongo
+db.version()
+quit()
+#OR
+exit
+
+#Current storage engine
+db.serverStatus().storageEngine
+
+#Configuration details of wiredTiger
+db.serverStatus().wiredTiger
+
+#Databases
+show databases
+show dbs
+db.getMongo().getDBNames()
+db.adminCommand('listDatabases')
+
+#Collections/Tables in Current Database
+#use <database>
+show collections
+show tables
+db.getCollectionNames()
+
+#Fields in a Collection
+#use <database>
+#for(var key in db.<collection>.findOne()) { print (key) }
+for(var key in db.eva.findOne()) { print (key) }
+for(var key in db.<collection>.findOne()) { print (key, typeof key) }
+for(var key in db.eva.findOne()) { print (key, typeof key) }
+
+
+#MongoDB mongo Shell Script
+mongo
+new Mongo("localhost:27017")
+
+conn = new Mongo("localhost:27017")
+db = conn.getDB("myDatabase");
+
+#default port 27017
+db = connect("localhost/myDatabase");
+#OR
+db = connect("localhost:27017/myDatabase");
+
+#non-default port 27020
+db = connect("localhost:27020/myDatabase");
+
+load("mongo_shell_script.js")
+
+load("E:/Working/MongoDB/MongoDB University/MongoDB mongo Shell/foo.js")
+
+
+// M101JS MongoDB for Node.js Developers\Week 4 Performance\Creating Indexes
+
+// M101JS MongoDB for Node.js Developers\Week 4 Performance\Creating Indexes\Download Handout\create_scores.js
+
+db=db.getSiblingDB("school");
+
+db.students.drop();
+
+types = ['exam', 'quiz', 'homework', 'homework'];
+
+// 1 million students
+
+for (i = 0; i < 1000000; i++) {
+
+
+
+    // take 10 classes
+    
+    for (class_counter = 0; class_counter < 10; class_counter ++) {
+
+	
+        scores = []
+	    
+        // and each class has 4 grades
+	    
+        for (j = 0; j < 4; j++) {
+		
+            scores.push({'type':types[j],'score':Math.random()*100});
+	    
+        }
+
+	
+
+	// there are 500 different classes that they can take
+	
+        class_id = Math.floor(Math.random()*501); // get a class id between 0 and 500
+
+	
+	record = {'student_id':i, 'scores':scores, 'class_id':class_id};
+	
+	db.students.insert(record);
+
+
+    
+    }
+
+
+
+}
+	
+
+
+// M101JS MongoDB for Node.js Developers\Week 4 Performance\Mongostat
+
+// M101JS MongoDB for Node.js Developers\Week 4 Performance\Mongostat\Download Handouts\create_scores.js
+
+use students;
+
+db.grades.drop();
+
+for (i = 0; i < 10000000; i++) {
+    
+    for (j = 0; j < 4; j++) {
+	
+        assess = ['exam', 'quiz', 'homework', 'homework'];
+	
+        record = {'student_id':i, 'type':assess[j], 'score':Math.random()*100};
+	
+        db.grades.insert(record);
+    
+    }
+
+}
+
+
+mongoimport -d agg -c zips zips.json
+
+
+// https://docs.mongodb.org/manual/tutorial/create-an-auto-incrementing-field/
+
+db.counters.insert(
+   {
+      _id: "userid",
+      seq: 0
+   }
+)
+
+function getNextSequence(name) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { _id: name },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
+
+db.users.insert(
+   {
+     _id: getNextSequence("userid"),
+     name: "Sarah C."
+   }
+)
+
+db.users.insert(
+   {
+     _id: getNextSequence("userid"),
+     name: "Bob D."
+   }
+)
+
+db.users.find()
+
+db.users.findOne()
+
+// Create an Auto-Incrementing Sequence Field
+
+Synopsis
+
+MongoDB reserves the _id field in the top level of all documents as a primary key. _id must be unique, and always has an index with a unique constraint. However, except for the unique constraint you can use any value for the _id field in your collections. This tutorial describes two methods for creating an incrementing sequence number for the _id field using the following:
+• Use Counters Collection
+• Optimistic Loop
+
+Considerations
+
+Generally in MongoDB, you would not use an auto-increment pattern for the _id field, or any field, because it does not scale for databases with large numbers of documents. Typically the default value ObjectId is more ideal for the _id.
+
+Procedures
+
+Use Counters Collection
+
+Counter Collection Implementation
+
+Use a separate counters collection to track the last number sequence used. The _id field contains the sequence name and the seq field contains the last value of the sequence.
+
+1.Insert into the counters collection, the initial value for the userid:
+
+db.counters.insert(
+   {
+      _id: "userid",
+      seq: 0
+   }
+)
+
+2.Create a getNextSequence function that accepts a name of the sequence. The function uses the findAndModify() method to atomically increment the seq value and return this new value:
+
+function getNextSequence(name) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { _id: name },
+            update: { $inc: { seq: 1 } },
+            new: true
+          }
+   );
+
+   return ret.seq;
+}
+
+3.Use this getNextSequence() function during insert().
+
+db.users.insert(
+   {
+     _id: getNextSequence("userid"),
+     name: "Sarah C."
+   }
+)
+
+db.users.insert(
+   {
+     _id: getNextSequence("userid"),
+     name: "Bob D."
+   }
+)
+
+You can verify the results with find():
+
+db.users.find()
+
+The _id fields contain incrementing sequence values:
+{
+  _id : 1,
+  name : "Sarah C."
+}
+{
+  _id : 2,
+  name : "Bob D."
+}
+
+findAndModify Behavior
+
+When findAndModify() includes the upsert: true option and the query field(s) is not uniquely indexed, the method could insert a document multiple times in certain circumstances. For instance, if multiple clients each invoke the method with the same query condition and these methods complete the find phase before any of methods perform the modify phase, these methods could insert the same document.
+
+In the counters collection example, the query field is the _id field, which always has a unique index. Consider that the findAndModify() includes the upsert: true option, as in the following modified example:
+
+function getNextSequence(name) {
+   var ret = db.counters.findAndModify(
+          {
+            query: { _id: name },
+            update: { $inc: { seq: 1 } },
+            new: true,
+            upsert: true
+          }
+   );
+
+   return ret.seq;
+}
+
+If multiple clients were to invoke the getNextSequence() method with the same name parameter, then the methods would observe one of the following behaviors:
+• Exactly one findAndModify() would successfully insert a new document.
+• Zero or more findAndModify() methods would update the newly inserted document.
+• Zero or more findAndModify() methods would fail when they attempted to insert a duplicate.
+
+If the method fails due to a unique index constraint violation, retry the method. Absent a delete of the document, the retry should not fail.
+
+Optimistic Loop
+
+In this pattern, an Optimistic Loop calculates the incremented _id value and attempts to insert a document with the calculated _id value. If the insert is successful, the loop ends. Otherwise, the loop will iterate through possible _id values until the insert is successful.
+
+1.Create a function named insertDocument that performs the “insert if not present” loop. The function wraps the insert() method and takes a doc and a targetCollection arguments.
+
+Changed in version 2.6: The db.collection.insert() method now returns a WriteResult object that contains the status of the operation. Previous versions required an extra db.getLastErrorObj() method call.
+
+function insertDocument(doc, targetCollection) {
+
+    while (1) {
+
+        var cursor = targetCollection.find( {}, { _id: 1 } ).sort( { _id: -1 } ).limit(1);
+
+        var seq = cursor.hasNext() ? cursor.next()._id + 1 : 1;
+
+        doc._id = seq;
+
+        var results = targetCollection.insert(doc);
+
+        if( results.hasWriteError() ) {
+            if( results.writeError.code == 11000 /* dup key */ )
+                continue;
+            else
+                print( "unexpected error inserting data: " + tojson( results ) );
+        }
+
+        break;
+    }
+}
+
+The while (1) loop performs the following actions:
+Queries the targetCollection for the document with the maximum _id value.
+Determines the next sequence value for _id by:?adding 1 to the returned _id value if the returned cursor points to a document.
+otherwise: it sets the next sequence value to 1 if the returned cursor points to no document.
+
+For the doc to insert, set its _id field to the calculated sequence value seq.
+Insert the doc into the targetCollection.
+If the insert operation errors with duplicate key, repeat the loop. Otherwise, if the insert operation encounters some other error or if the operation succeeds, break out of the loop.
+
+2.Use the insertDocument() function to perform an insert:
+
+var myCollection = db.users2;
+
+insertDocument(
+   {
+     name: "Grace H."
+   },
+   myCollection
+);
+
+insertDocument(
+   {
+     name: "Ted R."
+   },
+   myCollection
+)
+
+You can verify the results with find():
+
+db.users2.find()
+
+The _id fields contain incrementing sequence values:
+{
+  _id: 1,
+  name: "Grace H."
+}
+{
+  _id : 2,
+  "name" : "Ted R."
+}
+
+The while loop may iterate many times in collections with larger insert volumes.
+
+
+// MongoChef WT
+
+db=db.getSiblingDB("school");
+db.students.drop();
+types = ['exam', 'quiz', 'homework', 'homework'];
+// 1 million students
+for (i = 0; i < 1000000; i++) {
+
+    // take 10 classes
+    for (class_counter = 0; class_counter < 10; class_counter ++) {
+	scores = []
+	    // and each class has 4 grades
+	    for (j = 0; j < 4; j++) {
+		scores.push({'type':types[j],'score':Math.random()*100});
+	    }
+
+	// there are 500 different classes that they can take
+	class_id = Math.floor(Math.random()*501); // get a class id between 0 and 500
+
+	record = {'student_id':i, 'scores':scores, 'class_id':class_id};
+	db.students.insert(record);
+
+    }
+
+}
+
+// Output:
+/*
+school
+false
+[ "exam", "quiz", "homework", "homework" ]
+WriteResult({ "nInserted" : 1 })
+*/
+
+
+db.students.count()
+
+// Output:
+// 10000000
+
+db.students.find().explain("executionStats")
+
+// Output:
+/*
+{
+	"queryPlanner" : {
+		"plannerVersion" : 1,
+		"namespace" : "school.students",
+		"indexFilterSet" : false,
+		"parsedQuery" : {
+			"$and" : [ ]
+		},
+		"winningPlan" : {
+			"stage" : "COLLSCAN",
+			"filter" : {
+				"$and" : [ ]
+			},
+			"direction" : "forward"
+		},
+		"rejectedPlans" : [ ]
+	},
+	"executionStats" : {
+		"executionSuccess" : true,
+		"nReturned" : 10000000,
+		"executionTimeMillis" : 5819,
+		"totalKeysExamined" : 0,
+		"totalDocsExamined" : 10000000,
+		"executionStages" : {
+			"stage" : "COLLSCAN",
+			"filter" : {
+				"$and" : [ ]
+			},
+			"nReturned" : 10000000,
+			"executionTimeMillisEstimate" : 4330,
+			"works" : 10000002,
+			"advanced" : 10000000,
+			"needTime" : 1,
+			"needFetch" : 0,
+			"saveState" : 78125,
+			"restoreState" : 78125,
+			"isEOF" : 1,
+			"invalidates" : 0,
+			"direction" : "forward",
+			"docsExamined" : 10000000
+		}
+	},
+	"serverInfo" : {
+		"host" : "RajaniDell",
+		"port" : 27017,
+		"version" : "3.0.6",
+		"gitVersion" : "1ef45a23a4c5e3480ac919b28afcba3c615488f2"
+	},
+	"ok" : 1
+}
+*/

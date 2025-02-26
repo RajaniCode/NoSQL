@@ -1,0 +1,30 @@
+1.6 Hey, Have You Heard About Wands?
+
+
+Our friend Merlin was asking about a wand by the name of "Storm Seeker". Let's check the wands collection to see if we can find information about it.
+
+
+Answer: db.wands.find( { "name": "Storm Seeker" } )
+
+Type help to see the help menu
+
+> db.wands.find( { "name": "Storm Seeker" } )
+{
+  "_id": ObjectId('d0a77e57a0544ec7ad5a740b'),
+  "name": "Storm Seeker",
+  "creator": "Olivemist",
+  "level_required": 96,
+  "price": 55.99,
+  "powers": [
+    "Wind",
+    "Static"
+  ],
+  "damage": {
+    "magic": 2,
+    "melee": 5
+  }
+}
+
+Congratulations, you're correct!
+
+> 

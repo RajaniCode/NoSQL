@@ -1,0 +1,15 @@
+3.11 Casting the Count
+
+
+For the sake of science and all things good, let's find out how many wands only have a level_required of 2.
+
+Write a query to find wands with a level_required of 2, and then use the appropriate cursor method to count the total.
+
+Shell Editor
+
+
+Answer:
+
+Shell Editor
+
+db.wands.find({"level_required": 2}).count()

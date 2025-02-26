@@ -1,0 +1,34 @@
+2.14 Sensible Stats
+
+
+People are getting confused by the damage stats for each wand. We've been basing damage on a scale of 1-10, but we should be using a scale of 1-100. We've gone ahead and updated "damage.magic" by multiplying the original value by 10 for all the documents. Here's an example:
+
+{ ...
+  "damage": {"magic": 4, "melee": 2}
+}
+This document was updated to:
+
+{ ...
+  "damage": {"magic": 40, "melee": 2}
+}
+
+Shell Editor
+
+db.wands.update(
+  {},
+  
+  {multi: true}
+)
+
+Check out the MongoDB documentation [https://docs.mongodb.org/manual/reference/operator/update/mul/?utmr=http%3A%2F%2Fcampus.codeschool.com%2Fcourses%2Fthe-magical-marvels-of-mongodb%2Flevel%2F2%2Fsection%2F2%2Fsensible-stats] to learn how to use the $mul operator, and then use it multiply the value of "damage.melee" by 10 for all documents.
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {},
+  { "$mul": { "damage.melee": 10 } },
+  {multi: true}
+)

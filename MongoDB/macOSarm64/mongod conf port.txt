@@ -1,0 +1,33 @@
+# Check if a certain port is already in use with the nc command
+% nc -l 27017
+% nc -l 3000
+% cat /opt/homebrew/etc/mongod.conf
+[                
+systemLog:
+  destination: file
+  path: /opt/homebrew/var/log/mongodb/mongo.log
+  logAppend: true
+storage:
+  dbPath: /opt/homebrew/var/mongodb
+net:
+  bindIp: 127.0.0.1, ::1
+  # default port # 27017
+  # port: 27017
+  ipv6: true
+]
+# Edit cat /opt/homebrew/etc/mongod.conf # 27017 # 3000
+[
+systemLog:
+  destination: file
+  path: /opt/homebrew/var/log/mongodb/mongo.log
+  logAppend: true
+storage:
+  dbPath: /opt/homebrew/var/mongodb
+net:
+  bindIp: 127.0.0.1, ::1
+  # default port # 27017
+  port: 3000
+  ipv6: true
+]
+# mongod --config /usr/local/etc/mongod.conf --fork # kill <mongod pid> # % ps -A | grep mongod | awk '{print $1}' 
+% mongod --config /opt/homebrew/etc/mongod.conf --fork

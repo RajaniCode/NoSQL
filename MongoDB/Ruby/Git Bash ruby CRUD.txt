@@ -1,0 +1,206 @@
+
+Aspire@Acer MINGW64 ~
+$ ruby --version
+ruby 2.2.4p230 (2015-12-16 revision 53155) [i386-mingw32]
+
+Aspire@Acer MINGW64 ~
+$ gem --version
+2.6.7
+
+Aspire@Acer MINGW64 ~
+$ rake --version
+rake, version 12.0.0
+
+Aspire@Acer MINGW64 ~
+$ rails --version
+Rails 5.0.1
+
+Aspire@Acer MINGW64 ~
+$ bundler --version
+Bundler version 1.13.5
+
+Aspire@Acer MINGW64 ~
+$ gem list mongo
+mongo (2.4.1)
+
+Aspire@Acer MINGW64 ~
+$ mongo --version
+MongoDB shell version: 3.2.8
+
+Aspire@Acer MINGW64 ~
+$ cd "E:\Working\MongoDB\MongoDB University\MongoDB-Ruby\CRUD"
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby inserting.rb
+inserting.rb:11:in `<main>': undefined method `n' for #<Mongo::BulkWrite::Result:0x29b8360> (NoMethodError)
+D, [2017-03-21T11:23:04.627486 #35012] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:04.627486 #35012] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:04.775692 #35012] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:04.775692 #35012] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:04.775692 #35012] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:04.776692 #35012] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.insert | STARTED | {"insert"=>"artists", "documents"=>[{:name=>"FKA Twigs", :_id=>BSON::ObjectId('58d0bfc01fafb488c4f79a6e')}], "ordered"=>true}
+D, [2017-03-21T11:23:05.349119 #35012] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.insert | SUCCEEDED | 0.557416s
+D, [2017-03-21T11:23:05.350120 #35012] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.insert | STARTED | {"insert"=>"artists", "documents"=>[{:name=>"Flying Lotus", :_id=>BSON::ObjectId('58d0bfc11fafb488c4f79a6f')}, {:name=>"Aphex Twin", :_id=>BSON::ObjectId('58d0bfc11fafb488c4f79a70')}], "ordered"=>true}
+D, [2017-03-21T11:23:05.362122 #35012] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.insert | SUCCEEDED | 0.012002s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby querying.rb
+D, [2017-03-21T11:23:15.878889 #43336] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:15.878889 #43336] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:15.885896 #43336] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:15.886896 #43336] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:15.886896 #43336] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:15.887897 #43336] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.find | STARTED | {"find"=>"artists", "filter"=>{"name"=>"Flying Lotus"}}
+D, [2017-03-21T11:23:16.001044 #43336] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.find | SUCCEEDED | 0.112147s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby query_options.rb
+D, [2017-03-21T11:23:31.697113 #40784] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:31.698113 #40784] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:31.705118 #40784] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:31.705118 #40784] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:31.705118 #40784] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:31.706117 #40784] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.find | STARTED | {"find"=>"artists", "filter"=>{"name"=>"Flying Lotus"}, "skip"=>10, "limit"=>10}
+D, [2017-03-21T11:23:31.762158 #40784] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.find | SUCCEEDED | 0.056041s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby additional_query_operations.rb
+D, [2017-03-21T11:23:41.552805 #43360] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:41.552805 #43360] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:41.573842 #43360] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:41.573842 #43360] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:41.573842 #43360] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:41.574842 #43360] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.count | STARTED | {"count"=>"artists", "query"=>{"name"=>"Flying Lotus"}}
+D, [2017-03-21T11:23:41.598860 #43360] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.count | SUCCEEDED | 0.024018s
+D, [2017-03-21T11:23:41.598860 #43360] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:41.599859 #43360] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:41.603862 #43360] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:41.603862 #43360] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:41.603862 #43360] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:41.604865 #43360] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.distinct | STARTED | {"distinct"=>"artists", "key"=>"name", "query"=>{}}
+D, [2017-03-21T11:23:41.650893 #43360] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.distinct | SUCCEEDED | 0.046028s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby updating.rb
+D, [2017-03-21T11:23:49.750030 #43824] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:23:49.750030 #43824] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:23:49.758033 #43824] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:23:49.758033 #43824] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:23:49.759034 #43824] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:23:49.760034 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"name"=>"Goldie"}, "u"=>{"$inc"=>{:plays=>1}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.816075 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.056041s
+D, [2017-03-21T11:23:49.816075 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"name"=>"Goldie"}, "u"=>{"$inc"=>{:plays=>1}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.828083 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.011011s
+D, [2017-03-21T11:23:49.828083 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"label"=>"Hospital"}, "u"=>{"$inc"=>{:plays=>1}}, "multi"=>true, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.840129 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.012046s
+D, [2017-03-21T11:23:49.840129 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"label"=>"Hospital"}, "u"=>{"$inc"=>{:plays=>1}}, "multi"=>true, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.852234 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.012105s
+D, [2017-03-21T11:23:49.852234 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"name"=>"Aphex Twin"}, "u"=>{:name=>"Richard James"}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.875324 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.02309s
+D, [2017-03-21T11:23:49.875324 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | STARTED | {"update"=>"artists", "updates"=>[{"q"=>{"name"=>"Aphex Twin"}, "u"=>{:name=>"Richard James"}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+D, [2017-03-21T11:23:49.887336 #43824] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.update | SUCCEEDED | 0.012012s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby updating_via_findAndModify.rb
+D, [2017-03-21T11:24:00.916354 #42808] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:00.917353 #42808] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:00.925358 #42808] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:00.926359 #42808] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:00.926359 #42808] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:00.927361 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "remove"=>true}
+D, [2017-03-21T11:24:00.962383 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.035022s
+D, [2017-03-21T11:24:00.963384 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{:name=>"Jose"}, "new"=>false, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:00.974390 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.011006s
+D, [2017-03-21T11:24:00.974390 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{:name=>"Jose"}, "new"=>false, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:00.986399 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.011008s
+D, [2017-03-21T11:24:00.986399 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{:name=>"Jose"}, "new"=>true, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:00.998406 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.012007s
+D, [2017-03-21T11:24:00.998406 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{"$set"=>{:name=>"Jose"}}, "new"=>false, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:01.010416 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.01201s
+D, [2017-03-21T11:24:01.010416 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{"$set"=>{:name=>"Jose"}}, "new"=>false, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:01.022425 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.012009s
+D, [2017-03-21T11:24:01.022425 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{"$set"=>{:name=>"Jose"}}, "new"=>true, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:01.034433 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.012008s
+D, [2017-03-21T11:24:01.034433 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | STARTED | {"findandmodify"=>"artists", "query"=>{"name"=>"Jose James"}, "update"=>{"$set"=>{:name=>"Jose"}}, "new"=>true, "bypassDocumentValidation"=>false}
+D, [2017-03-21T11:24:01.046443 #42808] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.findandmodify | SUCCEEDED | 0.01201s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby removing.rb
+D, [2017-03-21T11:24:09.139318 #37408] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:09.139318 #37408] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:09.156332 #37408] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:09.157330 #37408] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:09.157330 #37408] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:09.158331 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | STARTED | {"delete"=>"artists", "deletes"=>[{"q"=>{"name"=>"Bjork"}, "limit"=>1}], "ordered"=>true}
+D, [2017-03-21T11:24:09.182348 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | SUCCEEDED | 0.024017s
+D, [2017-03-21T11:24:09.182348 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | STARTED | {"delete"=>"artists", "deletes"=>[{"q"=>{"name"=>"Bjork"}, "limit"=>1}], "ordered"=>true}
+D, [2017-03-21T11:24:09.194356 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | SUCCEEDED | 0.011009s
+D, [2017-03-21T11:24:09.194356 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | STARTED | {"delete"=>"artists", "deletes"=>[{"q"=>{"label"=>"Mute"}, "limit"=>0}], "ordered"=>true}
+D, [2017-03-21T11:24:09.206364 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | SUCCEEDED | 0.012008s
+D, [2017-03-21T11:24:09.206364 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | STARTED | {"delete"=>"artists", "deletes"=>[{"q"=>{"label"=>"Mute"}, "limit"=>0}], "ordered"=>true}
+D, [2017-03-21T11:24:09.218372 #37408] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.delete | SUCCEEDED | 0.012008s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby create_collection_arts.rb
+create_collection_arts.rb:6:in `<main>': undefined local variable or method `artists' for main:Object (NameError)
+D, [2017-03-21T11:24:26.821946 #38968] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:26.822945 #38968] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:26.828949 #38968] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:26.828949 #38968] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:26.828949 #38968] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:26.829948 #38968] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.create | STARTED | {"create"=>"arts", "capped"=>true, "size"=>1024}
+D, [2017-03-21T11:24:27.136043 #38968] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.create | SUCCEEDED | 0.306095s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby readwrite_collection_arts.rb
+readwrite_collection_arts.rb:8:in `<main>': undefined method `|' for Integer:Class (NoMethodError)
+D, [2017-03-21T11:24:34.875069 #42852] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:34.875069 #42852] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:34.892111 #42852] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:34.892111 #42852] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:34.892111 #42852] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:34.893112 #42852] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.find | STARTED | {"find"=>"arts", "filter"=>{}}
+D, [2017-03-21T11:24:34.916127 #42852] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.find | SUCCEEDED | 0.023015s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby drop_collection_arts.rb
+D, [2017-03-21T11:24:42.992130 #43508] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:42.992130 #43508] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:42.999135 #43508] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:43.000134 #43508] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:43.000134 #43508] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:43.001135 #43508] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.drop | STARTED | {"drop"=>"arts"}
+D, [2017-03-21T11:24:43.025150 #43508] DEBUG -- : MONGODB | 127.0.0.1:27017 | music.drop | FAILED | ns not found (26) | 0.024015s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby create_database_muse.rb
+D, [2017-03-21T11:24:52.905186 #43760] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:24:52.905186 #43760] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:24:52.913191 #43760] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:24:52.913191 #43760] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:24:52.913191 #43760] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:24:52.915196 #43760] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.insert | STARTED | {"insert"=>"arts", "documents"=>[{:name=>"FKA Twigs", :_id=>BSON::ObjectId('58d0c02c1fafb4aaf049b7dd')}], "ordered"=>true}
+D, [2017-03-21T11:24:52.938268 #43760] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.insert | SUCCEEDED | 0.024075s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby execute_database_muse.rb
+D, [2017-03-21T11:25:01.057201 #43540] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:25:01.057201 #43540] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:25:01.064208 #43540] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:25:01.065207 #43540] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:25:01.065207 #43540] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:25:01.066208 #43540] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.ismaster | STARTED | {"ismaster"=>1}
+D, [2017-03-21T11:25:01.079216 #43540] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.ismaster | SUCCEEDED | 0.012006s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$ ruby drop_database_muse.rb
+D, [2017-03-21T11:25:11.033426 #41996] DEBUG -- : MONGODB | Topology type 'unknown' initializing.
+D, [2017-03-21T11:25:11.033426 #41996] DEBUG -- : MONGODB | Server 127.0.0.1:27017 initializing.
+D, [2017-03-21T11:25:11.040431 #41996] DEBUG -- : MONGODB | Topology type 'unknown' changed to type 'single'.
+D, [2017-03-21T11:25:11.041432 #41996] DEBUG -- : MONGODB | Server description for 127.0.0.1:27017 changed from 'unknown' to 'standalone'.
+D, [2017-03-21T11:25:11.041432 #41996] DEBUG -- : MONGODB | There was a change in the members of the 'single' topology.
+D, [2017-03-21T11:25:11.042428 #41996] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.dropDatabase | STARTED | {"dropDatabase"=>1}
+D, [2017-03-21T11:25:11.109478 #41996] DEBUG -- : MONGODB | 127.0.0.1:27017 | muse.dropDatabase | SUCCEEDED | 0.06705s
+
+Aspire@Acer MINGW64 /e/Working/MongoDB/MongoDB University/MongoDB-Ruby/CRUD
+$

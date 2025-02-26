@@ -1,0 +1,9 @@
+4.2 Marvelous Merging
+
+
+Fill in the blank with the correct answer.
+
+When we take the data from one document and place it inside another one, that's called an [ ] document.
+
+
+Answer: embedded

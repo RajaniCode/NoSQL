@@ -1,0 +1,18 @@
+# mongorestore
+# Download Dataset for Use on Local Machine
+% curl https://atlas-education.s3.amazonaws.com/sampledata.archive -o sampledata.archive
+# Or
+% wget https://atlas-education.s3.amazonaws.com/sampledata.archive
+% ls
+[
+% brew services start mongodb-community
+]
+% mongorestore --archive=sampledata.archive
+% mongosh
+> show dbs
+> use sample_analytics
+> show collections
+> db.accounts.findOne()
+> db.accounts.find()
+> exit
+/*********

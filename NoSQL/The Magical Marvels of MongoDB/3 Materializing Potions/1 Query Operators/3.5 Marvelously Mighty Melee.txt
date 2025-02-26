@@ -1,0 +1,21 @@
+3.5 Marvelously Mighty Melee
+
+
+At our current level, we can't do much magic damage yet, but we can do melee damage all the way up to 40.
+
+Let's find out which wands have a "damage.melee" that is greater than or equal to 30 and less than or equal to 40.
+
+Shell Editor
+
+db.wands.find(
+  
+)
+
+
+Answer:
+
+Shell Editor
+
+db.wands.find(
+  { "damage.melee": {"$gte": 30, "$lte": 40 } }
+)

@@ -1,0 +1,351 @@
+Last login: Tue Oct 10 11:15:03 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % arch                                                                         
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % pwd                        
+/Users/rajaniapple
+rajaniapple@Rajanis-MacBook-Pro ~ % cd /Users/rajaniapple/Desktop/Technology/Kubernetes/Proof-of-Concept/MongoDB 
+rajaniapple@Rajanis-MacBook-Pro MongoDB % pwd                                                                          
+/Users/rajaniapple/Desktop/Technology/Kubernetes/Proof-of-Concept/MongoDB
+rajaniapple@Rajanis-MacBook-Pro MongoDB % multipass --version                                                          
+multipass   1.12.2+mac
+multipassd  1.12.2+mac
+rajaniapple@Rajanis-MacBook-Pro MongoDB % multipass shell microk8s-vm                                                  
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-84-generic aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Oct 10 04:48:32 UTC 2023
+
+  System load:             0.3076171875
+  Usage of /:              3.6% of 38.59GB
+  Memory usage:            4%
+  Swap usage:              0%
+  Processes:               95
+  Users logged in:         0
+  IPv4 address for enp0s1: 192.168.64.4
+  IPv6 address for enp0s1: fd1d:a80c:e456:91f0:5054:ff:fec2:ba42
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Tue Oct 10 11:16:00 2023 from 192.168.64.1
+ubuntu@microk8s-vm:~$ sudo kubectl cluster-info
+Kubernetes control plane is running at https://127.0.0.1:16443
+CoreDNS is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+ubuntu@microk8s-vm:~$ sudo kubectl get nodes -o wide
+NAME          STATUS   ROLES    AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+microk8s-vm   Ready    <none>   71m   v1.27.5   192.168.64.4   <none>        Ubuntu 22.04.3 LTS   5.15.0-84-generic   containerd://1.6.15
+ubuntu@microk8s-vm:~$ sudo kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   71m   <none>
+ubuntu@microk8s-vm:~$ sudo kubectl get deployments -o wide
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES   SELECTOR
+nginx   1/1     1            1           64m   nginx        nginx    app=nginx
+ubuntu@microk8s-vm:~$ sudo kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP            NODE          NOMINATED NODE   READINESS GATES
+nginx-77b4fdf86c-ndmbl   1/1     Running   0          64m   10.1.254.73   microk8s-vm   <none>           <none>
+ubuntu@microk8s-vm:~$ sudo kubectl get replicasets -o wide
+NAME               DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES   SELECTOR
+nginx-77b4fdf86c   1         1         1       64m   nginx        nginx    app=nginx,pod-template-hash=77b4fdf86c
+ubuntu@microk8s-vm:~$ sudo kubectl apply -f https://k8s.io/examples/application/mongodb/mongo-service.yaml
+service/mongo created
+ubuntu@microk8s-vm:~$ sudo kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE   SELECTOR
+kubernetes   ClusterIP   10.152.183.1     <none>        443/TCP     73m   <none>
+mongo        ClusterIP   10.152.183.242   <none>        27017/TCP   30s   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+nginx-77b4fdf86c-ndmbl   1/1     Running   0          67m   10.1.254.73   microk8s-vm   <none>           <none>
+ubuntu@microk8s-vm:~$ sudo kubectl get service mongo
+NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
+mongo   ClusterIP   10.152.183.242   <none>        27017/TCP   2m4s
+ubuntu@microk8s-vm:~$ sudo kubectl describe service mongo
+Name:              mongo
+Namespace:         default
+Labels:            app.kubernetes.io/component=backend
+                   app.kubernetes.io/name=mongo
+Annotations:       <none>
+Selector:          app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.152.183.242
+IPs:               10.152.183.242
+Port:              <unset>  27017/TCP
+TargetPort:        27017/TCP
+Endpoints:         <none>
+Session Affinity:  None
+Events:            <none>
+ubuntu@microk8s-vm:~$ sudo kubectl apply -f https://k8s.io/examples/application/mongodb/mongo-deployment.yaml
+deployment.apps/mongo created
+ubuntu@microk8s-vm:~$ sudo kubectl get deployments -o wide
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES      SELECTOR
+nginx   1/1     1            1           69m   nginx        nginx       app=nginx
+mongo   0/1     1            0           25s   mongo        mongo:4.2   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+ubuntu@microk8s-vm:~$ sudo kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP            NODE          NOMINATED NODE   READINESS GATES
+nginx-77b4fdf86c-ndmbl   1/1     Running   0          70m   10.1.254.73   microk8s-vm   <none>           <none>
+mongo-7d96cb4cf-85fhp    1/1     Running   0          53s   10.1.254.74   microk8s-vm   <none>           <none>
+ubuntu@microk8s-vm:~$ sudo kubectl get replicasets -o wide
+NAME               DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES      SELECTOR
+nginx-77b4fdf86c   1         1         1       70m   nginx        nginx       app=nginx,pod-template-hash=77b4fdf86c
+mongo-7d96cb4cf    1         1         1       63s   mongo        mongo:4.2   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo,pod-template-hash=7d96cb4cf
+ubuntu@microk8s-vm:~$ wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-7.0.asc
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+mQINBGPILWABEACqeWP/ktugdlWEyk7YTXo3n19+5Om4AlSdIyKv49vAlKtzCfMA
+QkZq3mfvjXiKMuLnL2VeElAJQIYcPoqnHf6tJbdrNv4AX2uI1cTsvGW7YS/2WNwJ
+C/+vBa4o+yA2CG/MVWZRbtOjkFF/W07yRFtNHAcgdmpIjdWgSnPQr9eIqLuWXIhy
+H7EerKsba227Vd/HfvKnAy30Unlsdywy7wi1FupzGJck0TPoOVGmsSpSyIQu9A4Z
+uC6TE/NcJHvaN0JuHwM+bQo9oWirGsZ1NCoVqSY8/sasdUc7T9r90MbUcH674YAR
+8OKYVBzU0wch4VTFhfHZecKHQnZf+V4dmP9oXnu4fY0/0w3l4jaew7Ind7kPg3yN
+hvgAkBK8yRAbSu1NOtHDNiRoHGEQFgct6trVOvCqHbN/VToLNtGk0rhKGOp8kuSF
+OJ02PJPxF3/zHGP8n8khCjUJcrilYPqRghZC8ZWnCj6GJVg6WjwLi+hPwNMi8xK6
+cjKhRW3eCy5Wcn73PzVBX9f7fSeFDJec+IfS47eNkxunHAOUMXa2+D+1xSWgEfK0
+PClfyWPgLIXY2pGQ6v8l3A6P5gJv4o38/E1h1RTcO3H1Z6cgZLIORZHPyAj50SPQ
+cjzftEcz56Pl/Cyw3eMYC3qlbABBgsdeb6KB6G5dkNxI4or3MgmxcwfnkwARAQAB
+tDdNb25nb0RCIDcuMCBSZWxlYXNlIFNpZ25pbmcgS2V5IDxwYWNrYWdpbmdAbW9u
+Z29kYi5jb20+iQI+BBMBAgAoBQJjyC1gAhsDBQkJZgGABgsJCAcDAgYVCAIJCgsE
+FgIDAQIeAQIXgAAKCRAWDSa7F4W6OM+eD/sE7KbJyRNWyPCRTqqJXrXvyPqZtbFX
+8sio0lQ8ghn4f7lmb7LnFroUsmBeWaYirM8O3b2+iQ9oj4GeR3gbRZsEhFXQfL54
+SfrmG9hrWWpJllgPP7Six+jrzcjvkf1TENqw4jRP+cJhuihH1Gfizo9ktwwoN9Yr
+m7vgh+focEEmx8dysS38ApLxKlUEfTsE9bYsClgqyY1yrt3v4IpGbf66yfyBHNgY
+sObR3sngDRVbap7PwNyREGsuAFfKr/Dr37HfrjY7nsn3vH7hbDpSBh+H7a0b/chS
+mM60aaG4biWpvmSC7uxA/t0gz+NQuC4HL+qyNPUxvyIO+TwlaXfCI6ixazyrH+1t
+F7Bj5mVsne7oeWjRrSz85jK3Tpn9tj3Fa7PCDA6auAlPK8Upbhuoajev4lIydNd2
+70yO0idm/FtpX5a8Ck7KSHDvEnXpN70imayoB4Fs2Kigi2BdZOOdib16o5F/9cx9
+piNa7HotHCLTfR6xRmelGEPWKspU1Sm7u2A5vWgjfSab99hiNQ89n+I7BcK1M3R1
+w/ckl6qBtcxz4Py+7jYIJL8BYz2tdreWbdzWzjv+XQ8ZgOaMxhL9gtlfyYqeGfnp
+hYW8LV7a9pavxV2tLuVjMM+05ut/d38IkTV7OSJgisbSGcmycXIzxsipyXJVGMZt
+MFw3quqJhQMRsA==
+=gbRM
+-----END PGP PUBLIC KEY BLOCK-----
+ubuntu@microk8s-vm:~$ sudo apt-get install gnupg
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+gnupg is already the newest version (2.2.27-3ubuntu2.1).
+gnupg set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+ubuntu@microk8s-vm:~$ wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-7.0.asc
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1
+
+mQINBGPILWABEACqeWP/ktugdlWEyk7YTXo3n19+5Om4AlSdIyKv49vAlKtzCfMA
+QkZq3mfvjXiKMuLnL2VeElAJQIYcPoqnHf6tJbdrNv4AX2uI1cTsvGW7YS/2WNwJ
+C/+vBa4o+yA2CG/MVWZRbtOjkFF/W07yRFtNHAcgdmpIjdWgSnPQr9eIqLuWXIhy
+H7EerKsba227Vd/HfvKnAy30Unlsdywy7wi1FupzGJck0TPoOVGmsSpSyIQu9A4Z
+uC6TE/NcJHvaN0JuHwM+bQo9oWirGsZ1NCoVqSY8/sasdUc7T9r90MbUcH674YAR
+8OKYVBzU0wch4VTFhfHZecKHQnZf+V4dmP9oXnu4fY0/0w3l4jaew7Ind7kPg3yN
+hvgAkBK8yRAbSu1NOtHDNiRoHGEQFgct6trVOvCqHbN/VToLNtGk0rhKGOp8kuSF
+OJ02PJPxF3/zHGP8n8khCjUJcrilYPqRghZC8ZWnCj6GJVg6WjwLi+hPwNMi8xK6
+cjKhRW3eCy5Wcn73PzVBX9f7fSeFDJec+IfS47eNkxunHAOUMXa2+D+1xSWgEfK0
+PClfyWPgLIXY2pGQ6v8l3A6P5gJv4o38/E1h1RTcO3H1Z6cgZLIORZHPyAj50SPQ
+cjzftEcz56Pl/Cyw3eMYC3qlbABBgsdeb6KB6G5dkNxI4or3MgmxcwfnkwARAQAB
+tDdNb25nb0RCIDcuMCBSZWxlYXNlIFNpZ25pbmcgS2V5IDxwYWNrYWdpbmdAbW9u
+Z29kYi5jb20+iQI+BBMBAgAoBQJjyC1gAhsDBQkJZgGABgsJCAcDAgYVCAIJCgsE
+FgIDAQIeAQIXgAAKCRAWDSa7F4W6OM+eD/sE7KbJyRNWyPCRTqqJXrXvyPqZtbFX
+8sio0lQ8ghn4f7lmb7LnFroUsmBeWaYirM8O3b2+iQ9oj4GeR3gbRZsEhFXQfL54
+SfrmG9hrWWpJllgPP7Six+jrzcjvkf1TENqw4jRP+cJhuihH1Gfizo9ktwwoN9Yr
+m7vgh+focEEmx8dysS38ApLxKlUEfTsE9bYsClgqyY1yrt3v4IpGbf66yfyBHNgY
+sObR3sngDRVbap7PwNyREGsuAFfKr/Dr37HfrjY7nsn3vH7hbDpSBh+H7a0b/chS
+mM60aaG4biWpvmSC7uxA/t0gz+NQuC4HL+qyNPUxvyIO+TwlaXfCI6ixazyrH+1t
+F7Bj5mVsne7oeWjRrSz85jK3Tpn9tj3Fa7PCDA6auAlPK8Upbhuoajev4lIydNd2
+70yO0idm/FtpX5a8Ck7KSHDvEnXpN70imayoB4Fs2Kigi2BdZOOdib16o5F/9cx9
+piNa7HotHCLTfR6xRmelGEPWKspU1Sm7u2A5vWgjfSab99hiNQ89n+I7BcK1M3R1
+w/ckl6qBtcxz4Py+7jYIJL8BYz2tdreWbdzWzjv+XQ8ZgOaMxhL9gtlfyYqeGfnp
+hYW8LV7a9pavxV2tLuVjMM+05ut/d38IkTV7OSJgisbSGcmycXIzxsipyXJVGMZt
+MFw3quqJhQMRsA==
+=gbRM
+-----END PGP PUBLIC KEY BLOCK-----
+ubuntu@microk8s-vm:~$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse
+ubuntu@microk8s-vm:~$ sudo apt-get update
+Ign:1 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 InRelease
+Get:2 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 Release [2090 B]
+Hit:3 http://ports.ubuntu.com/ubuntu-ports jammy InRelease
+Get:4 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 Release.gpg [866 B]
+Get:5 http://ports.ubuntu.com/ubuntu-ports jammy-updates InRelease [119 kB]
+Get:6 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 Packages [14.0 kB]
+Get:7 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse arm64 Packages [13.0 kB]
+Get:8 http://ports.ubuntu.com/ubuntu-ports jammy-backports InRelease [109 kB]
+Get:9 http://ports.ubuntu.com/ubuntu-ports jammy-security InRelease [110 kB]
+Get:10 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 Packages [13.9 MB]
+Get:11 http://ports.ubuntu.com/ubuntu-ports jammy/universe Translation-en [5652 kB]                                                                            
+Get:12 http://ports.ubuntu.com/ubuntu-ports jammy/universe arm64 c-n-f Metadata [277 kB]                                                                       
+Get:13 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 Packages [184 kB]                                                                           
+Get:14 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse Translation-en [112 kB]                                                                           
+Get:15 http://ports.ubuntu.com/ubuntu-ports jammy/multiverse arm64 c-n-f Metadata [7064 B]                                                                     
+Get:16 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 Packages [933 kB]                                                                         
+Get:17 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main Translation-en [233 kB]                                                                         
+Get:18 http://ports.ubuntu.com/ubuntu-ports jammy-updates/main arm64 c-n-f Metadata [15.3 kB]                                                                  
+Get:19 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 Packages [630 kB]                                                                   
+Get:20 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted Translation-en [157 kB]                                                                   
+Get:21 http://ports.ubuntu.com/ubuntu-ports jammy-updates/restricted arm64 c-n-f Metadata [380 B]                                                              
+Get:22 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 Packages [898 kB]                                                                     
+Get:23 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe Translation-en [216 kB]                                                                     
+Get:24 http://ports.ubuntu.com/ubuntu-ports jammy-updates/universe arm64 c-n-f Metadata [19.3 kB]                                                              
+Get:25 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 Packages [23.5 kB]                                                                  
+Get:26 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse Translation-en [9768 B]                                                                   
+Get:27 http://ports.ubuntu.com/ubuntu-ports jammy-updates/multiverse arm64 c-n-f Metadata [260 B]                                                              
+Get:28 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 Packages [41.4 kB]                                                                      
+Get:29 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main Translation-en [10.5 kB]                                                                      
+Get:30 http://ports.ubuntu.com/ubuntu-ports jammy-backports/main arm64 c-n-f Metadata [388 B]                                                                  
+Get:31 http://ports.ubuntu.com/ubuntu-ports jammy-backports/restricted arm64 c-n-f Metadata [116 B]                                                            
+Get:32 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 Packages [22.7 kB]                                                                  
+Get:33 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe Translation-en [16.4 kB]                                                                  
+Get:34 http://ports.ubuntu.com/ubuntu-ports jammy-backports/universe arm64 c-n-f Metadata [576 B]                                                              
+Get:35 http://ports.ubuntu.com/ubuntu-ports jammy-backports/multiverse arm64 c-n-f Metadata [116 B]                                                            
+Get:36 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 Packages [735 kB]                                                                        
+Get:37 http://ports.ubuntu.com/ubuntu-ports jammy-security/main Translation-en [175 kB]                                                                        
+Get:38 http://ports.ubuntu.com/ubuntu-ports jammy-security/main arm64 c-n-f Metadata [11.1 kB]                                                                 
+Get:39 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 Packages [623 kB]                                                                  
+Get:40 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted Translation-en [154 kB]                                                                  
+Get:41 http://ports.ubuntu.com/ubuntu-ports jammy-security/restricted arm64 c-n-f Metadata [384 B]                                                             
+Get:42 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 Packages [700 kB]                                                                    
+Get:43 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe Translation-en [144 kB]                                                                    
+Get:44 http://ports.ubuntu.com/ubuntu-ports jammy-security/universe arm64 c-n-f Metadata [14.1 kB]                                                             
+Get:45 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 Packages [19.7 kB]                                                                 
+Get:46 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse Translation-en [7060 B]                                                                  
+Get:47 http://ports.ubuntu.com/ubuntu-ports jammy-security/multiverse arm64 c-n-f Metadata [232 B]                                                             
+Fetched 26.3 MB in 17s (1587 kB/s)                                                                                                                             
+Reading package lists... Done
+ubuntu@microk8s-vm:~$ sudo apt-get install -y mongodb-mongosh
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  mongodb-mongosh
+0 upgraded, 1 newly installed, 0 to remove and 18 not upgraded.
+Need to get 44.1 MB of archives.
+After this operation, 206 MB of additional disk space will be used.
+Get:1 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse arm64 mongodb-mongosh arm64 2.0.1 [44.1 MB]
+Fetched 44.1 MB in 8s (5705 kB/s)                                                                                                                              
+Selecting previously unselected package mongodb-mongosh.
+(Reading database ... 66214 files and directories currently installed.)
+Preparing to unpack .../mongodb-mongosh_2.0.1_arm64.deb ...
+Unpacking mongodb-mongosh (2.0.1) ...
+Setting up mongodb-mongosh (2.0.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                                                                           
+Scanning linux images...                                                                                                                                        
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@microk8s-vm:~$ mongosh --version
+2.0.1
+ubuntu@microk8s-vm:~$ sudo kubectl get deployments -o wide
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES      SELECTOR
+nginx   1/1     1            1           69m   nginx        nginx       app=nginx
+mongo   0/1     1            0           25s   mongo        mongo:4.2   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+ubuntu@microk8s-vm:~$ sudo kubectl get deployments mongo
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mongo   1/1     1            1           19m
+ubuntu@microk8s-vm:~$ sudo kubectl port-forward deployment/mongo 28015:27017
+Forwarding from 127.0.0.1:28015 -> 27017
+Forwarding from [::1]:28015 -> 27017
+Handling connection for 28015
+Handling connection for 28015
+Handling connection for 28015
+Handling connection for 28015
+Handling connection for 28015
+E1010 12:04:12.255320  145125 portforward.go:394] error copying from local connection to remote stream: read tcp4 127.0.0.1:28015->127.0.0.1:37020: read: connection reset by peer
+^Cubuntu@microk8s-vm:~sudo kubectl cluster-infofo
+Kubernetes control plane is running at https://127.0.0.1:16443
+CoreDNS is running at https://127.0.0.1:16443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+ubuntu@microk8s-vm:~$ sudo kubectl get nodes -o wide
+NAME          STATUS   ROLES    AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+microk8s-vm   Ready    <none>   107m   v1.27.5   192.168.64.4   <none>        Ubuntu 22.04.3 LTS   5.15.0-84-generic   containerd://1.6.15
+ubuntu@microk8s-vm:~$ sudo kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE    SELECTOR
+kubernetes   ClusterIP   10.152.183.1     <none>        443/TCP     108m   <none>
+mongo        ClusterIP   10.152.183.242   <none>        27017/TCP   35m    app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+ubuntu@microk8s-vm:~$ sudo kubectl get deployments -o wide
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS   IMAGES      SELECTOR
+nginx   1/1     1            1           101m   nginx        nginx       app=nginx
+mongo   1/1     1            1           32m    mongo        mongo:4.2   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo
+ubuntu@microk8s-vm:~$ sudo kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE    IP            NODE          NOMINATED NODE   READINESS GATES
+nginx-77b4fdf86c-ndmbl   1/1     Running   0          101m   10.1.254.73   microk8s-vm   <none>           <none>
+mongo-7d96cb4cf-85fhp    1/1     Running   0          32m    10.1.254.74   microk8s-vm   <none>           <none>
+ubuntu@microk8s-vm:~$ sudo kubectl get replicasets -o wide
+NAME               DESIRED   CURRENT   READY   AGE    CONTAINERS   IMAGES      SELECTOR
+nginx-77b4fdf86c   1         1         1       101m   nginx        nginx       app=nginx,pod-template-hash=77b4fdf86c
+mongo-7d96cb4cf    1         1         1       32m    mongo        mongo:4.2   app.kubernetes.io/component=backend,app.kubernetes.io/name=mongo,pod-template-hash=7d96cb4cf
+ubuntu@microk8s-vm:~$ ls -a
+.  ..  .bash_history  .bash_logout  .bashrc  .cache  .mongodb  .profile  .ssh  .sudo_as_admin_successful  index.html
+ubuntu@microk8s-vm:~$ ls -a
+.  ..  .bash_history  .bash_logout  .bashrc  .cache  .mongodb  .profile  .ssh  .sudo_as_admin_successful  index.html
+ubuntu@microk8s-vm:~$ ls .mongodb/
+mongosh
+ubuntu@microk8s-vm:~$ ls .mongodb/mongosh
+6524efb39afac5f689a1c65d_log  am-6524efb39afac5f689a1c65c.json  config  mongosh_repl_history  snippets  update-metadata.json
+ubuntu@microk8s-vm:~$ ls .mongodb/mongosh/snippets
+index.bson.br  package.json
+ubuntu@microk8s-vm:~$ cat .mongodb/mongosh/config
+{"userId":"6524efb39afac5f689a1c65c","telemetryAnonymousId":"6524efb39afac5f689a1c65c","enableTelemetry":true,"disableGreetingMessage":true}ubuntu@microk8s-vm:~$ 
+ubuntu@microk8s-vm:~$ cat .mongodb/mongosh/update-metadata.json
+{"updateURL":"https://downloads.mongodb.com/compass/mongosh.json","lastChecked":1696919476771,"etag":"\"d3daf8ac663be23ddc6f5627f79f34bf\"","latestKnownMongoshVersion":"2.0.1"}ubuntuls .mongodb/mongosh/snippets
+index.bson.br  package.json
+ubuntu@microk8s-vm:~cat .mongodb/mongosh/am-6524efb39afac5f689a1c65c.json
+{"count":2,"timestamp":1696919589211}ubuntu@microk8s-vm:~$
+ubuntu@microk8s-vm:~$ cat .mongodb/mongosh/6524efb39afac5f689a1c65d_log
+{"t":{"$date":"2023-10-10T06:31:15.996Z"},"s":"I","c":"MONGOSH","id":1000000000,"ctx":"log","msg":"Starting log","attr":{"execPath":"/usr/bin/mongosh","envInfo":{"EDITOR":null,"NODE_OPTIONS":null,"TERM":"xterm-256color"},"version":"2.0.1","distributionKind":"compiled","buildArch":"arm64","buildPlatform":"linux","buildTarget":"linux-arm64","buildTime":"2023-09-14T09:18:28.761Z","gitVersion":"225d4603f0d43d500a8847beaa980e906e9a35be","nodeVersion":"v20.6.1","opensslVersion":"3.0.10+quic","sharedOpenssl":false,"runtimeArch":"arm64","runtimePlatform":"linux","deps":{"nodeDriverVersion":"6.0.0","libmongocryptVersion":"1.9.0-20230828+git8e7f69f1c0","libmongocryptNodeBindingsVersion":"6.0.0"}}}
+{"t":{"$date":"2023-10-10T06:31:16.005Z"},"s":"I","c":"MONGOSH","id":1000000048,"ctx":"config","msg":"Loading global configuration file","attr":{"filename":"/etc/mongosh.conf","found":false}}
+{"t":{"$date":"2023-10-10T06:31:16.027Z"},"s":"I","c":"MONGOSH","id":1000000052,"ctx":"startup","msg":"Fetching update metadata","attr":{"updateURL":"https://downloads.mongodb.com/compass/mongosh.json","localFilePath":"/home/ubuntu/.mongodb/mongosh/update-metadata.json"}}
+{"t":{"$date":"2023-10-10T06:31:16.061Z"},"s":"E","c":"DEVTOOLS-CONNECT","id":1000000041,"ctx":"mongosh-deps","msg":"Missing optional dependency","attr":{"name":"saslprep","error":"Cannot find module 'saslprep'"}}
+{"t":{"$date":"2023-10-10T06:31:16.081Z"},"s":"I","c":"DEVTOOLS-CONNECT","id":1000000042,"ctx":"mongosh-connect","msg":"Initiating connection attempt","attr":{"uri":"mongodb://127.0.0.1:28015/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1","driver":{"name":"nodejs|mongosh","version":"6.0.0|2.0.1"},"devtoolsConnectVersion":"2.4.1","host":"127.0.0.1:28015"}}
+{"t":{"$date":"2023-10-10T06:31:16.086Z"},"s":"I","c":"DEVTOOLS-CONNECT","id":1000000035,"ctx":"mongosh-connect","msg":"Server heartbeat succeeded","attr":{"connectionId":"127.0.0.1:28015"}}
+{"t":{"$date":"2023-10-10T06:31:16.097Z"},"s":"I","c":"DEVTOOLS-CONNECT","id":1000000037,"ctx":"mongosh-connect","msg":"Connection attempt finished"}
+{"t":{"$date":"2023-10-10T06:31:16.110Z"},"s":"I","c":"MONGOSH","id":1000000004,"ctx":"connect","msg":"Connecting to server","attr":{"session_id":"6524efb39afac5f689a1c65d","userId":null,"telemetryAnonymousId":"6524efb39afac5f689a1c65c","connectionUri":"mongodb://<ip address>:28015/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1","is_atlas":false,"is_localhost":true,"is_do":false,"server_version":"4.2.24","node_version":"v20.6.1","mongosh_version":"2.0.1","server_os":"linux","server_arch":"aarch64","is_enterprise":false,"auth_type":null,"is_data_federation":false,"is_stream":false,"dl_version":null,"atlas_version":null,"is_genuine":true,"non_genuine_server_name":"mongodb","is_local_atlas":false,"fcv":"4.2","api_version":null,"api_strict":null,"api_deprecation_errors":null}}
+{"t":{"$date":"2023-10-10T06:31:16.111Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"adminCommand","class":"Database","db":"test","arguments":{"cmd":{"ping":1}}}}
+{"t":{"$date":"2023-10-10T06:31:16.158Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"getSiblingDB","class":"Database","db":"test","arguments":{"db":"admin"}}}
+{"t":{"$date":"2023-10-10T06:31:16.164Z"},"s":"I","c":"MONGOSH","id":1000000010,"ctx":"shell-api","msg":"Initialized context","attr":{"method":"setCtx","arguments":{}}}
+{"t":{"$date":"2023-10-10T06:31:16.169Z"},"s":"I","c":"MONGOSH","id":1000000009,"ctx":"shell-api","msg":"Used \"show\" command","attr":{"method":"show startupWarnings"}}
+{"t":{"$date":"2023-10-10T06:31:16.172Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"adminCommand","class":"Database","db":"test","arguments":{"cmd":{"getLog":"startupWarnings"}}}}
+{"t":{"$date":"2023-10-10T06:31:16.173Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"getSiblingDB","class":"Database","db":"test","arguments":{"db":"admin"}}}
+{"t":{"$date":"2023-10-10T06:31:16.176Z"},"s":"I","c":"MONGOSH","id":1000000009,"ctx":"shell-api","msg":"Used \"show\" command","attr":{"method":"show automationNotices"}}
+{"t":{"$date":"2023-10-10T06:31:16.176Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"hello","class":"Database","db":"test","arguments":{}}}
+{"t":{"$date":"2023-10-10T06:31:16.176Z"},"s":"I","c":"MONGOSH","id":1000000009,"ctx":"shell-api","msg":"Used \"show\" command","attr":{"method":"show nonGenuineMongoDBCheck"}}
+{"t":{"$date":"2023-10-10T06:31:16.177Z"},"s":"I","c":"MONGOSH-SNIPPETS","id":1000000024,"ctx":"snippets","msg":"Fetching snippet index","attr":{"refreshMode":"allow-cached"}}
+{"t":{"$date":"2023-10-10T06:31:16.197Z"},"s":"I","c":"MONGOSH-SNIPPETS","id":1000000019,"ctx":"snippets","msg":"Loaded snippets","attr":{"installdir":"/home/ubuntu/.mongodb/mongosh/snippets"}}
+{"t":{"$date":"2023-10-10T06:31:16.198Z"},"s":"I","c":"MONGOSH-SNIPPETS","id":1000000028,"ctx":"snippets","msg":"Modifying snippets package.json failed","attr":{"error":"ENOENT: no such file or directory, open '/home/ubuntu/.mongodb/mongosh/snippets/package.json'"}}
+{"t":{"$date":"2023-10-10T06:31:16.220Z"},"s":"I","c":"MONGOSH","id":1000000002,"ctx":"repl","msg":"Started REPL","attr":{"version":"2.0.1"}}
+{"t":{"$date":"2023-10-10T06:31:16.779Z"},"s":"I","c":"MONGOSH","id":1000000053,"ctx":"startup","msg":"Fetching update metadata complete","attr":{"latest":"2.0.1"}}
+{"t":{"$date":"2023-10-10T06:31:26.766Z"},"s":"I","c":"MONGOSH-SNIPPETS","id":1000000027,"ctx":"snippets","msg":"Fetching snippet index done"}
+{"t":{"$date":"2023-10-10T06:33:09.101Z"},"s":"I","c":"MONGOSH","id":1000000007,"ctx":"repl","msg":"Evaluating input","attr":{"input":"db.runCommand( { ping: 1 } )"}}
+{"t":{"$date":"2023-10-10T06:33:09.208Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"runCommand","class":"Database","db":"test","arguments":{"cmd":{"ping":1}}}}
+{"t":{"$date":"2023-10-10T06:34:08.756Z"},"s":"I","c":"MONGOSH","id":1000000007,"ctx":"repl","msg":"Evaluating input","attr":{"input":"db.version()"}}
+{"t":{"$date":"2023-10-10T06:34:08.770Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"version","class":"Database","db":"test","arguments":{}}}
+{"t":{"$date":"2023-10-10T06:34:08.774Z"},"s":"I","c":"MONGOSH","id":1000000011,"ctx":"shell-api","msg":"Performed API call","attr":{"method":"getSiblingDB","class":"Database","db":"test","arguments":{"db":"admin"}}}
+{"t":{"$date":"2023-10-10T06:34:13.278Z"},"s":"I","c":"MONGOSH","id":1000000045,"ctx":"analytics","msg":"Flushed outstanding data","attr":{"flushError":null,"flushDuration":1018}}
+ubuntu@microk8s-vm:~$ cat .mongodb/mongosh/mongosh_repl_history
+exit
+db.version()
+db.runCommand( { ping: 1 } )ubuntu@microk8s-vm:~$
+ubuntu@microk8s-vm:~$ cat .mongodb/mongosh/snippets/package.json
+{}
+ubuntu@microk8s-vm:~$ exit
+logout
+rajaniapple@Rajanis-MacBook-Pro MongoDB % 

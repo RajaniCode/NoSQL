@@ -1,0 +1,76 @@
+Last login: Tue Oct 10 11:31:08 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % arch                                                                         
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % pwd                                                                          
+/Users/rajaniapple
+rajaniapple@Rajanis-MacBook-Pro ~ % cd /Users/rajaniapple/Desktop/Technology/Kubernetes/Proof-of-Concept/MongoDB 
+rajaniapple@Rajanis-MacBook-Pro MongoDB % pwd                                                                          
+/Users/rajaniapple/Desktop/Technology/Kubernetes/Proof-of-Concept/MongoDB
+rajaniapple@Rajanis-MacBook-Pro MongoDB % multipass --version                                                          
+multipass   1.12.2+mac
+multipassd  1.12.2+mac
+rajaniapple@Rajanis-MacBook-Pro MongoDB % multipass shell microk8s-vm                                                  
+Welcome to Ubuntu 22.04.3 LTS (GNU/Linux 5.15.0-84-generic aarch64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue Oct 10 04:48:32 UTC 2023
+
+  System load:             0.3076171875
+  Usage of /:              3.6% of 38.59GB
+  Memory usage:            4%
+  Swap usage:              0%
+  Processes:               95
+  Users logged in:         0
+  IPv4 address for enp0s1: 192.168.64.4
+  IPv6 address for enp0s1: fd1d:a80c:e456:91f0:5054:ff:fec2:ba42
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+22 updates can be applied immediately.
+21 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+Last login: Tue Oct 10 11:31:30 2023 from 192.168.64.1
+ubuntu@microk8s-vm:~$ mongosh --version
+2.0.1
+ubuntu@microk8s-vm:~$ mongosh --port 28015
+Current Mongosh Log ID:	6524efb39afac5f689a1c65d
+Connecting to:		mongodb://127.0.0.1:28015/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.1
+Using MongoDB:		4.2.24
+Using Mongosh:		2.0.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2023-10-10T06:07:13.317+0000: 
+   2023-10-10T06:07:13.317+0000: ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+   2023-10-10T06:07:13.317+0000: **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2023-10-10T06:07:13.365+0000: 
+   2023-10-10T06:07:13.365+0000: ** WARNING: Access control is not enabled for the database.
+   2023-10-10T06:07:13.365+0000: **          Read and write access to data and configuration is unrestricted.
+   2023-10-10T06:07:13.365+0000: 
+   2023-10-10T06:07:13.365+0000: 
+   2023-10-10T06:07:13.366+0000: ** WARNING: soft rlimits too low. rlimits set to 15362 processes, 65536 files. Number of processes should be at least 32768 : 0.5 times number of files.
+------
+
+test> db.runCommand( { ping: 1 } )
+{ ok: 1 }
+test> db.version()
+4.2.24
+test> exit
+ubuntu@microk8s-vm:~$ exit
+logout
+rajaniapple@Rajanis-MacBook-Pro MongoDB % 

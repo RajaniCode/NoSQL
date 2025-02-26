@@ -1,0 +1,36 @@
+2.11 Abracadabra Array Alterations II
+
+
+We know that there are a lot of wands with the power of "Love", but the correct power is actually named "Love Burst". We'll need to update all wands that contain this power.
+
+{
+  "_id": ObjectId("56016414959123c11810f9ad"),
+  "name": "Dream Bender",
+  "creator": "Foxmond",
+  "level_required": 10,
+  "price": 34.9,
+  "powers": ["Fire Deflection", "Love"],
+  "damage": {"magic": 4, "melee": 2}
+}
+
+Shell Editor
+
+db.wands.update(
+  {"powers": "Love"},
+  
+  {"multi": true}
+)
+
+Add the update parameter using the positional operator to change the value of "Love" to "Love Burst".
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {"powers": "Love"},
+  { "$set": { "powers.$": "Love Burst" } },
+  {"multi": true}
+)
+

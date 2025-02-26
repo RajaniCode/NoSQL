@@ -1,0 +1,58 @@
+Last login: Tue Oct 10 13:47:42 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % cat /opt/homebrew/etc/mongod.conf
+systemLog:
+  destination: file
+  path: /opt/homebrew/var/log/mongodb/mongo.log
+  logAppend: true
+storage:
+  dbPath: /opt/homebrew/var/mongodb
+net:
+  bindIp: 127.0.0.1, ::1
+  # default port # 27017
+  # port: 27017
+  ipv6: true%                                                                                                                                                   rajaniapple@Rajanis-MacBook-Pro ~ % vim /opt/homebrew/etc/mongod.conf
+rajaniapple@Rajanis-MacBook-Pro ~ % cat /opt/homebrew/etc/mongod.conf
+systemLog:
+  destination: file
+  path: /opt/homebrew/var/log/mongodb/mongo.log
+  logAppend: true
+storage:
+  dbPath: /opt/homebrew/var/mongodb
+net:
+  bindIp: 127.0.0.1, ::1
+  # default port # 27017
+  port: 3000
+  ipv6: true
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --config /opt/homebrew/etc/mongod.conf --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5733
+ERROR: child process failed, exited with 100
+To see additional information in this output, start without the "--fork" option.
+rajaniapple@Rajanis-MacBook-Pro ~ % ps -A | grep mongod | awk '{print $1}'              
+5166
+5735
+rajaniapple@Rajanis-MacBook-Pro ~ % kill 5166                                           
+rajaniapple@Rajanis-MacBook-Pro ~ % kill 5735
+kill: kill 5735 failed: no such process
+rajaniapple@Rajanis-MacBook-Pro ~ % mongod --config /opt/homebrew/etc/mongod.conf --fork
+about to fork child process, waiting until server is ready for connections.
+forked process: 5740
+child process started successfully, parent exiting
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh --port 3000                                 
+Current Mongosh Log ID:	652509b741cf774bab2bca0a
+Connecting to:		mongodb://127.0.0.1:3000/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.1
+Using MongoDB:		6.0.6
+Using Mongosh:		1.10.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-10-10T13:51:59.970+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-10-10T13:51:59.970+05:30: Soft rlimits for open file descriptors too low
+------
+
+test> db.version()
+6.0.6
+test> exit
+rajaniapple@Rajanis-MacBook-Pro ~ % 

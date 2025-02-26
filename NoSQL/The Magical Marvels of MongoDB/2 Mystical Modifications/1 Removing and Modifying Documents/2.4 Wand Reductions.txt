@@ -1,0 +1,15 @@
+2.4 Wand Reductions
+
+
+The makers of the "Devotion Shift" wand have decided to reduce its price since no one is showing interest in their luxury wand.
+
+Write the command to update the wand with a name of "Devotion Shift" and set the price to 5.99.
+
+Shell Editor
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update( { "name": "Devotion Shift" },  { "$set": { "price": 5.99 } } )

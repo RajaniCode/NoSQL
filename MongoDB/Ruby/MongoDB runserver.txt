@@ -1,0 +1,5 @@
+cd "E:\Working\MongoDB\MongoDB University\MongoDB-Ruby"
+
+# runserver
+$ mkdir -p WT
+$ mongod -dbpath "/e/Working/MongoDB/MongoDB University/MongoDB-Ruby/WT" --storageEngine wiredTiger

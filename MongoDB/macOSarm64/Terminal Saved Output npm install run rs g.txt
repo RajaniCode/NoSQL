@@ -1,0 +1,24 @@
+Last login: Sat Nov  4 04:13:35 on ttys001
+rajaniapple@Rajanis-MacBook-Pro ~ % sw_vers
+ProductName:		macOS
+ProductVersion:		14.0
+BuildVersion:		23A344
+rajaniapple@Rajanis-MacBook-Pro ~ % arch
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % npm -v
+10.1.0
+rajaniapple@Rajanis-MacBook-Pro ~ % npm install run-rs -g
+
+added 100 packages in 35s
+
+8 packages are looking for funding
+  run `npm fund` for details
+rajaniapple@Rajanis-MacBook-Pro ~ % npm list -g
+/Users/rajaniapple/.nvm/versions/node/v20.9.0/lib
+├── corepack@0.20.0
+├── gulp@4.0.2
+├── npm@10.1.0
+├── run-rs@0.7.7
+└── yarn@1.22.19
+
+rajaniapple@Rajanis-MacBook-Pro ~ % 

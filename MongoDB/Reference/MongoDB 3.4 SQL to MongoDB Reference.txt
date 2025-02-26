@@ -1,0 +1,134 @@
+Things to remember:
+Inner operators:
+$gt / $gte
+$lt / $lte
+$ne
+$exists
+
+
+Outer operator 
+$set
+$unset
+$inc
+# Note option: multi
+
+
+Outer operator list:
+$or: [ ]
+
+
+
+
+Functions on collection:
+.find()
+.findOne()
+.count()
+.distinct()
+
+.insert()
+.update()
+.remove()
+.drop()
+
+
+# .update()
+
+db.collection.update(
+   <query>,
+   <update>,
+   {
+     upsert: <boolean>,
+     multi: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+# write concern
+Specifies whether a write operation has succeeded. Write concern allows your application to detect insertion errors or unavailable mongod instances. For replica sets, you can configure write concern to confirm replication to a specified number of members.
+
+# Upsert Behavior: 
+If upsert is true and no document matches the query criteria, update() inserts a single document. The update creates the new document with either:
+
+• The fields and values of the <update> parameter if the <update> parameter is a replacement document (i.e., contains only field and value pairs). If neither the <query> nor the <update> document specifies an _id field, MongoDB adds the _id field with an ObjectId value.
+
+• The fields and values of both the <query> and <update> parameters if the <update> parameter contains update operator expressions. The update creates a base document from the equality clauses in the <query> parameter, and then applies the update expressions from the <update> parameter. Comparison operations from the <query> will not be included in the new document.
+
+
+# .updateOne()
+Updates a single document within the collection based on the filter.
+
+db.collection.updateOne(
+   <filter>,
+   <update>,
+   {
+     upsert: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+try {
+   db.restaurant.updateOne(
+      { "violations" : { $gt: 10} },
+      { $set: { "Closed" : true } },
+      { upsert: true }
+   );
+} catch (e) {
+   print(e);
+}
+
+
+# .updateMany() - New in version 3.2
+
+db.collection.updateMany(filter, update, options)
+
+db.collection.updateMany(
+   <filter>,
+   <update>,
+   {
+     upsert: <boolean>,
+     writeConcern: <document>
+   }
+)
+
+try {
+   db.restaurant.updateMany(
+      { violations: { $gt: 4 } },
+      { $set: { "Review" : true } }
+   );
+} catch (e) {
+   print(e);
+}
+
+
+# .updateMany() - New in version 3.2 - Update Multiple Documents with Upsert
+try {
+   db.inspectors.updateMany(
+      { "Sector" : { $gt : 4 }, "inspector" : "R. Coltrane" },
+      { $set: { "Patrolling" : false } },
+      { upsert: true }
+   );
+} catch (e) {
+   print(e);
+}
+
+
+# .updateMany() - New in version 3.2 - Update with Write Concern
+
+try {
+   db.restaurant.updateMany(
+       { "name" : "Pizza Rat's Pizzaria" },
+       { $inc: { "violations" : 3}, $set: { "Closed" : true } },
+       { w: "majority", wtimeout: 100 }
+   );
+} catch (e) {
+   print(e);
+}
+
+
+
+
+Functions on find():
+.sort()
+.limit() /.limit().skip()
+.count()
+.explain()

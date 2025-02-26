@@ -1,0 +1,17 @@
+5.2 Many Makers
+
+
+Not only have we been adding wands, but our users have been adding new ones daily! Let's create a list of all the unique wand makers in our database.
+
+Write an aggregate to group wands by their maker so that we'll get a list of unique makers.
+
+Shell Editor
+
+
+Answer:
+
+Shell Editor
+
+db.wands.aggregate([
+  { "$group": {"_id": "$maker" } }
+])

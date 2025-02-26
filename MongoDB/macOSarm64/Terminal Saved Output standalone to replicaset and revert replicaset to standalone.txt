@@ -1,0 +1,51 @@
+Last login: Sat Nov  4 04:25:43 on ttys000
+rajaniapple@Rajanis-MacBook-Pro ~ % sw_vers
+ProductName:		macOS
+ProductVersion:		14.0
+BuildVersion:		23A344
+rajaniapple@Rajanis-MacBook-Pro ~ % arch
+arm64
+rajaniapple@Rajanis-MacBook-Pro ~ % npm -v
+10.1.0
+rajaniapple@Rajanis-MacBook-Pro ~ % npm list -g
+/Users/rajaniapple/.nvm/versions/node/v20.9.0/lib
+├── corepack@0.20.0
+├── gulp@4.0.2
+├── npm@10.1.0
+├── run-rs@0.7.7
+└── yarn@1.22.19
+
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services stop mongodb-community
+Warning: Service `mongodb-community` is not started.
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services list
+Name              Status User File
+mongodb-community none        
+rajaniapple@Rajanis-MacBook-Pro ~ % sudo run-rs --mongod
+Password:
+Purging database...
+Running 'mongod' [ 27017, 27018, 27019 ]
+Starting replica set...
+Started replica set on "mongodb://localhost:27017,localhost:27018,localhost:27019?replicaSet=rs"
+Connected to oplog
+(node:10310) [MONGODB DRIVER] DeprecationWarning: collection.find option [oplogReplay] is deprecated and will be removed in a later version.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+^C
+rajaniapple@Rajanis-MacBook-Pro ~ % brew services start mongodb-community
+==> Successfully started `mongodb-community` (label: homebrew.mxcl.mongodb-community)
+rajaniapple@Rajanis-MacBook-Pro ~ % mongosh
+(node:11777) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Current Mongosh Log ID:	65458299d0d850bb7486c7e1
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.0.2
+Using MongoDB:		7.0.2
+Using Mongosh:		2.0.2
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-11-04T05:00:27.995+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> exit
+rajaniapple@Rajanis-MacBook-Pro ~ % 

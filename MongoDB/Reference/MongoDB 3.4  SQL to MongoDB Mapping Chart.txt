@@ -1,0 +1,422 @@
+MongoDB 3.4 SQL to MongoDB Mapping Chart
+
+In addition to the charts that follow, you might want to consider the Frequently Asked Questions section for a selection of common questions about MongoDB.
+Terminology and Concepts
+
+The following table presents the various SQL terminology and concepts and the corresponding MongoDB terminology and concepts.
+SQL Terms/Concepts 							MongoDB Terms/Concepts
+database 								database
+table 									collection
+row 									document or BSON document
+column 									field
+index 									index
+table joins 								embedded documents and linking
+
+primary key								primary key
+
+Specify any unique column or column combination as primary key.		In MongoDB, the primary key is automatically set to the _id field.
+
+aggregation (e.g. group by) 						aggregation pipeline [See the SQL to Aggregation Mapping Chart.]
+
+
+Executables
+The following table presents some database executables and the corresponding MongoDB executables. This table is not meant to be exhaustive.
+  	 		MongoDB 	MySQL 		Oracle 		Informix 	DB2
+Database Server 	mongod 		mysqld 		oracle 		IDS 		DB2 Server
+Database Client 	mongo 		mysql 		sqlplus 	DB-Access 	DB2 Client
+
+Examples
+The following table presents the various SQL statements and the corresponding MongoDB statements. The examples in the table assume the following conditions:
+
+    The SQL examples assume a table named users.
+
+    The MongoDB examples assume a collection named users that contain documents of the following prototype:
+
+    {
+      _id: ObjectId("509a8fb2f3f4948bd2f983a0"),
+      user_id: "abc123",
+      age: 55,
+      status: 'A'
+    }
+
+Create and Alter
+The following table presents the various SQL statements related to table-level actions and the corresponding MongoDB statements.
+SQL Schema Statements 				MongoDB Schema Statements
+
+CREATE TABLE users (				Implicitly created on first insert() operation. The primary key _id is automatically added if _id field is not specified.
+    id MEDIUMINT NOT NULL			db.users.insert( {
+        AUTO_INCREMENT,			 	    user_id: "abc123",
+    user_id Varchar(30),		    	    age: 55,
+    age Number,				    	    status: "A"
+    status char(1),
+    PRIMARY KEY (id)				} )
+)						However, you can also explicitly create a collection:
+						db.createCollection("users")
+
+
+ALTER TABLE users				Collections do not describe or enforce the structure of its documents; i.e. there is no structural alteration at the collection level.
+ADD join_date DATETIME				However, at the document level, update() operations can add fields to existing documents using the $set operator.
+						db.users.update(
+						        { },
+							{ $set: { join_date: new Date() } },
+						)
+
+ALTER TABLE users				Collections do not describe or enforce the structure of its documents; i.e. there is no structural alteration at the collection level.
+DROP COLUMN join_date				However, at the document level, update() operations can remove fields from documents using the $unset operator.
+						db.users.update(
+						    { },
+						    { $unset: { join_date: "" } },
+						    { multi: true }	
+						)
+
+CREATE INDEX idx_user_id_asc			db.users.createIndex( { user_id: 1 } )
+ON users(user_id)
+
+
+CREATE INDEX					db.users.createIndex( { user_id: 1, age: -1 } )
+       idx_user_id_asc_age_desc
+ON users(user_id, age DESC)
+
+
+DROP TABLE users				db.users.drop()
+
+For more information, see db.collection.insert(), db.createCollection(), db.collection.update(), $set, $unset, db.collection.createIndex(), indexes, db.collection.drop(), and Data Modeling Concepts.
+
+Insert
+The following table presents the various SQL statements related to inserting records into tables and the corresponding MongoDB statements.
+
+SQL INSERT Statements 				MongoDB insert() Statements
+
+INSERT INTO users(user_id,			db.users.insert(
+                  age,				    { user_id: "bcd001", age: 45, status: "A" }
+                  status)			)
+VALUES ("bcd001",
+        45,
+        "A")
+
+
+For more information, see db.collection.insert().
+
+
+Select
+The following table presents the various SQL statements related to reading records from tables and the corresponding MongoDB statements.
+
+SQL SELECT Statements 				MongoDB find() Statements
+
+
+SELECT *					db.users.find()
+FROM users
+
+
+SELECT id,					db.users.find(
+       user_id,				    	    { },
+       status				    	    { user_id: 1, status: 1 }
+FROM users					)
+
+
+SELECT user_id, status				db.users.find(
+FROM users				    	    { },
+					            { },
+    						)				
+
+SELECT *					db.users.find(
+FROM users				    	    { status: "A" }
+WHERE status = "A"				)
+
+
+SELECT user_id, status				db.users.find(
+FROM users				            { status: "A" },
+WHERE status = "A"			            { user_id: 1, status: 1, _id: 0 }
+						)					
+
+
+SELECT *					db.users.find(
+FROM users				            { status: { $ne: "A" } }
+WHERE status != "A"				)
+
+
+SELECT *					db.users.find(
+FROM users				            { status: "A",
+WHERE status = "A"			            age: 50 }
+AND age = 50					)
+
+
+SELECT *					db.users.find(
+FROM users				    	    { $or: [ { status: "A" } ,
+WHERE status = "A"			            { age: 50 } ] }		
+OR age = 50					)
+
+
+SELECT *					db.users.find(
+FROM users				    	    { age: { $gt: 25 } }
+WHERE age > 25					)
+
+
+SELECT *					db.users.find(
+FROM users				    	    { age: { $lt: 25 } }
+WHERE age < 25					)
+
+
+SELECT *					db.users.find(
+FROM users				    	    { age: { $gt: 25, $lte: 50 } }
+WHERE age > 25					)
+AND   age <= 50				
+
+
+SELECT *					db.users.find( { user_id: /bc/ } )
+FROM users
+WHERE user_id like "%bc%"
+
+
+SELECT *					db.users.find( { user_id: /^bc/ } )
+FROM users
+WHERE user_id like "bc%"
+
+
+SELECT *					db.users.find( { status: "A" } ).sort( { user_id: 1 } )
+FROM users
+WHERE status = "A"
+ORDER BY user_id ASC
+
+
+SELECT *					db.users.find( { status: "A" } ).sort( { user_id: -1 } )
+FROM users
+WHERE status = "A"
+ORDER BY user_id DESC
+
+
+SELECT COUNT(*)					db.users.count()
+FROM users					or
+						db.users.find().count()
+
+
+SELECT COUNT(user_id)				db.users.count( { user_id: { $exists: true } } )
+FROM users					or
+						db.users.find( { user_id: { $exists: true } } ).count()
+	
+
+SELECT COUNT(*)					db.users.count( { age: { $gt: 30 } } )							
+FROM users					or
+WHERE age > 30					db.users.find( { age: { $gt: 30 } } ).count()
+
+
+SELECT DISTINCT(status)				db.users.distinct( "status" )
+FROM users
+
+
+SELECT *					db.users.findOne()
+FROM users					or
+LIMIT 1						db.users.find().limit(1)
+
+
+SELECT *					db.users.find().limit(5).skip(10)
+FROM users					
+LIMIT 5						
+SKIP 10						
+	
+
+EXPLAIN SELECT *				db.users.find( { status: "A" } ).explain()
+FROM users
+WHERE status = "A"
+
+For more information, see db.collection.find(), db.collection.distinct(), db.collection.findOne(), $ne $and, $or, $gt, $lt, $exists, $lte, $regex, limit(), skip(), explain(), sort(), and count().
+
+
+Update Records
+The following table presents the various SQL statements related to updating existing records in tables and the corresponding MongoDB statements.
+
+SQL Update Statements 				MongoDB update() Statements
+
+UPDATE users					db.users.update(
+SET status = "C"				    { age: { $gt: 25 } },
+WHERE age > 25					    { $set: { status: "C" } },
+						    { multi: true }
+						)
+
+UPDATE users					db.users.update( 
+SET age = age + 3				    { status: "A" } ,
+WHERE status = "A"				    { $inc: { age: 3 } },
+						    { multi: true }
+						)   
+
+For more information, see db.collection.update(), $set, $inc, and $gt.
+
+
+Delete Records
+The following table presents the various SQL statements related to deleting records from tables and the corresponding MongoDB statements.
+
+
+SQL Delete Statements 				MongoDB remove() Statements
+
+DELETE FROM users				db.users.remove( { status: "D" } )
+WHERE status = "D"				
+
+
+DELETE FROM users				db.users.remove({})
+
+For more information, see db.collection.remove().
+
+
+
+SQL to Aggregation Mapping Chart
+
+The aggregation pipeline allows MongoDB to provide native aggregation capabilities that corresponds to many common data aggregation operations in SQL.
+
+The following table provides an overview of common SQL aggregation terms, functions, and concepts and the corresponding MongoDB aggregation operators:
+SQL Terms, Functions, and Concepts 		MongoDB Aggregation Operators
+WHERE 						$match
+GROUP BY 					$group
+HAVING 						$match
+SELECT 						$project
+ORDER BY 					$sort
+LIMIT 						$limit
+SUM() 						$sum
+COUNT() 					$sum
+join 						No direct corresponding operator; however, the $unwind operator allows for somewhat similar functionality, but with fields embedded within the document.
+
+
+SQL Example					MongoDB Example						Description
+
+SELECT COUNT(*) AS count			db.orders.aggregate( [					Count all records from orders
+FROM orders					    {
+						        $group: {
+						        _id: null,
+						        count: { $sum: 1 }
+						    	}
+						    }
+						] )
+
+
+SELECT SUM(price) AS total			db.orders.aggregate( [					Sum the price field from orders
+FROM orders					    {
+							$group: {
+							    _id: null,
+							    total: { $sum: "$price" }
+							}
+						    }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id, sum the price field.
+       SUM(price) AS total			    {
+FROM orders						$group: {
+GROUP BY cust_id					    _id: "$cust_id",
+								total: { $sum: "$price" }
+							}
+						    }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id, sum the price field, results sorted by sum.
+       SUM(price) AS total			   {
+FROM orders					     $group: {
+GROUP BY cust_id				        _id: "$cust_id",
+ORDER BY total					        total: { $sum: "$price" }
+						     }
+						   },
+						   { $sort: { total: 1 } }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id, ord_date grouping, sum the price field. Excludes the time portion of the date.
+       ord_date,				   {
+       SUM(price) AS total			     $group: {
+FROM orders						_id: {
+GROUP BY cust_id,					    cust_id: "$cust_id",
+    ord_date				           	    ord_date: {
+						                month: { $month: "$ord_date" },
+						                day: { $dayOfMonth: "$ord_date" },
+						                year: { $year: "$ord_date"}
+							    }
+						        },
+						        total: { $sum: "$price" }
+						     }
+						   }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For cust_id with multiple records, return the cust_id and the corresponding record count.				
+       count(*)					   {
+FROM orders					     $group: {
+GROUP BY cust_id					_id: "$cust_id",
+HAVING count(*) > 1					count: { $sum: 1 }			
+						     }
+						   },
+						   { $match: { count: { $gt: 1 } } }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id, ord_date grouping, sum the price field and return only where the sum is greater than 250. Excludes the time portion of the date.
+       ord_date,				   {
+       SUM(price) AS total			     $group: {
+FROM orders						_id: {
+GROUP BY cust_id,					cust_id: "$cust_id",
+         ord_date					ord_date: {
+HAVING total > 250				               month: { $month: "$ord_date" },
+						               day: { $dayOfMonth: "$ord_date" },
+						               year: { $year: "$ord_date"}
+							}
+					  	    },
+						total: { $sum: "$price" }
+						     }
+
+						   },
+						   { $match: { total: { $gt: 250 } } }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id with status A, sum the price field.
+       SUM(price) as total			    { $match: { status: 'A' } },
+FROM orders					        {
+WHERE status = 'A'				            $group: {
+GROUP BY cust_id				                _id: "$cust_id",
+							        total: { $sum: "$price" }
+							    }
+   						   }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id with status A, sum the price field and return only where the sum is greater than 250.
+       SUM(price) as total			    { $match: { status: 'A' } },
+FROM orders					    {
+WHERE status = 'A'				        $group: {
+GROUP BY cust_id				            _id: "$cust_id",
+HAVING total > 250					    total: { $sum: "$price" }	
+ 						        }
+						   },
+						   { $match: { total: { $gt: 250 } } }
+						] )
+
+
+SELECT cust_id,					db.orders.aggregate( [					For each unique cust_id, sum the corresponding line item qty fields associated with the orders.
+       SUM(li.qty) as qty			   { $unwind: "$items" },
+FROM orders o,					   {
+     order_lineitem li					$group: {
+WHERE li.order_id = o.id				    _id: "$cust_id",
+GROUP BY cust_id					    qty: { $sum: "$items.qty" }
+						        }
+					 	    }
+						] )
+
+
+SELECT COUNT(*)					db.orders.aggregate( [					Count the number of distinct cust_id, ord_date groupings. Excludes the time portion of the date.
+FROM (SELECT cust_id,				    {
+             ord_date				        $group: {
+      FROM orders				   	_id: {
+      GROUP BY cust_id,				           cust_id: "$cust_id",
+               ord_date)			           ord_date: {
+      as DerivedTable				           	month: { $month: "$ord_date" },
+							        day: { $dayOfMonth: "$ord_date" },
+						               	year: { $year: "$ord_date"}
+						           }
+						        }
+						     }
+						   },
+
+						   {
+						     $group: {
+						        _id: null,
+							count: { $sum: 1 }		
+					             }
+						   }	
+						] )

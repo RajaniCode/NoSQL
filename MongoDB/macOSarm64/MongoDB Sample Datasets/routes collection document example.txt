@@ -1,0 +1,17 @@
+// routes collection document example
+{
+   "_id": {
+      "$oid": "56e9b39b732b6122f877fa5c"
+   },
+   "airline": {
+         "alias": "2G",
+         "iata": "CRG",
+         "id": 1654,
+         "name": "Cargoitalia"
+   },
+   "airplane": "A81",
+   "codeshare": "",
+   "dst_airport": "OVB",
+   "src_airport": "BTK",
+   "stops": 0
+}

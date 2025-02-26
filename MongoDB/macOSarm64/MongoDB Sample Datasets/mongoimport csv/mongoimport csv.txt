@@ -1,0 +1,19 @@
+# mongoimport
+# Download .csv for mongoimport Dataset for Use on Local Machine
+% curl https://data.nasa.gov/api/views/9kcy-zwvn/rows.csv -o eva.csv  
+# Or
+% wget https://data.nasa.gov/api/views/9kcy-zwvn/rows.csv -O eva.csv
+% ls
+[
+% brew services start mongodb-community
+]
+% mongoimport --headerline --file eva.csv --type csv --db nasa --collection eva
+% mongosh
+> show dbs
+> use nasa
+> show collections
+> db.eva.findOne()
+> db.eva.find()
+> db.dropDatabase()
+> show dbs
+> exit

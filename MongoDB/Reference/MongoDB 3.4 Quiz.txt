@@ -1,0 +1,4340 @@
+Quiz: What is MongoDB?
+
+Which of the following statements are true about MongoDB?
+
+[Multiple Answers]
+
+MongoDB is schemaless.
+MongoDB supports SQL.
+MongoDB supports Joins.
+MongoDB is document oriented. 
+
+Answer:
+MongoDB is schemaless.
+MongoDB is document oriented. 
+Note:
+A brief discussion is probably in order for the schemaless answer. We also sometimes use the term 'dynamic schema.' The point is that, unlike in a relational database, you are not constrained to follow any particular schema. If you wish to change your schema, you are free to do any of the following:
+
+Begin inserting documents with the new schema.
+Perform a bulk update on the existing documents.
+Begin updating old documents to the new schema one by one at an appropriate event (such as getting read from or written to), as coded in the application.
+
+Contrast this with what happens in a relational database, where the table must typically be taken offline in order to add columns.
+
+As for the other two answers, MongoDB does not support joins as a design decision because they do not scale horizontally, and it does not support SQL because that query language was built around joins and transactions, and tends to assume table structure rather than the flexible document orientation that MongoDB provides.
+
+
+Quiz: MongoDB Relative to Relational
+
+Which features did MongoDB omit in order to retain scalability?
+
+[Multiple Answers]
+
+Indexes
+Joins
+Transactions across multiple collections
+Secondary Indexes 
+
+Answer:
+Joins
+Transactions across multiple collections
+
+
+Quiz: Quick Introduction to the Mongo Shell
+
+Which of the following expressions are valid JSON documents?
+
+[Single Answer]
+
+{a:1, b:2, c:3}
+{a,1; b,4, c,6}
+{a:1; b:1; c:4}
+(A,1; b:2; c,4} 
+
+Answer:
+{a:1, b:2, c:3}
+
+
+Quiz: Introduction to JSON
+
+Which of the following are JSON documents that the MongoDB shell will accept?
+
+[Multiple Answers]
+
+{ a : 1, b : 2, c : 3 }
+{ a : 1, b : 2, c : [ 1, 2, 3, 4, 5 ] }
+{ a : 1, b : { }, c : [ { a : 1, b : 2 }, 5, 6 ] }
+{ } 
+
+Answer:
+{ a : 1, b : 2, c : 3 }
+{ a : 1, b : 2, c : [ 1, 2, 3, 4, 5 ] }
+{ a : 1, b : { }, c : [ { a : 1, b : 2 }, 5, 6 ] }
+{ }
+
+
+Quiz: JSON Revisited
+
+Write the JSON for a simple document containing a single key "fruit" that has as its value an array containing three strings: "apple", "pear", and "peach"
+
+Note that this isn't a question about the mongo shell; you'll need to put quotation marks around your key.
+
+Answer:
+{"fruit": ["apple", "pear", "peach"]}
+Note:
+Quotes around the value pairs, they are still a part of the JSON spec. Feel free to omit them in the mongo shell, where they can be implicit rather than explicit, but keep in mind that in JSON, they have to be there.
+
+
+Quiz: JSON Subdocuments
+
+Write a JSON document with a single key, "address" that has as it value another document with the keys "street_address", "city", "state", "zipcode", with the following values: "street_address" is "23 Elm Drive", "city" is "Palo Alto", "state" is "California", "zipcode" is "94305"
+
+Answer: {"address": {"street_address": "23 Elm Drive",  "city": "Palo Alto", "state": "California", "zipcode": "94305"}}
+
+
+Quiz Blog in Relational Tables
+
+Let's assume that our blog can be modeled with the following relational tables:
+
+authors:
+	author_id,
+	name,
+	email,
+	password
+
+posts:
+	post_id,
+	author_id
+	title,
+	body,	
+	publication_date
+
+comments:
+	comment_id,
+	name, 
+	email,
+	comment_text
+
+post_comments:
+	post_id,
+	comment_id
+
+
+tags
+	tag_id
+	name
+
+post_tags
+	post_id
+	tag_id
+
+In order to display a blog post with its comments and tags, how many tables will need to be accessed?
+
+[Single Answer]
+
+2
+3
+5
+6
+
+Answer: 6
+
+
+Quiz Blog in Documents
+
+Given the document schema that we proposed for the blog, how many collections would we need to access to display the blog home page?
+
+[Single Answer]
+
+0
+1
+2
+4 
+
+Answer: 1
+
+
+Quiz: Introduction to Schema Design
+
+In which scenario is it impossible to embed data within a document (you must put the data in it a separate collection)?
+
+[Single Answer]
+
+The data is not isomorphic.
+The embedded data could exceed the 16MB document limit within MongoDB.
+You need an index on the data element.
+The data would be duplicated across multiple objects within a collection.
+
+Answer: The embedded data could exceed the 16MB document limit within MongoDB.
+
+
+Quiz: Python Lists
+
+Write the to code to initialize a list with the items "hammer", "nail" and "wall" and assign the list to the variable named "things".
+
+Answer: things = ["hammer", "nail", "wall"]
+
+
+Quiz: Python Lists, Slice Operator
+
+things = ['apples', 'orange', 'pear', 'grape', 'kiwi']. What is the slice notation that will return the sublist ['orange', 'pear']?
+
+Answer: things[1:3]
+
+
+Quiz: Python Lists, Inclusion
+
+Given a Python list called "fruit", write an if statement to check whether "apple" is in the list. Please use double quotes at this time.
+
+Answer: if "apple" in fruit:
+
+
+Quiz: Python, Working with Dicts
+
+Initialize a new dict named "colors" with the following key values pairs: sky is blue, sea is blue. earth is brown. Note: Please preserve the order of these keys when you enter your answer.
+
+Answer: colors = {'sky': 'blue', 'sea': 'blue', 'earth': 'brown'}
+
+
+Quiz: Python: Dicts and Lists Together
+
+Initialize a new dict with a single key, "animals" whose value is the list "dog", "cat", "zebra" and assign the entire expression to variable named "things".
+
+Answer: things = {'animals' : ['dog', 'cat', 'zebra']}
+
+
+Quiz: Python: for Loops, with Lists
+
+What does the following code print?
+
+sum = 0
+numbers = [1, 2, 3, 5, 8]
+for i in numbers:
+    sum = sum + i
+print i
+
+Answer: 8
+
+
+Quiz: Python: for Loops with Dicts
+
+people = {'name': 'Bob', 'hometown': "Palo Alto", 'favorite_color': 'red'}
+for item in people:
+    if (item == 'favorite_color'):
+        print people[item]
+
+What does this program print?
+
+Answer: red
+
+
+Quiz: Secrets of the Mongo Shell
+
+What does the following fragment of JavaScript output?
+
+x = { "a" : 1 };
+y = "a";
+x[y]++;
+print(x.a);
+
+Answer: 2
+
+
+Quiz: BSON Introduced
+
+Which of the following are types available in BSON?
+
+[Multiple Answers]
+
+Strings
+Floating-point numbers
+Complex numbers
+Arrays
+Objects (Subdocuments)
+Timestamps 
+
+Answer:
+Strings
+Floating-point numbers
+Arrays
+Objects (Subdocuments)
+Timestamps
+
+
+Quiz: Inserting Docs
+
+Insert a document into the fruit collection with the attributes of "name" being "apple", "color" being "red", and "shape" being "round". Use the "insert" method.
+
+This is a fully functional web shell, so please press enter for your query to get passed to the server, just like you would for the command line shell. 
+
+Answer:
+
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.fruit.insert({name: "apple", color: "red", shape: "round"})
+WriteResult({ "nInserted" : 1 })
+
+
+Quiz: Introduction to findOne
+
+Use findOne on the collection users to find one document where the key username is "dwight", and retrieve only the key named email.
+
+Answer: db.users.findOne( {username: "dwight"}, {email: 1, _id: 0} )
+
+
+Quiz: Querying Using field Selection
+
+Supposing a scores collection similar to the one presented, how would you find all documents with type: essay and score: 50 and only retrieve the student field?
+
+Answer: db.scores.find( {type: "essay", score: 50}, {student: true, _id: false})
+
+
+Quiz: Querying Using $gt and $lt
+
+Which of these finds documents with a score between 50 and 60, inclusive?
+
+[Single Answer]
+
+db.scores.find({ score : { $gt : 50 , $lt : 60 } } );
+db.scores.find({ score : { $gte : 50 , $lte : 60 } } );
+db.scores.find({ score : { $gt : 50 , $lte : 60 } } );
+db.scores.find({ score : { $gte : 50 , $lt : 60 } } );
+db.scores.find({ score : { $gt : 50 } } );
+
+Answer: db.scores.find({ score : { $gte : 50 , $lte : 60 } } );
+
+
+Quiz: Inequalities on Strings
+
+Which of the following will find all users with name between "F" and "Q" (Inclusive)?
+
+[Multiple Answers]
+
+db.users.find( { name : { $gte : "F" , $lte : "Q" } } );
+db.users.find( { name : { $lte : "Q" , $gte : "F" } } );
+db.users.find( { name : { $gte : "f" , $lte : "Q" } } );
+db.users.find( { name : { $lte : "Q" } });
+
+Answer:
+db.users.find( { name : { $gte : "F" , $lte : "Q" } } );
+db.users.find( { name : { $lte : "Q" , $gte : "F" } } );
+
+
+Quiz: Using regexes, $exists, $type
+
+Write a query that retrieves documents from a users collection where the name has a "q" in it, and the document has an email field.
+
+Answer: db.users.find( { name: {$regex: "q" }, email: { $exists: 1 } } )
+
+
+Quiz: Using $or
+
+How would you find all documents in the scores collection where the score is less than 50 or greater than 90?
+
+Note: We're afraid that the parser has trouble recognizing when you switch the order, so be sure to put your "less than" operator before your "greater than" one.
+
+Answer: db.scores.find( { $or: [ {score: { $lt: 50 } }, { score: { $gt: 90 } } ] } )
+
+
+
+Quiz: Using $and
+
+What will the following query do?
+
+db.scores.find( { score : { $gt : 50 }, score : { $lt : 60 } } );
+
+[Single Answer]
+
+Find all documents with score between 50 and 60
+Find all documents with score greater than 50
+Find all documents with score less than 60
+Explode like the Death Star
+None of the above
+
+Answer: Find all documents with score less than 60
+
+
+
+Quiz: Querying Inside Arrays
+
+Which of the following documents would be returned by this query?
+
+db.products.find( { tags : "shiny" } );
+
+[Multiple Answers]
+
+{ _id : 42 , name : "Whizzy Wiz-o-matic", tags : [ "awesome", "shiny" , "green" ] }
+{ _id : 704 , name : "Fooey Foo-o-tron", tags : [ "blue", "mediocre" ] }
+{ _id : 1040 , name : "Snappy Snap-o-lux", tags : "shiny" }
+{ _id : 12345 , name : "Quuxinator", tags : [ ] }
+
+Answer:
+{ _id : 42 , name : "Whizzy Wiz-o-matic", tags : [ "awesome", "shiny" , "green" ] }
+{ _id : 1040 , name : "Snappy Snap-o-lux", tags : "shiny" }
+
+
+Quiz: Using $in and $all
+
+Which of the following documents matches this query? 
+
+db.users.find( { friends : { $all : [ "Joe" , "Bob" ] }, favorites : { $in : [ "running" , "pickles" ] } } )
+
+[Single Answer]
+
+{ name : "William" , friends : [ "Bob" , "Fred" ] , favorites : [ "hamburgers", "running" ] }
+{ name : "Stephen" , friends : [ "Joe" , "Pete" ] , favorites : [ "pickles", "swimming" ] }
+{ name : "Cliff" , friends : [ "Pete" , "Joe" , "Tom" , "Bob" ] , favorites : [ "pickles", "cycling" ] }
+{ name : "Harry" , friends : [ "Joe" , "Bob" ] , favorites : [ "hot dogs", "swimming" ] } 
+
+Answer: { name : "Cliff" , friends : [ "Pete" , "Joe" , "Tom" , "Bob" ] , favorites : [ "pickles", "cycling" ] } 
+
+
+Quiz: Queries with Dot Notation
+
+Suppose a simple e-commerce product catalog called catalog with documents that look like this:
+
+{ product : "Super Duper-o-phonic", 
+  price : 100000000000,
+  reviews : [ { user : "fred", comment : "Great!" , rating : 5 },
+              { user : "tom" , comment : "I agree with Fred, somewhat!" , rating : 4 } ],
+  ... }
+
+Write a query that finds all products that cost more than 10,000 and that have a rating of 5 or better.
+
+For this assignment, please use quotation marks around the keys in any documents in your queries.
+
+Answer: db.catalog.find( { price: { $gt: 10000 }, "reviews.rating": { $gte: 5 } } )
+
+
+Quiz: Querying, Cursors
+
+When can you change the behavior of a cursor, by applying a sort, skip, or limit to it?
+This can be done only before the cursor is created.
+This can only be done when the cursor is created.
+This can be done at any point, and will reset the cursor.
+This can be done at any point, and will apply to any documents the cursor hasn't yet pulled.
+This can be done at any point before the first document is called and before you've checked to see if it is empty. 
+
+Answer: This can be done at any point before the first document is called and before you've checked to see if it is empty. 
+
+
+Quiz: Counting Results
+
+How would you count the documents in the scores collection where the type was "essay" and the score was greater than 90?
+
+Answer: db.scores.count( { type: "essay", score: { $gt: 90 } } )
+
+
+Quiz: Wholesale Updating of a Document
+
+Let's say you had a collection with the following document in it:
+
+{ "_id" : "Texas", "population" : 2500000, "land_locked" : 1 }
+
+and you issued the query:
+
+db.foo.update({_id:"Texas"},{population:30000000})
+
+What would be the state of the collection after the update?
+
+[Single Answer]
+
+{ "_id" : "Texas", "population" : 2500000, "land_locked" : 1 }
+{ "_id" : "Texas", "population" : 3000000, "land_locked" : 1 }
+{ "_id" : "Texas", "population" : 30000000 }
+{ "_id" : ObjectId("507b7c601eb13126c9e3dcca"), "population" : 2500000 }
+
+Answer: { "_id" : "Texas", "population" : 30000000 }
+
+
+Quiz: Using the $set Command
+
+For the users collection, the documents are of the form
+
+{
+	"_id" : "myrnarackham",
+	"phone" : "301-512-7434",
+	"country" : "US"
+}
+
+Please set myrnarackham's country code to "RU" but leave the rest of the document (and the rest of the collection) unchanged.
+
+Hint: You should not need to pass the "phone" field to the update query.
+
+This is a fully functional web shell, so please press enter for your query to get passed to the server, just like you would for the command line shell.
+
+Answer:
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.users.update({ _id : "myrnarackham" }, { $set: { country: "RU" } } )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+Quiz: Using the $unset Command
+
+Write an update query that will remove the "interests" field in the following document in the users collection.
+
+{ 
+    "_id" : "jimmy" , 
+    "favorite_color" : "blue" , 
+    "interests" : [ "debating" , "politics" ] 
+}
+
+Do not simply empty the array. Remove the key : value pair from the document.
+
+This is a fully functional web shell, so please press enter for your query to get passed to the server, just like you would for the command line shell. 
+
+Answer:
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.users.update( { _id: "jimmy" }, { $unset: { interests: "debating" } } )
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+Quiz: Using $push, $pop, $pull, $pushAll, $pullAll, $addToSet
+
+Suppose you have the following document in your friends collection:
+
+{ _id : "Mike", interests : [ "chess", "botany" ] }
+
+What will the result of the following updates be?
+
+db.friends.update( { _id : "Mike" }, { $push : { interests : "skydiving" } } );
+db.friends.update( { _id : "Mike" }, { $pop : { interests : -1 } } );
+db.friends.update( { _id : "Mike" }, { $addToSet : { interests : "skydiving" } } );
+db.friends.update( { _id : "Mike" }, { $pushAll: { interests : [ "skydiving" , "skiing" ] } } );
+
+Answer: { _id : "Mike", interests : [ "botany", "skydiving", "skydiving" , "skiing" ] }
+
+
+Quiz: Upserts
+
+After performing the following update on an empty collection
+
+db.foo.update( { username : 'bar' }, { '$set' : { 'interests': [ 'cat' , 'dog' ] } } , { upsert : true } );
+
+What could be a document in the collection?
+
+[Single Answer]
+
+{ "_id" : ObjectId("507b78232e8dfde94c149949"), "interests" : [ "cat", "dog" ]}
+{"interests" : [ "cat", "dog" ], "username" : "bar" }
+{}
+{ "_id" : ObjectId("507b78232e8dfde94c149949"), "interests" : [ "cat", "dog" ], "username" : "bar" } 
+
+Answer: { "_id" : ObjectId("507b78232e8dfde94c149949"), "interests" : [ "cat", "dog" ], "username" : "bar" } 
+
+
+Quiz: Multi-update
+
+Recall the schema of the scores collection:
+
+{
+	"_id" : ObjectId("50844162cb4cf4564b4694f8"),
+	"student" : 0,
+	"type" : "exam",
+	"score" : 75
+}
+
+Give every document with a score less than 70 an extra 20 points.
+
+If you input an incorrect query, don't forget to reset the problem state, as any wrong update will likely take you away from your initial state.
+
+This is a fully functional web shell, so please press enter for your query to get passed to the server, just like you would for the command line shell.
+
+Answer:
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.scores.update( { score: { $lt: 70 } }, { $inc: { score: 20 } }, { multi: true } )
+WriteResult({ "nMatched" : 208, "nUpserted" : 0, "nModified" : 208 })
+
+
+Quiz: Removing Data
+
+Recall the schema of the scores collection:
+
+{
+	"_id" : ObjectId("50844162cb4cf4564b4694f8"),
+	"student" : 0,
+	"type" : "exam",
+	"score" : 75
+}
+
+Delete every document with a score of less than 60.
+
+This is a fully functional web shell, so please press enter for your query to get passed to the server, just like you would for the command line shell. 
+
+Answer:
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.scores.remove( { score: { $lt : 60  } } )
+WriteResult({ "nRemoved" : 182 })
+
+
+Quiz: PyMongo: find, find_one and Cursors
+
+Consider the following code snippet:
+
+import pymongo
+import sys
+
+# establish a connection to the server, and use it to get a handle on the scores collection.
+connection = pymongo.MongoClient("mongodb://localhost")
+
+# get a handle to the school database and the scores collection.
+db=connection.school
+scores = db.scores
+     
+try:
+        XXX
+        
+except Exception as e:
+        print "Unexpected error:", type(e), e
+
+print doc
+
+Answer: doc = scores.find_one()
+
+
+Quiz: PyMongo: Projecting Results from Find
+
+Which of the following could work using Pymongo, depending on variable names, to project just the student_id from the scores collection using a find command.
+
+cursor = students.find( { 'student_id' : 1 } )
+cursor = students.find( { }, { 'student_id' : 1, '_id' : 0 } )
+cursor = students.find( { }, { student_id : 1, _id : 0 } )
+cursor = students.find( { 'student_id' : 1, '_id' : 0 } )
+
+Answer: cursor = students.find( { }, { 'student_id' : 1, '_id' : 0 } ) 
+
+
+Quiz: PyMongo: Using $gt and $lt
+
+In the following code, what is the correct line of code, marked by xxxx, to search for all quiz scores that are greater than 20 and less than 90.
+
+import pymongo
+import sys
+
+# establish a connection to the database
+connection = pymongo.MongoClient("mongodb://localhost")
+
+# get a handle to the school database
+db=connection.school
+scores = db.scores
+
+def find():
+
+    print "find, reporting for duty"
+
+    xxxx
+
+    try:
+        iter = scores.find(query)
+
+    except Exception as e:
+        print "Unexpected error:", type(e), e
+        
+    return iter
+
+find()
+
+query = {'score':{'$gt':20, '$lt':90}}
+query = {'type':'quiz', 'score':{'$gt':20, '$lt':90}}
+query = {'type':'quiz', '$gt':{'score':20}, '$lt':{'score':90}}
+query = {'type':'quiz', 'score':{$gt:20, $lt:90}}
+
+Answer: query = {'type':'quiz', 'score':{'$gt':20, '$lt':90}}
+
+
+Quiz: PyMongo: Sort, Skip and Limit
+
+Supposed you had the following documents in a collection named things.
+
+{ "_id" : 0, "value" : 10 }
+{ "_id" : 2, "value" : 5 }
+{ "_id" : 3, "value" : 7 }
+{ "_id" : 4, "value" : 20 }
+
+If you performed the following query in pymongo:
+
+cursor = things.find().skip( 3 ).limit( 1 ).sort( 'value', pymongo.DESCENDING )
+
+which document would be returned?
+
+[single Answer]
+
+The document with _id=0
+The document with _id=2
+The document with _id=3
+The doucment with _id=4 
+
+Answer: The document with _id=2
+
+
+Quiz: PyMongo: Insert_one
+
+Do you expect the second insert below to succeed?
+
+# get a handle to the school database
+db=connection.school
+people = db.people
+
+doc = {"name":"Andrew Erlichson", "company":"MongoDB",
+              "interests":['running', 'cycling', 'photography']}
+
+try:
+        people.insert_one(doc)   # first insert
+        del(doc['_id'])
+        people.insert_one(doc)   # second insert
+
+except Exception as e:
+        print "Unexpected error:", type(e), e
+
+[Single Answer]
+
+No, because the _id will be a duplicate in the collection.
+No, because the del call will delete the entire record in Python.
+Yes, because the del call will remove the _id key added by the pymongo driver in the first insert.
+Yes, because the Pymongo driver always adds a unique _id field on insert.
+
+Answer: Yes, because the del call will remove the _id key added by the pymongo driver in the first insert.
+
+
+Quiz: PyMongo: Insert_many
+
+Suppose you ran the following python program. How many documents would you expect to find in the things collection at the completion of the program, and why?
+
+import pymongo
+import sys
+
+# establish a connection to the database
+connection = pymongo.MongoClient("mongodb://localhost")
+
+def insert_many():
+
+    # get a handle to the school database
+    db=connection.test
+    things = db.things
+
+    # empty the collection
+    things.drop()
+
+    # insert some docs
+
+    docs = [{'_id':1,'a':1}, 
+            {'_id':2,'b':2},            
+            {'_id':3,'b':3},            
+            {'_id':3,'b':4},            
+            {'_id':4,'b':5}]
+
+    try:
+        things.insert_many(docs)
+
+    except Exception as e:
+        print "Unexpected error:", type(e), e
+
+insert_many()
+
+[Single Answer]
+
+Four documents, because two documents have the same _id and one of those will fail to be inserted
+Five documents, because we are inserting five documents using insert_many
+Zero documents, because the insert_many will fail because two of the documents have the same _id
+Three documents, because insert_ordered=True by default, and the insert will stop at the first failed insert. 
+
+Answer: Three documents, because insert_ordered=True by default, and the insert will stop at the first failed insert.
+
+
+Quiz: PyMongo: Updating
+
+In the following code fragment, what is the python expression in place of xxxx to set a new key "examiner" to be "Jones"
+
+Please use the $set operator.
+
+def using_set():
+
+    print "updating record using set"
+    # get a handle to the school database
+    db=connection.school
+    scores = db.scores
+
+    try:
+        # get the doc
+        score = scores.find_one({'student_id':1, 'type':'homework'})
+        print "before: ", score
+
+        # update using set
+        scores.update_one({'student_id':1, 'type':'homework'},
+                      xxxx)
+
+        score = scores.find_one({'student_id':1, 'type':'homework'})
+        print "after: ", score
+
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
+
+Answer: { '$set': { 'examiner': 'Jones' } }
+
+
+Quiz: PyMongo: Updating Data using Replace
+
+Which of the following statements about updating data from PyMongo are true? Check all that apply.
+
+[Multiple Answers]
+
+Whether you use update_one or replace_one, the same amount of data is sent across the wire to the server.
+if you want to atomically increment a counter, replace_one is preferred because the entire counter is replaced.
+replace_one, update_one and update_many all call the server's update command behind the scenes.
+If you use update_one or update_many, you must specify a $operator of some sort. if you use replace_one, you may not specify a $operator, where operator is something like 'set', or 'unset.' 
+
+Answer:
+replace_one, update_one and update_many all call the server's update command behind the scenes.
+If you use update_one or update_many, you must specify a $operator of some sort. if you use replace_one, you may not specify a $operator, where operator is something like 'set', or 'unset.' 
+
+
+Quiz: PyMongo: Upserts
+
+Suppose we would like to upsert the following document into the collection stuff:
+
+{_id:"bat", friend:'ball', cousin:'glove'}
+
+Which of the following python statements work when using PyMongo. Check all that apply.
+
+[Multiple Answers]
+
+stuff.update_one({'_id':'bat'}, {'$set':{'friend':'ball', 'cousin':'glove'}}, upsert=True)
+stuff.replace_one({'_id':'bat'}, {'$set':{'friend':'ball', 'cousin':'glove'}}, upsert=False)
+stuff.update_one({'_id':'bat'}, {'$set':{'_id':'bat', 'friend':'ball', 'cousin':'glove'}}, upsert=True)
+stuff.replace_one({'_id':'bat'}, {'friend':'ball', 'cousin':'glove'}, upsert=True) 
+
+Answer:
+stuff.update_one({'_id':'bat'}, {'$set':{'friend':'ball', 'cousin':'glove'}}, upsert=True)
+stuff.update_one({'_id':'bat'}, {'$set':{'_id':'bat', 'friend':'ball', 'cousin':'glove'}}, upsert=True)
+stuff.replace_one({'_id':'bat'}, {'friend':'ball', 'cousin':'glove'}, upsert=True)  
+
+
+Quiz: PyMongo: Removing Data
+
+When performing a delete_one or delete_many, you get back a DeleteResult structure that contains the number of documents deleted. What is the name of the field that contains the number of documents deleted?
+
+[Single Answer]
+
+num_deleted
+num_removed
+deleted_count
+removed_count
+
+Answer: deleted_count
+
+
+Quiz: MongoDB Schema Design
+
+What's the single most important factor in designing your application schema within MongoDB?
+
+[Single Answer]
+
+Making the design extensible.
+Making it easy to read by a human.
+Matching the data access patterns of your application.
+Keeping the data in third normal form. 
+
+Answer: Matching the data access patterns of your application.
+
+
+Quiz: Mongo Design for Blog
+
+Which data access pattern is not well supported by the blog schema?
+
+[Single Answer]
+
+Collecting the most recent blog entries for the blog home page
+Collecting all the information to display a single post
+Collecting all comments by a single author
+Providing a table of contents by tag
+
+Answer: Providing a table of contents by tag
+
+
+Quiz: Living Without Constraints
+
+What does Living Without Constraints refer to?
+Living every day like it's your last
+Saying whatever you want when you want it
+Keeping your data consistent even though MongoDB lacks foreign key constraints
+Wearing no belt
+
+Answer: Keeping your data consistent even though MongoDB lacks foreign key
+
+
+Quiz: Living Without Transactions
+
+Which of the following operations operate atomically within a single document? Check all that apply.
+
+[Multiple Answers]
+
+Update
+findAndModify
+$addToSet (within an update)
+$push within an update
+
+Answer:
+Update
+findAndModify
+$addToSet (within an update)
+$push within an update
+
+
+Quiz: One to One Relations
+
+What's a good reason you might want to keep two documents that are related to each other one-to-one in separate collections? Check all that apply.
+
+[Multiple Answers]
+
+Because you want to allow atomic update of both documents at once
+To reduce the working set size of your application
+To enforce foreign key constraints
+Because the combined size of the documents would be larger than 16MB
+
+Answer:
+To reduce the working set size of your application
+Because the combined size of the documents would be larger than 16MB
+
+
+Quiz: One to Many Relations
+
+When is it recommended to represent a one to many relationship in multiple collections?
+
+[Single Answer]
+
+Always
+Whenever the many is large
+Whenever the many is actually few
+Never
+
+Answer: Whenever the many is large
+
+
+Quiz: Trees
+
+Given the following typical document for a e-commerce category hierarchy collection called categories
+
+{
+  _id: 34,
+  name : "Snorkeling",
+  parent_id: 12,
+  ancestors: [12, 35, 90]
+}
+
+Which query will find all descendants of the snorkeling category?
+db.categories.find({ancestors:{'$in':[12,35,90]}})
+db.categories.find({parent_id: 34})
+db.categories.find({_id:{'$in':[12,35,90]}})
+db.categories.find({ancestors:34})
+
+Answer: db.categories.find({ancestors:34})
+
+
+Quiz: Storage Engines: Introduction
+
+The storage engine directly determines which of the following? Check all that apply.
+The data file format
+Format of indexes
+Architecture of a cluster
+The wire protocol for the drivers
+
+Answer:
+The data file format
+Format of indexes
+
+
+Quiz: Storage Engines: MMAPv1
+
+Which of the following statements about the MMAPv1 storage engine are true? Check all that apply.
+
+[Multiple Answers]
+
+MMAPv1 offers document-level locking
+MMAPv1 automatically allocates power-of-two-sized documents when new documents are inserted
+MMAPv1 is built on top of the mmap system call that maps files into memory
+MongoDB manages the memory used by each mapped file, deciding which parts to swap to disk
+
+Answer:
+MMAPv1 automatically allocates power-of-two-sized documents when new documents are inserted
+MMAPv1 is built on top of the mmap system call that maps files into memory
+Note:
+The correct answers are:
+MMAPv1 automatically allocates power-of-two-sized documents when new documents are inserted. 
+This is handled by the storage engine.
+MMAPv1 is built on top of the mmap system call that maps files into memory
+This is the basic idea behind why we call it MMAPv1.
+Wrong ones are:
+MMAPv1 offers document-level locking
+It has collection level locking.
+MongoDB manages the memory used by each mapped file, deciding which parts to swap to disk.
+The operating system handles this.
+
+
+Quiz: Storage Engines: WiredTiger
+
+Which of the following are features of the WiredTiger storage engine?
+
+[Multiple Answers]
+
+In-place update of documents.
+Power-of-two document padding.
+Document-level concurrency
+Compression
+Turbocharged 
+
+Answer:
+Document-level concurrency
+Compression
+
+
+Quiz: Indexes
+
+Which optimization will typically have the greatest impact on the performance of a database.
+
+[Single Anwer]
+
+Adding more memory so that the working set fits in memory.
+Adding a faster drive so that operations that hit disk will happen more quickly.
+Replacing your CPU with a faster one (say one 2x as fast)
+Adding appropriate indexes on large collections so that only a small percentage of queries need to scan the collection.
+
+Answer: Adding appropriate indexes on large collections so that only a small percentage of queries need to scan the collection.
+
+
+Quiz: Creating Indexes
+
+Please provide the mongo shell command to add an index to a collection named students, having the index key be class, student_name.
+
+Neither will go in the "-1" direction..
+
+Answer: db.students.createIndex( { class: 1, student_name: 1 } )
+
+
+Quiz: Index Creation Option, Unique
+
+Please provide the mongo shell command to create a unique index on student_id, class_id, ascending for the collection students.
+
+Answer: db.students.createIndex( { student_id: 1, class_id: 1 }, { unique: 1 } )
+
+
+Quiz: Index Creation, Background
+
+Which things are true about creating an index in the background in MongoDB. Check all that apply.
+
+[Multiple Answers]
+
+A mongod instance can only build one background index at a time per database.
+Although the database server will continue to take requests, a background index creation still blocks the mongo shell that you are using to create the index.
+Creating an index in the background takes longer than creating it in the foreground
+In Mongo 2.2 and above, indexes are created in the background by default.
+
+Answer:
+Although the database server will continue to take requests, a background index creation still blocks the mongo shell that you are using to create the index.
+Creating an index in the background takes longer than creating it in the foreground
+
+
+Quiz: Discovering (and Deleting) Indexes
+
+Which of the following is a valid way to discover indexes for a collection in mongoDB?
+
+[Single Answer]
+
+db.collection.findIndexes()
+db.collection.getIndexes()
+show indexes
+db.collection.find("indexes")
+db.getIndexes()
+
+Answer: db.collection.getIndexes()
+
+
+Quiz: Multikey Indexes
+
+Suppose we have a collection foo that has an index created as follows:
+
+db.foo.createIndex( { a:1, b:1 } )
+
+Which of the following inserts are valid to this collection?
+
+[Multiple Answers]
+
+db.foo.insert( { a : "grapes", b : "oranges" } )
+db.foo.insert( { a : "grapes", b : [ 8, 9, 10 ] } )
+db.foo.insert( { a : ["apples", "oranges" ], b : "grapes" } )
+db.foo.insert( { a : [ 1, 2, 3 ], b : [ 5, 6, 7 ] } )
+
+Answer:
+db.foo.insert( { a : "grapes", b : "oranges" } )
+db.foo.insert( { a : "grapes", b : [ 8, 9, 10 ] } )
+db.foo.insert( { a : ["apples", "oranges" ], b : "grapes" } )
+
+
+Quiz: Dot Notation and Multikey
+
+Suppose you have a collection called people in the database earth with documents of the following form:
+
+{
+	"_id" : ObjectId("551458821b87e1799edbebc4"),
+	"name" : "Eliot Horowitz",
+	"work_history" : [
+		{
+			"company" : "DoubleClick",
+			"position" : "Software Engineer"
+		},
+		{
+			"company" : "ShopWiki",
+			"position" : "Founder & CTO"
+		},
+		{
+			"company" : "MongoDB",
+			"position" : "Founder & CTO"
+		}
+	]
+}
+
+Type the command that you would issue in the Mongo shell to create an index on company, descending.
+
+Answer: db.people.createIndex( { "work_history.company": -1 } )
+
+
+Quiz: Index Creation, Sparse
+
+What are the advantages of a sparse index? Check all that apply.
+
+[Multiple Answers]
+
+The index can be used to sort much more quickly in all cases.
+The index will be smaller than it would if it were not sparse.
+Your indexes can be multikey only if they are sparse.
+You can gain greater flexibility with creating Unique indexes.
+
+Answer:
+The index will be smaller than it would if it were not sparse.
+You can gain greater flexibility with creating Unique indexes.
+Note:
+In MongoDB 2.2, the answer that you can only make one background index per database would have been correct.
+
+
+Quiz: Using Explain
+
+Which of the following are valid ways to find out which index uses a particular query? Check all that apply.
+
+[Multiple Answers]
+
+db.example.explain().find( { a : 1, b : 2 } )
+db.example.remove( { a : 1, b : 2 } ).explain()
+curs = db.example.find( { a : 1, b : 2 } ); curs.explain()
+var exp = db.example.explain(); exp.find( { a : 1, b : 2 } )
+db.example.explain().remove( { a : 1, b : 2 } )
+db.example.find( { a : 1, b : 2 } ).explain()
+
+Answer:
+db.example.explain().find( { a : 1, b : 2 } )
+curs = db.example.find( { a : 1, b : 2 } ); curs.explain()
+var exp = db.example.explain(); exp.find( { a : 1, b : 2 } )
+db.example.explain().remove( { a : 1, b : 2 } )
+db.example.find( { a : 1, b : 2 } ).explain()
+
+
+Quiz: Explain: Verbosity
+
+Given the following output from explain, what is the best description of what happened during the query?
+
+> exp = db.example.explain("executionStats")
+Explainable(test.example)
+> exp.find( { a : 7 } )
+{
+	"queryPlanner" : {
+		"plannerVersion" : 1,
+		"namespace" : "test.example",
+		"indexFilterSet" : false,
+		"parsedQuery" : {
+			"a" : {
+				"$eq" : 7
+			}
+		},
+		"winningPlan" : {
+			"stage" : "COLLSCAN",
+			"filter" : {
+				"a" : {
+					"$eq" : 7
+				}
+			},
+			"direction" : "forward"
+		},
+		"rejectedPlans" : [ ]
+	},
+	"executionStats" : {
+		"executionSuccess" : true,
+		"nReturned" : 10000,
+		"executionTimeMillis" : 619,
+		"totalKeysExamined" : 0,
+		"totalDocsExamined" : 999999,
+		"executionStages" : {
+			"stage" : "COLLSCAN",
+			"filter" : {
+				"a" : {
+					"$eq" : 7
+				}
+			},
+			"nReturned" : 10000,
+			"executionTimeMillisEstimate" : 520,
+			"works" : 1000001,
+			"advanced" : 10000,
+			"needTime" : 990000,
+			"needFetch" : 0,
+			"saveState" : 7812,
+			"restoreState" : 7812,
+			"isEOF" : 1,
+			"invalidates" : 0,
+			"direction" : "forward",
+			"docsExamined" : 999999
+		}
+	},
+	"serverInfo" : {
+		"host" : "cross-mb-air.local",
+		"port" : 27017,
+		"version" : "3.0.1",
+		"gitVersion" : "534b5a3f9d10f00cd27737fbcd951032248b5952"
+	},
+	"ok" : 1
+}
+
+[Single Answer]
+
+The query scanned 999,999 documents, returning 10,000 in 619 milliseconds.
+The query scanned 10,000 documents and return in 520 milliseconds.
+The query's explain plan is performed on a cursor.
+The query used an index called BasicCursor and returned its results in 619 milliseconds.
+
+Answer:
+The query scanned 999,999 documents, returning 10,000 in 619 milliseconds.
+
+
+Quiz: Covered Queries
+
+You would like to perform a covered query on the example collection. You have the following indexes:
+
+{ name : 1, dob : 1 }
+{ _id : 1 }
+{ hair : 1, name : 1 }
+
+Which of the following is likely to be a covered query? Check all that apply.
+
+[Multiple Answers]
+
+db.example.find( { name : { $in : ["Alfred", "Bruce" ] } }, { name : 1, hair : 1 } )
+db.example.find( { _id : 1117008 }, { _id : 0, name : 1, dob : 1 } )
+db.example.find( { name : { $in : [ "Bart", "Homer" ] } }, {_id : 0, dob : 1, name : 1} )
+db.example.find( { name : { $in : [ "Bart", "Homer" ] } }, {_id : 0, hair : 1, name : 1} )
+
+Answer: db.example.find( { name : { $in : [ "Bart", "Homer" ] } }, {_id : 0, dob : 1, name : 1} )
+
+
+Quiz: When is an Index Used?
+
+Given collection foo with the following index:
+
+db.foo.createIndex( { a : 1, b : 1, c : 1 } )
+
+Which of the following queries will use the index?
+
+[Multiple Answers]
+
+db.foo.find( { c : 1 } ).sort( { a : 1, b : 1 } )
+db.foo.find({c:1}).sort({a:-1, b:1})
+db.foo.find( { b : 3, c : 4 } )
+db.foo.find( { a : 3 } ) 
+
+Answer: 
+db.foo.find( { c : 1 } ).sort( { a : 1, b : 1 } )
+db.foo.find( { a : 3 } )
+
+
+Quiz: How Large is Your Index?
+
+Is it more important that your index or your data fit into memory?
+
+[Single Answer]
+
+Index
+Data
+
+Answer: Index
+
+
+Quiz: Number of Index Entries
+
+Let's say you update a document with a key called tags and that update causes the document to need to get moved on disk. Assume you are using the MMAPv1 storage engine. If the document has 100 tags in it, and if the tags array is indexed with a multikey index, how many index points need to be updated in the index to accommodate the move? Put just the number below.
+
+Answer: 100
+
+
+Quiz: Geospatial Indexes
+
+Suppose you have a 2D geospatial index defined on the key location in the collection places. Write a query that will find the closest three places (the closest three documents) to the location 74, 140.
+
+Answer:
+db.places.find( { location: { $near: [74, 140] } } ).limit(3)
+
+
+Quiz: Geospatial Spherical
+
+What is the query that will query a collection named "stores" to return the stores that are within 1,000,000 meters of the location latitude=39, longitude=-130? Type the query in the box below. Assume the stores collection has a 2dsphere index on "loc" and please use the "$near" operator. Each store record looks like this:
+
+{ "_id" : { "$oid" : "535471aaf28b4d8ee1e1c86f" }, "store_id" : 8, "loc" : { "type" : "Point", "coordinates" : [ -37.47891236119904, 4.488667018711567 ] } }
+
+Answer: 
+db.stores.find({loc:{ 
+    $near: { $geometry: { type: "Point", coordinates: [-130, 39 ] }, 
+    $maxDistance: 1000000
+}}})
+
+
+Quiz: Text Indexes
+
+You create a text index on the "title" field of the movies collection, and then perform the following text search:
+
+> db.movies.find( { $text : { $search : "Big Lebowski" } } )
+
+Which of the following documents will be returned, assuming they are in the movies collection? Check all that apply.
+
+[Multiple Answers]
+
+{ "title" : "The Big Lebowski" , star: "Jeff Bridges" }
+{ "title" : "Big" , star : "Tom Hanks" }
+{ "title" : "Big Fish" , star: "Ewan McGregor" } 
+
+Answer:
+{ "title" : "The Big Lebowski" , star: "Jeff Bridges" }
+{ "title" : "Big" , star : "Tom Hanks" }
+{ "title" : "Big Fish" , star: "Ewan McGregor" }
+
+
+Quiz: Efficiency of Index Use
+
+In general, based on the preceding lecture, what is the primary factor that determines how efficiently an index can be used?
+
+[Single Answer]
+
+The number of fields in a compound index
+Whether we are able to sort using the index
+The selectivity of the index
+
+Answer: The selectivity of the index
+Note:
+Selectivity is the primary factor that determines how efficiently an index can be used. Ideally, the index enables us to select only those records required to complete the result set, without the need to scan a substantially larger number of index keys (or documents) in order to complete the query. Selectivity determines how many records any subsequent operations must work with. Fewer records means less execution time.
+
+
+Quiz: Efficiency of Index Use Example
+
+In general, which of the following rules of thumb should you keep in mind when building compound indexes? Check all that apply. For this question, use the following definitions:
+
+[Multiple Answers]
+
+equality field: field on which queries will perform an equality test
+sort field: field on which queries will specify a sort
+range field: field on which queries perform a range test
+Sort fields before equality fields
+Equality fields before range fields
+Sort fields before range fields
+Equality fields before sort fields
+Range fields before equality fields 
+
+Answer:
+Equality fields before range fields
+Sort fields before range fields
+Equality fields before sort fields
+
+
+Quiz: Profiling
+
+Write the query to look in the system profile collection for all queries that took longer than one second, ordered by timestamp descending.
+
+Answer: db.system.profile.find( { millis: {$gt: 1000} } ).sort( { ts: -1 } )
+
+
+Quiz: Mongostat
+
+Which of the following statements about mongostat output are true? Check all that apply.
+
+[Multiple Answers]
+
+the mmap column field appears for all storage engines
+The getmore column concerns the number of requests per time interval to get additional data from a cursor
+only the wiredTiger storage engine reports the resident memory size of the database
+the faults column appears only in the mmapv1 output
+by default, mongostat provides information in 100ms increments 
+
+Answer:
+The getmore column concerns the number of requests per time interval to get additional data from a cursor
+the faults column appears only in the mmapv1 output
+
+
+Quiz: Simple Aggregation Example
+
+Write the aggregation query that will find the number of products by category of a collection that has the form:
+
+{
+	"_id" : ObjectId("50b1aa983b3d0043b51b2c52"),
+	"name" : "Nexus 7",
+	"category" : "Tablets",
+	"manufacturer" : "Google",
+	"price" : 199
+}
+
+Have the resulting key be called "num_products," as in the video lesson. Hint, you just need to change which key you are aggregating on relative to the examples shown in the lesson.
+
+Please double quote all keys to make it easier to check your result.
+
+Answer:
+db.products.aggregate([{$group:{ 
+_id: "$category",
+num_products: { $sum: 1 }  
+}}])
+
+
+Quiz: The Aggregation Pipeline
+
+Which of the following are stages in the aggregation pipeline. Check all that apply.
+
+[Multiple Answers]
+
+Match
+Transpose
+Group
+Skip
+Limit
+Sort
+Project
+Unwind
+
+Answer:
+Match
+Group
+Skip
+Limit
+Sort
+Project
+Unwind
+
+
+Quiz: Simple Example Expanded
+
+If you have the following collection of stuff:
+
+> db.stuff.find()
+{ "_id" : ObjectId("50b26f9d80a78af03b5163c8"), "a" : 1, "b" : 1, "c" : 1 }
+{ "_id" : ObjectId("50b26fb480a78af03b5163c9"), "a" : 2, "b" : 2, "c" : 1 }
+{ "_id" : ObjectId("50b26fbf80a78af03b5163ca"), "a" : 3, "b" : 3, "c" : 1 }
+{ "_id" : ObjectId("50b26fcd80a78af03b5163cb"), "a" : 3, "b" : 3, "c" : 2 }
+{ "_id" : ObjectId("50b26fd380a78af03b5163cc"), "a" : 3, "b" : 5, "c" : 3 }
+
+and you perform the following aggregation:
+
+db.stuff.aggregate([{$group:{_id:'$c'}}])
+
+How many documents will be in the result set from aggregate?
+
+[Single Answer]
+
+1
+2
+3
+4
+5 
+
+Answer: 3
+
+
+Quiz: Compound Grouping
+
+Given the following collection:
+
+> db.stuff.find()
+{ "_id" : ObjectId("50b26f9d80a78af03b5163c8"), "a" : 1, "b" : 1, "c" : 1 }
+{ "_id" : ObjectId("50b26fb480a78af03b5163c9"), "a" : 2, "b" : 2, "c" : 1 }
+{ "_id" : ObjectId("50b26fbf80a78af03b5163ca"), "a" : 3, "b" : 3, "c" : 1 }
+{ "_id" : ObjectId("50b26fcd80a78af03b5163cb"), "a" : 3, "b" : 3, "c" : 2 }
+{ "_id" : ObjectId("50b26fd380a78af03b5163cc"), "a" : 3, "b" : 5, "c" : 3 }
+{ "_id" : ObjectId("50b27f7080a78af03b5163cd"), "a" : 3, "b" : 3, "c" : 2 }
+
+And the following aggregation query:
+
+db.stuff.aggregate([{$group:
+		     {_id:
+		      {'moe':'$a', 
+		       'larry':'$b',
+		       'curly':'$c'
+		      }
+		     }
+		    }])
+
+How many documents will be in the result set?
+
+[Single Answer]
+
+2
+3
+4
+5
+6
+
+Answer: 5
+
+
+Quiz: Using $sum
+
+This problem, and some after it, use the zips collection from media.mongodb.org/zips.json. You don't need to download it, but you can if you want, allowing you to test your queries within MongoDB. You can import, once downloaded, using mongoimport
+
+Suppose we have a collection of populations by postal code. The postal codes in are in the _id field, and are therefore unique. Documents look like this:
+
+{
+	"city" : "CLANTON",
+	"loc" : [
+		-86.642472,
+		32.835532
+	],
+	"pop" : 13990,
+	"state" : "AL",
+	"_id" : "35045"
+}
+
+For students outside the United States, there are 50 non-overlapping states in the US with two letter abbreviations such as NY and CA. In addition, the capital of Washington is within an area designated the District of Columbia, and carries the abbreviation DC. For purposes of the mail, the postal service considers DC to be a "state." So in this dataset, there are 51 states. We call postal codes "zip codes." A city may overlap several zip codes.
+
+Write an aggregation query to sum up the population (pop) by state and put the result in a field called population. Don't use a compound _id key (you don't need one and the quiz checker is not expecting one). The collection name is zips. so something along the lines of db.zips.aggregate...
+
+
+Answer:
+db.zips.aggregate([{$group:{   
+    _id: "$state",
+    population: { $sum: "$pop" }
+}}])
+
+
+Quiz: Using $avg
+
+Hands on: This problem uses a subset of the same data as we referenced in the $sum quiz, but only a subset, so the answers you get in this web shell will be different than those you would find using the full data set. They also won't correspond to the actual averages of the populations in the zip codes of those states.
+
+Given population data by zip code (postal code), write an aggregation expression to calculate the average population of a zip code (postal code) by state. This dataset only contains four states, and only 50 zip codes per state, because some browsers have trouble working with large data sets.
+
+Which of the following represents the average populations that you find?
+
+This is a web shell problem, so please interact with the web shell as you would with a shell in a terminal window on your computer. Hit enter after each command. You will not need (or be able to) change databases, and will be working with the zips collection.
+
+
+[Multiple Answers]
+
+{ "NY": 13226.48, "NJ": 16949.9, "CT": 9705.34, "CA": 19067.72 }
+{ "NY": 16949.9, "NJ": 9705.34, "CT": 13226.48, "CA": 19067.72 }
+{ "NY": 9705.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 }
+{ "NY": 19067.72, "NJ": 16949.9, "CT": 13226.48, "CA": 9705.34 }
+{ "NY": 10000.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 } 
+
+Answer: { "NY": 9705.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 } 
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.zips.aggregate([{$group:{
+      _id: "$state",
+      avg: { $avg: "$pop" }
+  }}])
+{ "_id" : "NY", "avg" : 9705.34 }
+{ "_id" : "NJ", "avg" : 16949.9 }
+{ "_id" : "CT", "avg" : 13226.48 }
+{ "_id" : "CA", "avg" : 19067.72 }
+
+
+Quiz: Using $addToSet
+
+This problem uses the same zip code data as the using $sum quiz. See that quiz for a longer explanation.
+
+Suppose we population by zip code (postal code) data that looks like this (putting in a query for the zip codes in Palo Alto)
+
+> db.zips.find({state:"CA",city:"PALO ALTO"})
+{ "city" : "PALO ALTO", "loc" : [ -122.149685, 37.444324 ], "pop" : 15965, "state" : "CA", "_id" : "94301" }
+{ "city" : "PALO ALTO", "loc" : [ -122.184234, 37.433424 ], "pop" : 1835, "state" : "CA", "_id" : "94304" }
+{ "city" : "PALO ALTO", "loc" : [ -122.127375, 37.418009 ], "pop" : 24309, "state" : "CA", "_id" : "94306" }
+
+Write an aggregation query that will return the postal codes that cover each city. The results should look like this: 
+
+{
+	"_id" : "CENTREVILLE",
+	"postal_codes" : [
+		"22020",
+		"49032",
+		"39631",
+		"21617",
+		"35042"
+	]
+},
+
+Again the collection will be called zips. You can deduce what your result column names should be from the above output. (ignore the issue that a city may have the same name in two different states and is in fact two different cities in that case - for eg Springfield, MO and Springfield, MA)
+
+Answer:
+db.zips.aggregate([{$group:{
+    _id: "$city",
+    postal_codes: { $addToSet: "$_id" }
+}}])
+
+
+Quiz: Using $push
+
+Given the zipcode dataset (explained more fully in the using $sum quiz) that has documents that look like this:
+
+> db.zips.findOne()
+{
+	"city" : "ACMAR",
+	"loc" : [
+		-86.51557,
+		33.584132
+	],
+	"pop" : 6055,
+	"state" : "AL",
+	"_id" : "35004"
+}
+
+would you expect the following two queries to produce the same result or different results?
+
+db.zips.aggregate([{"$group":{"_id":"$city", "postal_codes":{"$push":"$_id"}}}])
+
+db.zips.aggregate([{"$group":{"_id":"$city", "postal_codes":{"$addToSet":"$_id"}}}])
+
+Same result
+Different Result
+
+Answer: Same result
+
+
+Quiz: Using $max and $min
+
+Again thinking about the zip code database, write an aggregation query that will return the population of the postal code in each state with the highest population. It should return output that looks like this:
+
+{
+    "_id" : "WI",
+    "pop" : 57187
+},
+{
+    "_id" : "WV",
+    "pop" : 70185
+},
+..and so on
+
+Once again, the collection is named zips.
+
+Answer:
+db.zips.aggregate([{$group:{
+    _id: "$state", 
+    pop: {$max: "$pop"}
+}}])
+
+
+Quiz: Double $group stages
+
+Given the following collection:
+
+> db.fun.find()
+{ "_id" : 0, "a" : 0, "b" : 0, "c" : 21 }
+{ "_id" : 1, "a" : 0, "b" : 0, "c" : 54 }
+{ "_id" : 2, "a" : 0, "b" : 1, "c" : 52 }
+{ "_id" : 3, "a" : 0, "b" : 1, "c" : 17 }
+{ "_id" : 4, "a" : 1, "b" : 0, "c" : 22 }
+{ "_id" : 5, "a" : 1, "b" : 0, "c" : 5 }
+{ "_id" : 6, "a" : 1, "b" : 1, "c" : 87 }
+{ "_id" : 7, "a" : 1, "b" : 1, "c" : 97 }
+
+And the following aggregation query 
+
+db.fun.aggregate([{$group:{_id:{a:"$a", b:"$b"}, c:{$max:"$c"}}}, {$group:{_id:"$_id.a", c:{$min:"$c"}}}])
+
+What values are returned?
+
+[Single  Answer]
+
+17 and 54
+97 and 21
+54 and 5
+52 and 22 
+
+Answer: 52 and 22
+
+
+Quiz: Using $project
+
+Write an aggregation query with a single projection stage that will transform the documents in the zips collection from this:
+
+{
+	"city" : "ACMAR",
+	"loc" : [
+		-86.51557,
+		33.584132
+	],
+	"pop" : 6055,
+	"state" : "AL",
+	"_id" : "35004"
+}
+
+to documents in the result set that look like this:
+
+{
+	"city" : "acmar",
+	"pop" : 6055,
+	"state" : "AL",
+	"zip" : "35004"
+}
+
+So that the checker works properly, please specify what you want to do with the _id key as the first item. The other items should be ordered as above. As before, assume the collection is called zips. You are running only the projection part of the pipeline for this quiz.
+
+A few facts not mentioned in the lesson that you will need to know to get this right: If you don't mention a key, it is not included, except for _id, which must be explicitly suppressed. If you want to include a key exactly as it is named in the source document, you just write key:1, where key is the name of the key. You will probably get more out of this quiz is you download the zips.json file and practice in the shell. zips.json link is in the using $sum quiz
+
+
+Answer:
+db.zips.aggregate([{$project:{
+    city: { $toLower: "$city" }, pop: 1, state: 1, zip: "$_id", _id: 0
+}}])
+
+
+Quiz: Using $match
+
+Again, thinking about the zipcode collection, write an aggregation query with a single match phase that filters for zipcodes with greater than 100,000 people. You may need to look up the use of the $gt operator in the MongoDB docs [http://docs.mongodb.org/manual/reference/operator/?_ga=1.142770357.1409379590.1444557852].
+
+Answer:
+db.zips.aggregate([{$match:{
+    pop: { $gt: 100000 }
+}}])
+
+
+Quiz: Using $text
+
+Which of the following statements are true about using a $text operator in the aggregation pipeline
+
+[Multiple Answers]
+
+$text is only allowed in the $match stage of the aggregation pipeline
+$text is only allowed within a $match that is the first stage of the aggregation pipeline
+$text can be used without an underlying full text search index when used in conjunction with aggregation
+the results of $text are always sorted according by search match quality
+
+Answer:
+$text is only allowed in the $match stage of the aggregation pipeline
+$text is only allowed within a $match that is the first stage of the aggregation pipeline
+
+
+Quiz: Using $limit and $skip
+
+Suppose you change the order of skip and limit in the query shown in the lesson, to look like this:
+
+db.zips.aggregate([
+    {$match:
+     {
+	 state:"NY"
+     }
+    },
+    {$group:
+     {
+	 _id: "$city",
+	 population: {$sum:"$pop"},
+     }
+    },
+    {$project:
+     {
+	 _id: 0,
+	 city: "$_id",
+	 population: 1,
+     }
+    },
+    {$sort:
+     {
+	 population:-1
+     }
+    },
+    {$limit: 5},
+    {$skip: 10} 
+])
+
+How many documents do you think will be in the result set?
+
+[Single Answer]
+
+10
+5
+0
+100
+
+Answer: 0
+
+
+Quiz: Revisiting $first and $last
+
+Given the following collection:
+
+> db.fun.find()
+{ "_id" : 0, "a" : 0, "b" : 0, "c" : 21 }
+{ "_id" : 1, "a" : 0, "b" : 0, "c" : 54 }
+{ "_id" : 2, "a" : 0, "b" : 1, "c" : 52 }
+{ "_id" : 3, "a" : 0, "b" : 1, "c" : 17 }
+{ "_id" : 4, "a" : 1, "b" : 0, "c" : 22 }
+{ "_id" : 5, "a" : 1, "b" : 0, "c" : 5 }
+{ "_id" : 6, "a" : 1, "b" : 1, "c" : 87 }
+{ "_id" : 7, "a" : 1, "b" : 1, "c" : 97 }
+
+What would be the value of c in the result from this aggregation query
+
+db.fun.aggregate([
+    {$match:{a:0}},
+    {$sort:{c:-1}}, 
+    {$group:{_id:"$a", c:{$first:"$c"}}}
+])
+
+[Single Answer]
+
+21
+54
+97
+5
+
+Answer: 54
+
+
+Quiz: Using $unwind
+
+Suppose you have the following collection:
+
+db.people.find()
+{ "_id" : "Will", "likes" : [ "physics", "MongoDB", "indexes" ] }
+{ "_id" : "Dwight", "likes" : [ "starting companies", "restaurants", "MongoDB" ] }
+
+And you unwind the "likes" array of each document. How many documents will you wind up with?
+
+[Single Answer]
+
+2
+4
+6
+9
+
+Answer: 6
+
+
+Quiz: $unwind example
+
+Which grouping operator will enable to you to reverse the effects of an unwind?
+
+[Single Answer]
+
+$sum
+$addToSet
+$push
+$first 
+
+Answer: $push
+
+
+Quiz: Double $unwind
+
+Can you reverse the effects of a double unwind (2 unwinds in a row) in our inventory collection (shown in the lesson ) with the $push operator?
+
+[Single Answer]
+
+Yes
+No 
+
+Answer: Yes
+
+
+Quiz: Aggregation Options
+
+Which of the following aggregation expressions properly allows disk use when performing aggregation?
+db.zips.aggregate( [ { $group : { _id : "$state" , population : { $sum : "$pop" } } } ] , { $allowDiskUse : true } )
+db.zips.aggregate( [ { $group : { _id : "$state" , population : { $sum : "$pop" } } } ] , { allowDiskUse : true } )
+db.zips.aggregate( { $group : { _id : "$state" , population : { $sum : "$pop" } } } , { allowDiskUse : true } )
+db.zips.aggregate( { $group : { _id : "$state" , population : { $sum : "$pop" } } } , { $allowDiskUse : true } ) 
+
+Answer: db.zips.aggregate( [ { $group : { _id : "$state" , population : { $sum : "$pop" } } } ] , { allowDiskUse : true } )
+
+
+Quiz: Python and Aggregation Results
+
+Which of the following statements about aggregation results are true? Check all that apply.
+
+[Multiple Answers]
+
+In mongoDB 2.4, by default, in the shell, the aggregate method returns a cursor.
+In mongoDB 2.6, by default, in the shell, the aggregate method returns a cursor.
+In mongoDB 2.4, by default, PyMongo's aggregate method returns a single document.
+In mongoDB 2.6, by default, PyMongo's aggregate method returns a single document. 
+
+Answer:
+In mongoDB 2.6, by default, in the shell, the aggregate method returns a cursor.
+In mongoDB 2.4, by default, PyMongo's aggregate method returns a single document.
+In mongoDB 2.6, by default, PyMongo's aggregate method returns a single document.
+
+
+Quiz: Write Concern
+
+Provided you assume that the disk is persistent, what are the w and j settings required to guarantee that an insert or update has been written all the way to disk.
+
+w=0, j=0
+w=1, j=1
+w=2, j=0
+w=1, j=0
+
+Answer: w=1, j=1
+
+
+Quiz: Network Errors
+
+What are the reasons why an application may receive an error back even if the write was successful. Check all that apply.
+
+[Multiple Answers]
+
+The network TCP connection between the application and the server was reset after the server received a write but before a response could be sent.
+The MongoDB server terminates between receiving the write and responding to it.
+The network fails between the time of the write and the time the client receives a response to the write.
+The write violates a primary key constraint on the collection.
+
+Answer:
+The network TCP connection between the application and the server was reset after the server received a write but before a response could be sent.
+The MongoDB server terminates between receiving the write and responding to it.
+The network fails between the time of the write and the time the client receives a response to the write.
+
+
+Quiz: Introduction to Replication
+
+What is the minimum original number of nodes needed to assure the election of a new Primary if a node goes down?
+
+[Single Answer]
+
+1
+2
+3
+5
+
+Answer: 3
+
+
+Quiz: Replica Set Elections
+
+Which types of nodes can participate in elections of a new primary?
+
+[Multiple Answers]
+
+Regular replica set members
+Hidden Members
+Arbiters
+Lawyers
+
+Answer:
+Regular replica set members
+Hidden Members
+Arbiters
+
+
+Quiz: Write Consistency
+
+During the time when failover is occurring, can writes successfully complete?
+
+[Single Answer]
+
+Yes
+No
+
+Answer: No
+
+
+Quiz: Creating a Replica Set
+
+Which command, when issued from the mongo shell, will allow you to read from a secondary?
+
+[Single Answer]
+
+db.isMaster()
+db.adminCommand({'readPreference':'Secondary"})
+rs.setStatus("Primary")
+rs.slaveOk()
+
+Answer: rs.slaveOk()
+
+
+Quiz: Replica Set Internals
+
+Which of the following statements are true about replication. Check all that apply.
+
+[Multiple Answers]
+
+You can write to a primary or secondary node and the database will forward the write to the primary.
+Replication supports mixed-mode storage engines. For examples, a mmapv1 primary and wiredTiger secondary.
+A copy of the oplog is kept on both the primary and secondary servers.
+You can read from a primary or secondary, by default.
+The oplog is implemented as a capped collection.
+
+Answer:
+Replication supports mixed-mode storage engines. For examples, a mmapv1 primary and wiredTiger secondary.
+A copy of the oplog is kept on both the primary and secondary servers.
+The oplog is implemented as a capped collection.
+
+
+Quiz: Failover and Rollback
+
+What happens if a node comes back up as a secondary after a period of being offline and the oplog has looped on the primary?
+
+[Single Answer]
+
+The entire dataset will be copied from the primary
+A rollback will occur
+The new node stays offline (does not re-join the replica set)
+The new node begins to calculate Pi to a large number of decimal places
+
+Answer: The entire dataset will be copied from the primary
+
+
+Quiz: Connecting to a Replica Set from Pymongo
+
+If you leave a replica set node out of the seedlist within the driver, what will happen?
+
+[Single Answer]
+
+The missing node will not be used by the application.
+The missing node will be discovered as long as you list at least one valid node.
+This missing node will be used for reads, but not for writes.
+The missing node will be used for writes, but not for reads.
+
+Answer: The missing node will be discovered as long as you list at least one valid node.
+
+
+Quiz: What Happens When Failover Occurs (Python)
+
+What will happen if the following statement is executed in Python during a primary election?
+db.test.insert_one({'x':1})
+
+[Single Answer]
+
+Insert will fail, program will continue
+Insert will succeed to new primary, because failover is automatic within MongoDB.
+Insert will fail, program will terminate
+Insert will succeed, program will terminate
+
+Answer: Insert will fail, program will terminate
+
+
+Quiz: Detecting Failover (Python)
+
+If you catch exceptions during failover, are you guaranteed to have your writes succeed?
+
+[Single Answer]
+
+Yes
+No
+
+Answer: No
+
+
+Quiz: Proper Handling of Failover for Inserts (Python)
+
+Assuming a setup similar to that shown in the lesson, Is this python code guaranteed to get the write done if failover occurs:
+
+     doc = {'_id':1}
+     for retry in range (3):
+        try:
+            things.insert_one(doc)
+            time.sleep(.1)
+            break
+        except pymongo.errors.AutoReconnect as e:
+            print "Exception ",type(e), e
+            print "Retrying.."
+            time.sleep(5)
+        except pymongo.errors.DuplicateKeyError as e:
+            break
+
+[Single Answer]
+
+Yes
+No
+
+Answer: No
+
+
+Quiz: Java Driver: Representing Documents
+
+How would you create a document using the Java driver with this JSON structure:
+
+{
+   "_id" : "user1",
+   "interests" : [ "basketball", "drumming"]
+}
+
+new HashMap().put("_id", "user1").put(Arrays.asList("basketball", "drumming"));
+new Document("_id", "user1").append("interests", "basketball", "drumming");
+new DBObject("_id", "user1").append("interests", Arrays.asList("basketball", "drumming"));
+new Document("_id", "user1").append("interests", Arrays.asList("basketball", "drumming"));
+
+
+Answer: new Document("_id", "user1").append("interests", Arrays.asList("basketball", "drumming"));
+
+
+Quiz: Java Driver: Insert
+
+Do you expect the second insert below to succeed?
+
+        MongoClient client = new MongoClient();
+        MongoDatabase database = client.getDatabase("school");
+        MongoCollection<Document> people = database.getCollection("people");
+
+        Document doc = new Document("name", "Andrew Erlichson").append("company", "10gen");
+
+         people.insertOne(doc);      // first insert
+         doc.remove("_id");          // remove the _id key
+         people.insertOne(doc);      // second insert
+
+[Single Answer]
+
+No because the remove call will remove the entire document.
+Yes, because the driver always adds a unique _id field on insert.
+No, because the _id will be a duplicate in the collection.
+Yes, because the remove call will remove the _id field added by the driver in the first insert. 
+
+Answer: Yes, because the remove call will remove the _id field added by the driver in the first insert. 
+
+
+Quiz: Java Driver: Find, FindOne, and Count
+
+In the following code snippet:
+
+MongoClient client = new MongoClient();
+MongoDatabase database = client.getDatabase("school");
+MongoCollection@<Document> people = database.getCollection("people");
+Document doc;
+// xxxx
+System.out.println(doc);
+
+Please enter the simplest one line of Java code that would be needed in place of // xxxx to make it print one document from the people collection.
+
+Answer: doc = people.find().first();
+
+
+Quiz: Java Driver: Querying with a filter
+
+Given a collection named "scores" of documents with two fields -- type and score -- what is the correct line of code to find all documents where type is "quiz" and score is greater than 20 and less than 90. Select all that apply.
+
+[Multiple Answers]
+
+scores.find(new Document("score", new Document("$gt", 20).append("$lt", 90))
+scores.find(new Document("type", "quiz").append("score", new Document("$gt", 20).append("$lt", 90)))
+scores.find(new Document("type", "quiz").append("$gt", new Document("score", 20)).append("$lt", new Document("score", 90)))
+scores.find(Filters.and(Filters.eq("type", "quiz"), Filters.gt("score", 20), Filters.lt("score", 90)))
+
+Answer: 
+scores.find(new Document("type", "quiz").append("score", new Document("$gt", 20).append("$lt", 90)))
+scores.find(Filters.and(Filters.eq("type", "quiz"), Filters.gt("score", 20), Filters.lt("score", 90)))
+
+
+Quiz: Java Driver: Querying with a Projection
+
+Given a variable named "students" of type MongoCollection<Document>, which of the following lines of code could be used to find all documents in the collection, retrieving only the "phoneNumber" field.
+
+[Multiple Answers]
+
+students.find(new Document("phoneNumber", 1).append("_id", 0))
+students.find().projection(Projections.fields(Projections.include("phoneNumber"), Projections.excludeId())
+students.find(new Document("phoneNumber", 1))
+students.find().projection(new Document("phoneNumber", 1).append("_id", 0))
+
+Answer: 
+students.find().projection(Projections.fields(Projections.include("phoneNumber"), Projections.excludeId())
+students.find().projection(new Document("phoneNumber", 1).append("_id", 0))
+
+
+Quiz: Java Driver: Querying with Sort, Skip and Limit
+
+Supposed you had the following documents in a collection named things.
+
+{ "_id" : 0, "value" : 10 }
+{ "_id" : 1, "value" : 5 }
+{ "_id" : 2, "value" : 7 }
+{ "_id" : 3, "value" : 20 }
+
+If you performed the following query in the Java driver:
+
+    collection.find().sort(new Document("value", -1)).skip(2).limit(1)
+
+which document would be returned?
+
+[Single Answer]
+
+The document with _id=0
+The document with _id=1
+The document with _id=2
+The document with _id=3
+
+Answer: The document with _id=2
+
+
+Quiz: Java Driver: Update and Replace
+
+In the following code fragment, what is the Java expression in place of xxxx that will set the field "examiner" to the value "Jones" for the document with _id of 1. Please use the $set operator.
+
+# update using $set
+scores.updateOne(new Document("_id", 1), xxxx);
+
+Answer: new Document("$set", new Document("examiner", "Jones"))
+
+
+Homework: Homework 4.1
+
+Suppose you have a collection with the following indexes:
+
+> db.products.getIndexes()
+[
+	{
+		"v" : 1,
+		"key" : {
+			"_id" : 1
+		},
+		"ns" : "store.products",
+		"name" : "_id_"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"sku" : 1
+		},
+                "unique" : true,
+		"ns" : "store.products",
+		"name" : "sku_1"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"price" : -1
+		},
+		"ns" : "store.products",
+		"name" : "price_-1"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"description" : 1
+		},
+		"ns" : "store.products",
+		"name" : "description_1"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"category" : 1,
+			"brand" : 1
+		},
+		"ns" : "store.products",
+		"name" : "category_1_brand_1"
+	},
+	{
+		"v" : 1,
+		"key" : {
+			"reviews.author" : 1
+		},
+		"ns" : "store.products",
+		"name" : "reviews.author_1"
+	}
+
+Which of the following queries can utilize at least one index to find all matching documents or to sort? Check all that apply.
+
+[Multiple Answers]
+
+db.products.find( { $and : [ { price : { $gt : 30 } },{ price : { $lt : 50 } } ] } ).sort( { brand : 1 } )
+db.products.find( { 'brand' : "GE" } )
+db.products.find( { brand : 'GE' } ).sort( { category : 1, brand : -1 } )
+db.products.find( { 'brand' : "GE" } ).sort( { price : 1 } )
+
+Answer:
+db.products.find( { $and : [ { price : { $gt : 30 } },{ price : { $lt : 50 } } ] } ).sort( { brand : 1 } )
+db.products.find( { 'brand' : "GE" } ).sort( { price : 1 } )
+
+
+Quiz: Simple Aggregation Example
+
+Write the aggregation query that will find the number of products by category of a collection that has the form:
+
+{
+	"_id" : ObjectId("50b1aa983b3d0043b51b2c52"),
+	"name" : "Nexus 7",
+	"category" : "Tablets",
+	"manufacturer" : "Google",
+	"price" : 199
+}
+
+Have the resulting key be called "num_products," as in the video lesson. Hint, you just need to change which key you are aggregating on relative to the examples shown in the lesson.
+
+Please double quote all keys to make it easier to check your result.
+
+Answer:
+db.products.aggregate([
+    { $group: { _id: "$category", "num_products": { $sum: 1 } } }
+])
+
+
+Quiz: The Aggregation Pipeline
+
+Which of the following are stages in the aggregation pipeline. Check all that apply.
+
+[Multiple Answers]
+
+Match
+Transpose
+Group
+Skip
+Limit
+Sort
+Project
+Unwind
+
+Answer:
+Match
+Group
+Skip
+Limit
+Sort
+Project
+Unwind
+
+
+Quiz: Simple Example Expanded
+
+If you have the following collection of stuff:
+
+> db.stuff.find()
+{ "_id" : ObjectId("50b26f9d80a78af03b5163c8"), "a" : 1, "b" : 1, "c" : 1 }
+{ "_id" : ObjectId("50b26fb480a78af03b5163c9"), "a" : 2, "b" : 2, "c" : 1 }
+{ "_id" : ObjectId("50b26fbf80a78af03b5163ca"), "a" : 3, "b" : 3, "c" : 1 }
+{ "_id" : ObjectId("50b26fcd80a78af03b5163cb"), "a" : 3, "b" : 3, "c" : 2 }
+{ "_id" : ObjectId("50b26fd380a78af03b5163cc"), "a" : 3, "b" : 5, "c" : 3 }
+
+and you perform the following aggregation:
+
+db.stuff.aggregate([{$group:{_id:'$c'}}])
+
+How many documents will be in the result set from aggregate?
+
+[Single Answer]
+
+1
+2
+3
+4
+5
+
+Answer: 3
+
+
+Quiz: Compound Grouping
+
+Given the following collection:
+
+> db.stuff.find()
+{ "_id" : ObjectId("50b26f9d80a78af03b5163c8"), "a" : 1, "b" : 1, "c" : 1 }
+{ "_id" : ObjectId("50b26fb480a78af03b5163c9"), "a" : 2, "b" : 2, "c" : 1 }
+{ "_id" : ObjectId("50b26fbf80a78af03b5163ca"), "a" : 3, "b" : 3, "c" : 1 }
+{ "_id" : ObjectId("50b26fcd80a78af03b5163cb"), "a" : 3, "b" : 3, "c" : 2 }
+{ "_id" : ObjectId("50b26fd380a78af03b5163cc"), "a" : 3, "b" : 5, "c" : 3 }
+{ "_id" : ObjectId("50b27f7080a78af03b5163cd"), "a" : 3, "b" : 3, "c" : 2 }
+
+And the following aggregation query:
+
+db.stuff.aggregate([{$group:
+		     {_id:
+		      {'moe':'$a', 
+		       'larry':'$b',
+		       'curly':'$c'
+		      }
+		     }
+		    }])
+
+How many documents will be in the result set?
+
+[Single Answer]
+
+2
+3
+4
+5
+6
+
+Answer: 5
+
+
+Quiz: Aggregation Expressions
+
+Which of the following aggregation expressions must be used in conjunction with a sort to make any sense?
+
+[Multiple Answers]
+
+$addToSet
+$first
+$last
+$max
+$min
+$avg
+$push
+$sum
+
+Answer:
+$first
+$last
+
+
+Quiz: Using $sum
+
+This problem, and some after it, use the zips collection from media.mongodb.org/zips.json. You don't need to download it, but you can if you want, allowing you to test your queries within MongoDB. You can import, once downloaded, using mongoimport
+
+Suppose we have a collection of populations by postal code. The postal codes in are in the _id field, and are therefore unique. Documents look like this:
+
+{
+	"city" : "CLANTON",
+	"loc" : [
+		-86.642472,
+		32.835532
+	],
+	"pop" : 13990,
+	"state" : "AL",
+	"_id" : "35045"
+}
+
+For students outside the United States, there are 50 non-overlapping states in the US with two letter abbreviations such as NY and CA. In addition, the capital of Washington is within an area designated the District of Columbia, and carries the abbreviation DC. For purposes of the mail, the postal service considers DC to be a "state." So in this dataset, there are 51 states. We call postal codes "zip codes." A city may overlap several zip codes.
+
+Write an aggregation query to sum up the population (pop) by state and put the result in a field called population. Don't use a compound _id key (you don't need one and the quiz checker is not expecting one). The collection name is zips. so something along the lines of db.zips.aggregate...
+
+Answer:
+db.zips.aggregate([
+    {$group: { _id: "$state", population: { $sum: "$pop" } }  }
+])
+
+
+Quiz: Using $avg
+
+Hands on: This problem uses a subset of the same data as we referenced in the $sum quiz, but only a subset, so the answers you get in this web shell will be different than those you would find using the full data set. They also won't correspond to the actual averages of the populations in the zip codes of those states.
+
+Given population data by zip code (postal code), write an aggregation expression to calculate the average population of a zip code (postal code) by state. This dataset only contains four states, and only 50 zip codes per state, because some browsers have trouble working with large data sets.
+
+Which of the following represents the average populations that you find?
+
+This is a web shell problem, so please interact with the web shell as you would with a shell in a terminal window on your computer. Hit enter after each command. You will not need (or be able to) change databases, and will be working with the zips collection.
+
+[Single Answer]
+
+{ "NY": 13226.48, "NJ": 16949.9, "CT": 9705.34, "CA": 19067.72 }
+{ "NY": 16949.9, "NJ": 9705.34, "CT": 13226.48, "CA": 19067.72 }
+{ "NY": 9705.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 }
+{ "NY": 19067.72, "NJ": 16949.9, "CT": 13226.48, "CA": 9705.34 }
+{ "NY": 10000.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 }
+
+Answer: { "NY": 9705.34, "NJ": 16949.9, "CT": 13226.48, "CA": 19067.72 }
+MongoDB Web Shell: Please treat this like any other shell. 
+Hit enter after every command.
+> db.zips.aggregate([
+   { $group: {_id: "$state", average: { $avg: "$pop" } } }
+  ])
+{ "_id" : "NY", "average" : 9705.34 }
+{ "_id" : "NJ", "average" : 16949.9 }
+{ "_id" : "CT", "average" : 13226.48 }
+{ "_id" : "CA", "average" : 19067.72 }
+>
+
+
+Quiz: Using $addToSet
+
+This problem uses the same zip code data as the using $sum quiz. See that quiz for a longer explanation.
+
+Suppose we population by zip code (postal code) data that looks like this (putting in a query for the zip codes in Palo Alto)
+
+> db.zips.find({state:"CA",city:"PALO ALTO"})
+{ "city" : "PALO ALTO", "loc" : [ -122.149685, 37.444324 ], "pop" : 15965, "state" : "CA", "_id" : "94301" }
+{ "city" : "PALO ALTO", "loc" : [ -122.184234, 37.433424 ], "pop" : 1835, "state" : "CA", "_id" : "94304" }
+{ "city" : "PALO ALTO", "loc" : [ -122.127375, 37.418009 ], "pop" : 24309, "state" : "CA", "_id" : "94306" }
+
+Write an aggregation query that will return the postal codes that cover each city. The results should look like this:
+
+		{
+			"_id" : "CENTREVILLE",
+			"postal_codes" : [
+				"22020",
+				"49032",
+				"39631",
+				"21617",
+				"35042"
+			]
+		},
+
+Again the collection will be called zips. You can deduce what your result column names should be from the above output. (ignore the issue that a city may have the same name in two different states and is in fact two different cities in that case - for eg Springfield, MO and Springfield, MA)
+
+Answer:
+db.zips.aggregate([
+    { $group: {_id: "$city", postal_codes: { $addToSet: "$_id"  }  } }
+])
+
+
+Quiz: Using $push
+
+Given the zipcode dataset (explained more fully in the using $sum quiz) that has documents that look like this:
+
+> db.zips.findOne()
+{
+	"city" : "ACMAR",
+	"loc" : [
+		-86.51557,
+		33.584132
+	],
+	"pop" : 6055,
+	"state" : "AL",
+	"_id" : "35004"
+}
+
+would you expect the following two queries to produce the same result or different results?
+
+db.zips.aggregate([{"$group":{"_id":"$city", "postal_codes":{"$push":"$_id"}}}])
+
+db.zips.aggregate([{"$group":{"_id":"$city", "postal_codes":{"$addToSet":"$_id"}}}])
+
+[Single Answer]
+
+Same result
+Different Result
+
+Answer: Same result
+
+
+Quiz: Using $max and $min
+
+Again thinking about the zip code database, write an aggregation query that will return the population of the postal code in each state with the highest population. It should return output that looks like this:
+
+{
+			"_id" : "WI",
+			"pop" : 57187
+		},
+		{
+			"_id" : "WV",
+			"pop" : 70185
+		},
+..and so on
+
+Once again, the collection is named zips.
+
+Answer:
+db.zips.aggregate([
+{ $group: {_id: "$state", pop: {$max: "$pop" } }}
+])
+
+
+Quiz: Double $group stages
+
+Given the following collection:
+
+> db.fun.find()
+{ "_id" : 0, "a" : 0, "b" : 0, "c" : 21 }
+{ "_id" : 1, "a" : 0, "b" : 0, "c" : 54 }
+{ "_id" : 2, "a" : 0, "b" : 1, "c" : 52 }
+{ "_id" : 3, "a" : 0, "b" : 1, "c" : 17 }
+{ "_id" : 4, "a" : 1, "b" : 0, "c" : 22 }
+{ "_id" : 5, "a" : 1, "b" : 0, "c" : 5 }
+{ "_id" : 6, "a" : 1, "b" : 1, "c" : 87 }
+{ "_id" : 7, "a" : 1, "b" : 1, "c" : 97 }
+
+And the following aggregation query
+
+db.fun.aggregate([{$group:{_id:{a:"$a", b:"$b"}, c:{$max:"$c"}}}, {$group:{_id:"$_id.a", c:{$min:"$c"}}}])
+
+What values are returned?
+
+[Single Answer]
+
+17 and 54
+97 and 21
+54 and 5
+52 and 22
+
+Answer: 52 and 22
+
+
+Quiz: Using $project
+
+Write an aggregation query with a single projection stage that will transform the documents in the zips collection from this:
+
+{
+	"city" : "ACMAR",
+	"loc" : [
+		-86.51557,
+		33.584132
+	],
+	"pop" : 6055,
+	"state" : "AL",
+	"_id" : "35004"
+}
+
+to documents in the result set that look like this:
+
+{
+	"city" : "acmar",
+	"pop" : 6055,
+	"state" : "AL",
+	"zip" : "35004"
+}
+
+So that the checker works properly, please specify what you want to do with the _id key as the first item. The other items should be ordered as above. As before, assume the collection is called zips. You are running only the projection part of the pipeline for this quiz.
+
+A few facts not mentioned in the lesson that you will need to know to get this right: If you don't mention a key, it is not included, except for _id, which must be explicitly suppressed. If you want to include a key exactly as it is named in the source document, you just write key:1, where key is the name of the key. You will probably get more out of this quiz is you download the zips.json file and practice in the shell. zips.json link is in the using $sum quiz
+
+Answer:
+db.zips.aggregate( [ { $project: 
+{ city: { $toLower: "$city" }, pop: 1, state: 1, zip: "$_id", _id: 0 } 
+} ] )
+
+
+Quiz: Using $match
+
+Again, thinking about the zipcode collection, write an aggregation query with a single match phase that filters for zipcodes with greater than 100,000 people. You may need to look up the use of the $gt operator in the MongoDB docs.
+
+Assume the collection is called zips.
+
+Answer:
+db.zips.aggregate([
+{ $match: { pop: { $gt: 100000 } } }
+])
+
+
+Quiz: Using $sort
+
+Again, considering the zipcode collection, which has documents that look like this,
+
+{
+	"city" : "ACMAR",
+	"loc" : [
+		-86.51557,
+		33.584132
+	],
+	"pop" : 6055,
+	"state" : "AL",
+	"_id" : "35004"
+}
+
+Write an aggregation query with just a sort stage to sort by (state, city), both ascending. Assume the collection is called zips.
+
+Answer:
+db.zips.aggregate([
+    { $sort: {state: 1, city: 1 } }
+])
+
+
+Quiz: Write Concern
+
+Provided you assume that the disk is persistent, what are the w and j settings required to guarantee that an insert or update has been written all the way to disk.
+
+[Single Answer]
+
+w=0, j=0
+w=1, j=1
+w=2, j=0
+w=1, j=0
+
+Answer: w=1, j=1
+
+
+Quiz: Network Errors
+
+What are the reasons why an application may receive an error back even if the write was successful. Check all that apply.
+
+[Single Answer]
+
+The network TCP connection between the application and the server was reset after the server received a write but before a response could be sent.
+The MongoDB server terminates between receiving the write and responding to it.
+The network fails between the time of the write and the time the client receives a response to the write.
+The write violates a primary key constraint on the collection.
+
+Answer:
+The network TCP connection between the application and the server was reset after the server received a write but before a response could be sent.
+The MongoDB server terminates between receiving the write and responding to it.
+The network fails between the time of the write and the time the client receives a response to the write.
+
+
+Quiz: Introduction to Replication
+
+What is the minimum original number of nodes needed to assure the election of a new Primary if a node goes down?
+
+[Single Answer]
+
+1
+2
+3
+5
+
+Answer: 3
+
+
+Quiz: Replica Set Elections
+
+Which types of nodes can participate in elections of a new primary?
+
+[Multiple Answers]
+
+Regular replica set members
+Hidden Members
+Arbiters
+Lawyers
+
+Answer:
+Regular replica set members
+Hidden Members
+Arbiters
+
+
+Quiz: Creating a Replica Set
+
+Which command, when issued from the mongo shell, will allow you to read from a secondary?
+
+[Single Answer]
+
+db.isMaster()
+db.adminCommand({'readPreference':'Secondary"})
+rs.setStatus("Primary")
+rs.slaveOk()
+
+Answer: rs.slaveOk()
+
+
+Quiz: Replica Set Internals
+
+Which of the following statements are true about replication. Check all that apply.
+
+[Multiple Answers]
+
+You can write to a primary or secondary node and the database will forward the write to the primary.
+Replication supports mixed-mode storage engines. For examples, a mmapv1 primary and wiredTiger secondary.
+A copy of the oplog is kept on both the primary and secondary servers.
+You can read from a primary or secondary, by default.
+The oplog is implemented as a capped collection.
+
+Answer:
+Replication supports mixed-mode storage engines. For examples, a mmapv1 primary and wiredTiger secondary.
+A copy of the oplog is kept on both the primary and secondary servers.
+The oplog is implemented as a capped collection.
+
+
+Quiz: Connecting to a Replica Set from the Java Driver
+
+If you leave a replica set node out of the seedlist within the driver, what will happen?
+
+[Single Answer]
+
+The missing node will not be used by the application.
+The missing node will be discovered as long as you list at least one valid node.
+This missing node will be used for reads, but not for writes.
+The missing node will be used for writes, but not for reads.
+
+Answer: The missing node will be discovered as long as you list at least one valid node.
+
+
+Quiz: When Bad Things Happen to Good Nodes
+
+If you use the MongoClient constructor that takes a seed list of replica set members, are you guaranteed to avoid application exceptions during a primary failover?
+
+[Single Answer]
+
+Yes
+No
+
+Answer: No
+
+
+Quiz: Write Concern Revisited
+
+If you set w=1 and j=1, is it possible to wind up rolling back a committed write to the primary on failover?
+
+[Single Answer]
+
+Yes
+No
+
+Answer: Yes
+
+
+Quiz: Proper Handling of Failover for Reads
+
+
+Why don't you need to handle a duplicate key exception for reads?
+
+[Single Answer]
+
+The driver handles that for you
+In the event that you present a duplicate key, the database still returns the right value.
+The database server handles that for you
+Duplicate key exceptions are impossible when reading
+
+Answer: Duplicate key exceptions are impossible when reading
+
+
+Quiz: Proper Handling of Failover for Updates
+
+If you want to be sure that an update with a $inc occurred exactly once in the face of failover, what's the best way to do it?
+
+[Single Answer]
+
+Transform the update into a statement that is idempotent
+Turn on journaling
+Increase the number of times you retry the update
+Build indexes in the background only
+
+Answer: Transform the update into a statement that is idempotent
+
+
+Quiz: Read Preferences
+
+You can configure your applications via the drivers to read from secondary nodes within a replica set. What are the reasons that you might not want to do that? Check all that apply.
+
+[Multiple Answers]
+
+If your write traffic is significantly greater than your read traffic, you may overwhelm the secondary, which must process all the writes as well as the reads. Replication lag can result.
+You may not read what you previously wrote to MongoDB.
+If the secondary hardware has insufficient memory to keep the read working set in memory, directing reads to it will likely slow it down.
+Reading from a secondary prevents it from being promoted to primary.
+
+Answer:
+If your write traffic is significantly greater than your read traffic, you may overwhelm the secondary, which must process all the writes as well as the reads. Replication lag can result.
+You may not read what you previously wrote to MongoDB.
+If the secondary hardware has insufficient memory to keep the read working set in memory, directing reads to it will likely slow it down.
+
+
+Quiz: Review of Implications of Replication
+
+If you set w=4 on a MongoClient and there are only three nodes in the replica set, how long will you wait in PyMongo for a response from an insert if you don't set a timeout?
+
+[Single Answer]
+
+Comes back immediately
+About a minute
+About 10 seconds
+More than five minutes
+You will get an immediate error
+
+Answer: You will get an immediate error
+
+
+Quiz: Introduction to Sharding
+
+If the shard key is not included in a find operation and there are 4 shards, each one a replica set with 3 nodes, how many nodes will see the find operation?
+
+[Single Answer]
+
+1
+3
+4
+12
+
+
+Answer: 4
+#Note
+#Since the shard key is not included in the find operation, "mongos" has to send the query to all 4 of the shards. Each shard has 3 replica-set members, but only one member of each replica set (the primary, by default) is required to handle the find.
+
+
+Quiz: Building a Sharded Environment
+
+If you want to build a production system with two shards, each one a replica set with three nodes, how may mongod processes must you start?
+
+[Single Answer]
+
+2
+6
+7
+9
+
+Answer: 9
+
+
+Quiz: Implications of Sharding
+
+Suppose you wanted to shard the zip code collection after importing it. You want to shard on zip code. What index would be required to allow MongoDB to shard on zip code?
+
+[Single Answer]
+
+An index on zip or a non-multi-key index that starts with zip.
+No index is required to use zip as the shard key.
+A unique index on the zip code.
+Any index that that includes the zip code.
+
+Answer: An index on zip or a non-multi-key index that starts with zip.
+
+
+Quiz: Sharding + Replication
+
+Suppose you want to run multiple mongos routers for redundancy. What level of the stack will assure that you can failover to a different mongos from within your application?
+
+[Single Answer]
+
+mongod
+mongos
+drivers
+sharding config servers
+
+Answer: drivers
+
+
+Quiz: Choosing a Shard Key
+
+You are building a facebook competitor called footbook that will be a mobile social network of feet. You have decided that your primary data structure for posts to the wall will look like this:
+{'username':'toeguy',
+     'posttime':ISODate("2012-12-02T23:12:23Z"),
+     "randomthought": "I am looking at my feet right now",
+     'visible_to':['friends','family', 'walkers']}
+Thinking about the tradeoffs of shard key selection, select the true statements below.
+
+[Single Answer]
+
+Choosing posttime as the shard key will cause hotspotting as time progresses.
+Choosing username as the shard key will distribute posts to the wall well across the shards.
+Choosing visible_to as a shard key is illegal.
+Choosing posttime as the shard key suffers from low cardinality.
+
+Answer:
+Choosing posttime as the shard key will cause hotspotting as time progresses.
+Choosing username as the shard key will distribute posts to the wall well across the shards.
+Choosing visible_to as a shard key is illegal.
+
+
+Quiz: Node.js Driver: find, findOne, and cursors
+
+var MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://localhost:27017/course', function(err, db) 
+{
+     if(err) throw err;
+
+     var query = { 'grade' : 100};
+
+     function callback(err, doc) {
+          if(err) throw err;
+
+          console.dir(doc);
+
+          db.close();
+     } 
+     /* TODO */
+});
+
+Answer: db.collection('grades').findOne(query, callback);
+
+
+Quiz: Node.js Driver: Using Field Projection
+
+Which of the following queries will cause only the 'grade' field to be returned?
+
+[Single Answer]
+
+db.collection('grades').find({'grade':0,"_id:1}, callback);
+db.collection('grades').find({'grade':1,"_id:0}, callback);
+db.collection('grades').find({}, {'grade':1, '_id':0}, callback);
+db.collection('grades').find({}, {'grade':1}, callback);
+
+Answer: db.collection('grades').find({}, {'grade':1, '_id':0}, callback);
+
+
+Quiz: Node.js Driver: Using $gt and $lt
+
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect('mongodb://localhost:27017/course', function(err, db) {
+    if(err) throw err;
+
+    /* TODO - Get all documents with a grade between 69 and 80 */
+
+    db.collection('grades').find(query).each(function(err, doc){
+        if(err) throw err;
+        if(doc == null) {
+            return db.close();
+        }
+        console.dir(doc);
+    });
+}); 
+
+Answer: var query = { 'grade' : { '$gt' : 69, '$lt' : 80 } };
+
+
+Quiz: Node.js Driver: Using $regex
+
+Which of the following query expressions would match a document with 'Microsoft' anywhere in the 'title' field? Select all that apply.
+
+{ 'title' : { '$regex' : 'Microsoft' } }
+{ '$regex' : 'Microsoft' }
+{ 'title' : { '$regex' : '^Microsoft' } }
+{ 'title' : 'Microsoft' }
+
+Answer: { 'title' : { '$regex' : 'Microsoft' } }
+
+
+Quiz: Node.js Driver: Skip, Limit and Sort
+
+What are some ways we can use skip, limit, and sort in the MongoDB Node.js driver? Check all that apply.
+
+[Multiple Answers]
+
+Include skip, limit, and sort options in the options object for find and findOne
+Pass a sort order as an argument to findAndModify
+Call the skip, limit, and sort functions on a cursor before retrieving any documents
+Call the skip, limit, and sort functions on a cursor after retrieving some documents
+
+Answer:
+Include skip, limit, and sort options in the options object for find and findOne
+Pass a sort order as an argument to findAndModify
+Call the skip, limit, and sort functions on a cursor before retrieving any documents
+
+
+Quiz: Node.js Driver: Inserting, _id
+
+var MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://localhost:27017/course', function(err, db) {
+    if(err) throw err;
+
+    var docs = [ { '_id' : 'George', 'age' : 6 },
+                 { '_id' : 'george', 'age' : 7 } ];
+
+    db.collection('students').insert(docs, function(err, inserted) {
+        if(err) throw err;
+
+        console.dir("Successfully inserted: " + JSON.stringify(inserted));
+
+        return db.close();
+    });
+});
+What will happen when we run the above code?
+
+[Single Answer]
+
+Only one document in the array will be inserted
+We will get an error because we are trying to insert an array of documents instead of a single document
+We will get a duplicate key error
+Both documents will be inserted successfully
+
+Answer: Both documents will be inserted successfully
+
+
+Quiz: Node.js Driver: Using Dot Notation
+
+Use dot notation to construct a query that selects for a document with a 'name' of 'Steve' in the 'students' array. Put your answer in the box below. Please use double quotes when constructing your answer.
+
+Here is an example of a document that should match the query:
+
+{
+    'course' : 'M101JS',
+    'students' : [
+        {
+            'name' : 'Susan'
+        },
+        {
+            'name' : 'Steve'
+        }
+    ]
+}
+
+Answer: { "students.name" : "Steve" }
+
+
+Quiz: Node.js Driver: Updating
+
+var MongoClient = require('mongodb').MongoClient;
+MongoClient.connect("mongodb://localhost:27017/course", function(err, db) {
+     if(err) throw err;
+
+     var query = { 'assignment': 'hw1'};
+     var operator = {'assignment': 'hw2', '$set': {'date_graded': new Date() } };
+
+     db.collection('grades').update(query, operator, function(err, updated) {
+          if(err) throw err;
+
+          console.dir("Successfully updated " + updated + " document!");
+
+          return db.close();
+     });
+});
+
+What happens when you run the above code with the given update operator?
+
+[Single Answer]
+
+It changes 'assignment' to 'hw2' and changes 'date_graded' to the current date
+It changes 'date_graded' to the current date, ignoring 'assignment'
+It replaces the document with a document with only 'date_graded' and 'assignment' fields
+It returns an error 
+
+Answer: It returns an error
+
+
+Quiz: Node.js Driver: Upserts
+
+db.collection('grades').save({'_id': 'email@example.com', 'name': 'Joe'}, callback);
+Assuming the necessary variables are defined, what is the result of calling this function?
+
+[Single Answer]
+
+Attempt to insert the object and throw an error if '_id' is not unique
+Update and replace the document
+Upsert to insert or replace the document
+Do an in place update
+
+Answer: Upsert to insert or replace the document
+
+
+Quiz: Node.js Driver: findAndModify
+
+Which of the following calls to findAndModify will add the "dropped" field to the homework document with the lowest grade and call the given callback with the resulting document?
+
+[Single Answer]
+
+db.collection('homeworks').findAndModify({}, [[ 'grade' , 1 ]], { '$set' : { 'dropped' : true } }, { 'new' : true }, callback);
+db.collection('homeworks').findAndModify({}, [[ 'grade' , -1 ]], { '$set' : { 'dropped' : true } }, { 'new' : true }, callback);
+db.collection('homeworks').findAndModify({ 'grade' : { '$lt' : 90 } }, [], { '$set' : { 'dropped' : true } }, { 'new' : true }, callback);
+db.collection('homeworks').findAndModify({}, [[ 'grade' , 1 ]], { 'new' : true }, { '$set' : { 'dropped' : true } }, callback);
+
+Answer: db.collection('homeworks').findAndModify({}, [[ 'grade' , 1 ]], { '$set' : { 'dropped' : true } }, { 'new' : true }, callback);
+
+
+Quiz: Node.js Driver: Remove
+
+Which of the following remove calls would definitely remove all the documents in the collection 'foo', regardless of its contents? Check all that apply.
+
+[Multiple Answers]
+
+db.collection('foo').remove(callback);
+db.collection('foo').remove({ 'x' : { '$nin' : [] } }, callback);
+db.collection('foo').remove({}, callback);
+db.collection('foo').remove({ 'x' : { '$exists' : true } }, callback);
+
+Answer:
+db.collection('foo').remove(callback);
+db.collection('foo').remove({ 'x' : { '$nin' : [] } }, callback);
+db.collection('foo').remove({}, callback);
+
+
+New Features and Tools in MongoDB 3.4
+
+
+Introducing Views Quiz
+
+You have a read-only view for a source collection, and then want to update one of the documents in that source collection. Does this modify the documents you get when you query the view?
+Choose the best answer:
+
+[Single Answer]
+
+yes
+no
+maybe so
+
+Answer: maybe so
+Note:
+Modifying the source collection may or may not modify the view, depending on the aggregation pipeline that defines the view. Some updates will change the view, while other updates will leave it the same
+So the answer is that it depends on the interaction between the update and the view
+
+
+Creating and Destroying Views Quiz
+
+How do you remove a view? Check all that apply.
+Check all that apply:
+
+[Multiple Answers]
+
+Drop it with db.view.drop() as if it were a collection
+Use the db.deleteView(), in a manner similar to creating a view
+Delete it from system.views with db.system.views.deleteOne( { _id : <view_name> } )
+
+Answer:
+Drop it with db.view.drop() as if it were a collection
+Delete it from system.views with db.system.views.deleteOne( { _id : <view_name> } )
+Note:
+There is no db.deleteView() command, so that wouldn't work
+However, db.view.drop() works, as does the db.system.views.deleteOne() command, as shown in the question. You can try this to verify it
+
+
+Indexes and Views Quiz
+
+Which of the following describe how indexes can be used in views? Check all that apply.
+Check all that apply:
+
+[Multiple Answers]
+
+You can create an index on a view, so that you can use an index to query the view
+Your views may be able to use indexes on its source collection
+Views will work even without using an index on the source collection
+
+Answer:
+Your views may be able to use indexes on its source collection
+Views will work even without using an index on the source collection
+Note:
+You cannot create an index on a view, because a view doesn't contain documents
+Your queries may use indexes that are on the source collection, depending on the behavior of the aggregation pipeline that defines the view. Keep in mind that queries that don't use an index will not be performant
+
+
+Introducing Improved BI Connector Quiz
+
+Check all that apply. Our new BI Connector ...
+Check all that apply:
+
+[Multiple Answers]
+
+allows SQL clients to connect to MongoDB instances and execute queries.
+is capable of translating SQL statements into MongoDB queries.
+uses embedded SQL libraries to connect to a MongoDB host.
+is an extension of mongod that enables the direct connection of BI Connector tools.
+is a native service that allows parsing of SQL statements.
+
+Answer:
+allows SQL clients to connect to MongoDB instances and execute queries.
+is capable of translating SQL statements into MongoDB queries.
+is a native service that allows parsing of SQL statements.
+
+
+Dataset and Schema Definition Quiz
+
+Which of the following tools is capable of generating a document-relational definition language file?
+Choose the best answer:
+
+[Single Answer]
+
+mongosqld
+mongodrdl
+mongo
+mongod
+mongoexport
+
+Answer: mongodrdl
+
+
+Extended SQL Statements Quiz
+
+How does mongosqld enable SQL joins?
+Choose the best answer:
+
+[Single Answer]
+
+mongosqld does not allow SQL joins.
+It performs a tree of left outer joins in a pipeline using $lookup between the different requested collections.
+mongosqld instantiates an RDBMS system and imports the data there.
+How to do joins is determined when mapping collections to tables using mongodrdl.
+
+Answer: It performs a tree of left outer joins in a pipeline using $lookup between the different requested collections.
+
+
+Mapping Collections to Tables Quiz
+
+How can we express native MongoDB queries through a SQL client ?
+Choose the best answer:
+
+[Single Answer]
+
+By definning a customFilterField and passing our MongoDB JSON query encoded into string.
+We can't, that is just not possible
+By just calling the find command. This will be passed to mongosqld and parsed to the correct result
+Modern SQL clients are capable of parsing MongoDB query language.
+
+Answer: By definning a customFilterField and passing our MongoDB JSON query encoded into string.
+
+
+BI Connector Security Overview Quiz
+
+If we enable authorization on our MongoDB server, we will have to configure mongosqld to do which of the following?
+Choose the best answer:
+
+[Single Answer]
+
+Enable network encryption on connections to and from mongoSQLD
+Enable network encryption on connections just from mongoSQLD
+Enable network encryption on connections just to mongoSQLD
+Enable the SQL Client or BI Tool to connect through X.509 certificates
+
+Answer: Enable network encryption on connections to and from mongoSQLD
+
+
+BI Connector Security Setup Quiz
+
+You have a MongoDB instance with the following user created by the following command:
+
+use customers
+db.createUser({user: 'john', pwd: '$%@@1234!',
+  roles: [{role: 'read', db: 'products'}]
+})
+
+Given this, which of the following instructions is correct?
+Choose the best answer:
+
+[Single Answer]
+
+mysql -u john?source=customers ...
+mysql -u john?authenticationDatabase=products ...
+mysql customers -u john ...
+
+Answer: mysql -u john?source=customers ...
+
+
+LDAP Authorization Introduction Quiz
+
+With MongoDB 3.4 we are further strengthening the MongoDB security features by enabling:
+Choose the best answer:
+
+[Single Answer]
+
+LDAP authorization
+Kerberos authentication
+X509 certificates authorization
+LDAP authentication
+
+Answer: LDAP authorization
+
+
+LDAP Authorization Steps Quiz
+
+Which of the following is not an LDAP authorization step:
+Choose the best answer:
+
+[Single Answer]
+
+Validate the mongod for authorized hostname and port
+Transform user credentials
+Provide user credentials to authorization server
+Query the LDAP server to validate user credentials
+Validate user credentials for authentication purposes
+
+Answer: Validate the mongod for authorized hostname and port
+
+
+LDAP Authorization User Transformations Quiz
+
+In order to match the credential formats between the authentication and authorization mechanisms, the user credentials may require a transformation step. This transformation is defined by the following format:
+Choose the best answer:
+
+[Single Answer]
+
+String value defining a JSON array of regular expression / substitution pairs
+JSON object defining an array of regular expressions / substitution pairs
+One regular expression / substitution pair
+String enclosing a regular expression and optional substitution string
+
+Answer: String value defining a JSON array of regular expression / substitution pairs
+
+
+LDAP Authorization Configuration Options Quiz
+
+Consider the following MongoDB configuration file snippet:
+
+//...
+security:
+  ldap:
+    servers: 'ldap.mongodb.university'
+    authz:
+      queryTemplate: '{USER}?memberOf?base'
+    transportSecurity: 'tls'
+    bind:
+      method: 'simple'
+    userToDNMapping: '[{match: "(.+)", substitution: "uid={0},ou=Users,dc=mongodb,dc=com"}]'
+  authenticationMechanisms: 'GSSAPI'
+  //...
+Check all statements that are valid, given the above configuration:
+
+Check all that apply:
+
+[Multiple Answers]
+
+MongoDB will be using Kerberos for authentication purposes
+The configured LDAP server is running on secured.mongodb.com
+MongoDB will be binding the operating system users for LDAP integration
+No transport security has been enabled between MongoDB and the authorization server
+LDAP authorization is enabled
+
+Answer:
+MongoDB will be using Kerberos for authentication purposes
+LDAP authorization is enabled
+
+
+MongoLDAP Quiz
+
+mongoldap enables us to validate:
+Check all that apply:
+
+[Multiple Answers]
+
+LDAP authorization options given a MongoDB configuration file
+LDAP server user groups hierarchy
+LDAP server TLS configuration
+Validate LDIF files
+Validate LDAP authorization individual configuration options
+
+Answer:
+LDAP authorization options given a MongoDB configuration file
+Validate LDAP authorization individual configuration options
+
+
+LDAP Authorization Setup Quiz
+
+To enable the integration of LDAP for authorization purposes in MongoDB, we had to modify the localhost exception [https://docs.mongodb.com/manual/core/security-users/?&_ga=2.240011779.1424345368.1494726144-513842414.1494724249#localhost-exception].
+
+In what does this modification consists off?
+
+Choose the best answer:
+
+[Single Answer]
+
+Extended the locahost host exception to allow the creation of a role
+Allow user defined roles to inherit built-in roles
+Alow the creation of more than one user
+Remove the locahost exception of MongoDB is configured for LDAP authorization
+
+Answer: Extended the locahost host exception to allow the creation of a role
+
+
+Log Redaction Introduction Quiz
+
+Why do we need to redact client data in the MongoDB log files?
+Check all that apply:
+
+[Multiple Answers]
+
+To prevent sensitive data from being written to system logs
+Because system log data is not encrypted
+To ensure that we filter unusable debugging information from the logs
+To enforce profiling data to be accessible to users
+
+Answer:
+To prevent sensitive data from being written to system logs
+Because system log data is not encrypted
+
+
+Log Redaction Setup Quiz
+
+In the case of a replica set or shard cluster we need to:
+Check all that apply:
+
+[Multiple Answers]
+
+Enable log redaction on all data holding members and mongos elements
+Setting the system flag security.redactClientLogData, in MongoDB configuration file, is the recommended setup guarantee that on reboot log redaction will be enabled.
+Running command db.adminCommand({setParameter:1, clientLogRedaction: 2}) forces all members of a cluster to redact their log client data.
+Users can bypass log redaction by emitting write concern flag {r:0} in their write operations
+Submit
+
+Answer:
+Enable log redaction on all data holding members and mongos elements
+Setting the system flag security.redactClientLogData, in MongoDB configuration file, is the recommended setup guarantee that on reboot log redaction will be enabled.
+
+
+graphLookup Introduction Quiz
+
+Which of the following statements apply to $graphLookup operator? check all that apply
+Check all that apply:
+
+[Multiple Answers]
+
+Provides MongoDB with graph or graph-like capabilities
+$lookup and $graphLookup stages require the exact same fields in their specification.
+$graphLookup depends on $lookup operator. Cannot be used without $lookup
+$graphLookup provides MongoDB a transitive closure implementation
+$graphLookup is a new stage of the aggregation pipeline introduced in MongoDB 3.2
+
+Answer:
+Provides MongoDB with graph or graph-like capabilities
+$graphLookup provides MongoDB a transitive closure implementation
+
+
+$graphLookup Simple Lookup Quiz
+
+Which of the following statements is/are correct? Check all that apply.
+Check all that apply:
+
+[Multiple Answers]
+
+connectToField will be used on recursive find operations
+as determines a collection where $graphLookup will store the stage results
+connectFromField value will be use to match connectToField in a recursive match
+startWith indicates the index that should be use to execute the recursive match
+
+Answer:
+connectToField will be used on recursive find operations
+connectFromField value will be use to match connectToField in a recursive match
+
+
+$graphLookup maxDepth and depthField Quiz
+
+Which of the following statements are incorrect? Check all that apply
+Check all that apply:
+
+[Multiple Answers]
+
+maxDepth only takes $long values
+maxDepth allows to specify the number of recursive lookups
+depthField determines a field, in the result document, which specifies the number of recursive lookup needed to reach that document
+depthField determines a field, which contains the value number of documents matched by the recursive lookup
+
+Answer:
+maxDepth only takes $long values
+depthField determines a field, which contains the value number of documents matched by the recursive lookup
+
+
+$graphLookup General Considerations Quiz
+
+Consider the following statement:
+
+``$graphLookup`` is required to be the last element on the pipeline.
+Which of the following is true about the statement?
+Choose the best answer:
+
+[Single Answer]
+
+This is incorrect. $graphLookup can be used in any position of the pipeline and acts in the same way as a regular $lookup.
+This is correct because of the recursive nature of $graphLookup we want to save resources for last.
+This is correct because $graphLookup pipes out the results of recursive search into a collection, similar to $out stage.
+This is incorrect. graphLookup needs to be the first element of the pipeline, regardless of other stages needed to perform the desired query.
+
+Answer: This is incorrect. $graphLookup can be used in any position of the pipeline and acts in the same way as a regular $lookup.
+
+
+Decimal Support Introduction Quiz
+
+Which numeric format does $decimal values represent?
+Choose the best answer:
+
+[Single Answer]
+
+decimal128
+hexadecimal
+decimal64
+Octuple
+
+Answer: decimal128
+
+
+Decimal Support Demo Quiz
+
+Which of the following documents will match, in a MongoDB query, with the decimal value, 123.22310001?
+Check all that apply:
+
+[Multiple Answers]
+
+{"_id":0, "number": NumberDecimal(123.223100010010)}
+{"_id":1, "number": NumberDecimal("0123.223100010000000")}
+{"_id":2, "number": NumberDecimal(123.223100010000000)}
+{"_id":3, "number": NumberDecimal(123.22310001001)}
+{"_id":4, "number": NumberDecimal("1230.223100010010")}
+
+Answer:
+{"_id":1, "number": NumberDecimal("0123.223100010000000")}
+{"_id":2, "number": NumberDecimal(123.223100010000000)}
+
+
+Robust Initial Sync Introduction Quiz
+
+What will we be covering in this chapter?
+Check all that apply:
+
+[Multiple Answers]
+
+Over the wire compression
+On-disk compression
+Improvements to the initial sync
+Improved logging for a mongos
+
+Answer:
+Over the wire compression
+Improvements to the initial sync
+
+
+What is an Initial Sync Quiz
+
+Which of the following are performed by a server during an initial sync?
+Check all that apply:
+
+[Multiple Answers]
+
+The server queries the oplog of a replica set member
+The server queries all documents of a replica set member
+The server builds indexes
+The server copies the server logs of a replica set member
+The server performs an rs.reconfig() on the replica set
+
+Answer:
+The server queries the oplog of a replica set member
+The server queries all documents of a replica set member
+The server builds indexes
+
+
+Improved Logging Quiz
+
+If you're looking at your server logs and you want to find a copy of their initial sync, what should you search for?
+Choose the best answer:
+
+[Single Answer]
+
+Initial Sync Statistics
+Initial Sync Summary
+[initial sync-0]
+[rsSync]
+
+Answer: Initial Sync Statistics
+
+
+Indexes and Network Interruptions Quiz
+
+In MongoDB 3.4, to build an index, a server performing an initial sync will only need to iterate over its data set once, when inserting documents. How many times did it have to iterate over those documents prior to MongoDB 3.4?
+Choose the best answer:
+
+[Single Answer]
+
+0
+1
+2
+3
+4
+
+Answer: 2
+
+
+Intra-Cluster Compression Quiz
+
+Which compression algorithms are available with MongoDB 3.4 for intra-cluster network compression?
+Check all that apply:
+
+[Multiple Answers]
+
+none (compression left off)
+snappy
+zlib
+
+Answer:
+none (compression left off)
+snappy
+
+
+Collations Introduction Quiz
+
+A collation ...
+Choose the best answer:
+
+[Single Answer]
+
+determines the ordering of words across various languages and dialects
+ensures all text conforms to a specific language
+is an index property of all MongoDB server databases
+
+Answer: determines the ordering of words across various languages and dialects
+
+
+Using Collations Quiz
+
+Where can we specify collations in MongoDB?
+Check all that apply:
+
+[Multiple Answers]
+
+On a collection, at creation time
+On indexes, at creation time
+On individual queries
+On sessions, all operations in a session will always use the same collation
+
+Answer:
+On a collection, at creation time
+On indexes, at creation time
+On individual queries
+
+
+Collations on Indexes Quiz
+
+When defining our collations using the indexes, which of the following is/are true?
+Check all that apply:
+
+[Multiple Answers]
+
+You can define two or more indexes that differ only in index name and collation.
+You can define specific indexes with different collations from the default collection collation.
+The index collation must match the collection collation.
+
+Answer:
+You can define two or more indexes that differ only in index name and collation.
+You can define specific indexes with different collations from the default collection collation.
+
+
+Collations and Index Selection Quiz
+
+An index will be used to satisfy a query involving only string fields...
+Choose the best answer:
+
+[Single Answer]
+
+... if the collation specified in the query matches that of the index.
+... always, regardless of the collation used in the query.
+
+Answer: ... if the collation specified in the query matches that of the index.
+
+
+Case Insensitive Indexes Quiz
+
+How can we create a case insensitive index with MongoDB 3.4?
+Choose the best answer:
+
+[Single Answer]
+
+Define a collation of strength 1 or 2.
+Create the index while setting {'insensitive': true}.
+That functionality is not possible with 3.4.
+
+Answer: Define a collation of strength 1 or 2.
+
+
+Collations on Views Quiz
+
+Which of the following apply to collations on views?
+Check all that apply:
+
+[Multiple Answers]
+
+We cannot override a view's collation in our queries.
+Creating a view on a collection will cause it to inherit that collection's collation.
+Creating a view from a view is no different than creating a view from a collection, regarding collations
+We can assign a specific collation while creating a view from a collection.
+Creating a view from a view requires the new view to match the source view's collation.
+
+Answer:
+We cannot override a view's collation in our queries.
+We can assign a specific collation while creating a view from a collection.
+Creating a view from a view requires the new view to match the source view's collation.
+
+
+Back Up and Restore, Part 3 Quiz
+
+To restore an encrypted database, you will need which of the following?
+Check all that apply:
+
+[Multiple Answers]
+
+The same KMIP key that was used to encrypt the database files
+A SCRAM-SHA-1 username and password with read access to the database
+The exact certificate that was used to generate the KMIP key
+Any certificate that has access to the KMIP key used to generate the database files
+
+Answer:
+The same KMIP key that was used to encrypt the database files
+Any certificate that has access to the KMIP key used to generate the database files
+
+
+Server Pools, Part 3 Quiz
+
+The server pools feature is optimal for which of the following?
+Check all that apply:
+
+[Multiple Answers]
+
+Offering MongoDB as a service within your organization
+Giving MongoDB users a mechanism for requesting hardware and MongoDB deployments in the same UI
+Reducing overall provisioning time for new MongoDB clusters
+Built-in automatic provisioning of servers in private and public clouds
+
+Answer:
+Offering MongoDB as a service within your organization
+Giving MongoDB users a mechanism for requesting hardware and MongoDB deployments in the same UI
+Reducing overall provisioning time for new MongoDB clusters
+
+
+Monitoring Quiz
+
+If your Ops Manager 2.0 application database is 2 GB, how much space should you allocate when performing an upgrade to 3.4?
+Choose the best answer:
+
+[Single Answer]
+
+2 GB
+2.5 GB
+3 GB
+3.5 GB
+4 GB
+
+Answer: 4 GB
+Note:
+This is something of a rule of thumb. The reason for it is because we are migrating old monitoring data to a new schema, but maintaining the old monitoring data. It is maintained in case the you decide to roll back your changes. You can then go and delete it at a later date if you'd like.
+
+
+Sharded Cluster Management Quiz
+
+If a given deployment's sharding is under management by Ops Manager, and you manually add a shard zone via the MongoDB shell, the following behavior is expected:
+Choose the best answer:
+
+[Single Answer]
+
+The zone is added into the Ops Manager UI for future management
+The zone is removed by automation
+
+Answer: The zone is removed by automation
+
+
+Getting Started with Compass Quiz
+
+Which of the following statements is/are true?
+Check all that apply:
+
+[Multiple Answers]
+
+Compass was originally developed as being a full graphical shell replacement for the MongoDB shell.
+Compass was built to be a drop-in replacement for Cloud Manager and Ops Manager.
+Compass was developed to give you a powerful interface to understanding, exploring, and editing your MongoDB data, and provide you with insights into your current server and query performance.
+Compass only works with MongoDB 3.4+.
+
+Answer:
+Compass was originally developed as being a full graphical shell replacement for the MongoDB shell.
+Compass was developed to give you a powerful interface to understanding, exploring, and editing your MongoDB data, and provide you with insights into your current server and query performance.
+Note:
+The following statements are true:
+Compass was originally developed as being a full graphical shell replacement for MongoDB.
+Compass was developed to give you a powerful interface to understanding, exploring, and editing your MongoDB data, and provide you with insights into your current server and query performance.
+The following statements are false:
+Compass was built to be a drop-in replacement for Cloud Manager and Ops Manager.
+No, Compass is an interface to your MongoDB deployment. It lets you view and edit data like you would in the mongo shell, but in a GUI. Ops Manager and Cloud Manager allow you to do operations management.
+Compass only works with MongoDB 3.4+.
+No, Compass works with MongoDB Server version 2.6 and higher.
+
+
+Performance Statistics Quiz
+
+Which of the following are performance metrics available in MongoDB Compass?
+Check all that apply:
+
+[Multiple Answers]
+
+Number of Operations (Insert, Queries, Updates, etc)
+Number of Reads & Writes
+Network Activity
+Disk Space Usage
+Memory Usage
+
+Answer:
+Number of Operations (Insert, Queries, Updates, etc)
+Number of Reads & Writes
+Network Activity
+Memory Usage
+Note:
+All of the following are performance metrics available in MongoDB Compass:
+Number of Operations (Insert, Queries, Updates, etc)
+Number of Reads & Writes
+Network Activity
+Memory Usage
+While Compass does report the number of "Reads & Writes," it is important to point out that this refers to operational reads & writes. Compass does not display disk reads and writes. An operational read translates into zero or more disk reads, while an operational write translates (usually) into at least 2 disk writes (can be more).
+Disk Space Usage is currently not a supported performance metric of MongoDB Compass.
+
+
+Exploring your Schema Quiz
+
+Which of the following statements is/are true?
+Check all that apply:
+
+[Multiple Answers]
+
+If a field is undefined or non-existant then Compass will report that it is undefined.
+Compass does random sampling when displaying schema information.
+Compass's schema overview only works when document validation is enabled.
+For geospatial fields on you can view a sample of the coordinates on a map.
+
+Answer:
+If a field is undefined or non-existant then Compass will report that it is undefined.
+Compass does random sampling when displaying schema information.
+For geospatial fields on you can view a sample of the coordinates on a map.
+Note:
+All of the following statements are true:
+If a field is undefined or non-existant then Compass will report that it is undefined.
+Compass does random sampling when displaying schema information.
+For geospatial fields on you can view a sample of the coordinates on a map.
+The following statement is false:
+Compass's schema overview does not need document validation enabled to work.
+
+
+Viewing & Modifying Documents Quiz
+
+True or false: Changes to a document in Compass happens in real time as you make modifications within that document.
+Choose the best answer:
+
+[Single Answer]
+
+true
+false
+
+Answer: false
+Note:
+No, changes to a document in Compass do not happen in real time. Changes to a document in Compass are shown in real time like a diff and are committed once submitted by clicking the "update" button.
+
+
+Examining Indexes Quiz
+
+Which of the following is/are true?
+Check all that apply:
+
+[Multiple Answers]
+
+Compass displays an overview about indexes in its UI.
+"Indexes usage since a date" refers to the time the index was added or the time when the server was last restarted, whichever is newer.
+You can add/remove indexes directly from Compass.
+
+Answer:
+Compass displays an overview about indexes in its UI.
+"Indexes usage since a date" refers to the time the index was added or the time when the server was last restarted, whichever is newer.
+You can add/remove indexes directly from Compass.
+Note:
+All of the following are true!
+Compass displays an overview about indexes in its UI.
+Indexes usage since a date is since the index was added or since the server was last restarted.
+You can add/remove indexes directly from Compass.
+
+
+Document Validation Quiz
+
+Which of the following is/are true?
+Check all that apply:
+
+[Multiple Answers]
+
+In order to enable document validation with Compass you need to install the Compass daemon on your server.
+You can define document validation rules directly in Compass.
+Compass supports document validation level (off, moderate, strict) modifications.
+
+Answer:
+You can define document validation rules directly in Compass.
+Compass supports document validation level (off, moderate, strict) modifications.
+Note:
+The following statements are true:
+You can define document validation rules directly in Compass.
+Compass supports document validation level (off, moderate, strict) modifications.
+The following statement is false:
+In order to enable document validation with Compass you need to install the Compass daemon on your server.
+No, this is not true. Document validation works out of the box with Compass. There is no Compass daemon.
+
+
+Zone Sharding Introduction Quiz
+
+Which of the following use cases are good uses for Zone Sharding?
+Check all that apply:
+
+[Multiple Answers]
+
+Geographical Distributed Clusters
+Application Affinity
+Geospatial Queries Across Regions
+Full Text Search
+
+Answer:
+Geographical Distributed Clusters
+Application Affinity
+Note:
+Zone Sharding allows users and applications to deal with Geographical Distributed Clusters and Application Affinity.
+Regarding Geographical Distributed Clusters, Zone Sharding allows data to be placed close to its country or region of origin to minimize latency and optimize operations response time. Zone Sharding also helps applications deal with data sovereignty regulations
+Application Affinity is a use case where we want to efficiently balance data according with the application that is consuming or producing the data sets. This approach allows us to create a efficient and balanced mechanism to provide resources to the application, or systems, that require more resources without the need to increase them across the board.
+
+
+Setting Up Sharding Quiz
+
+To create a sharded cluster in 3.4 it is mandatory to...
+Choose the best answer:
+
+[Single Answer]
+
+provide the --shardsvr flag to mongod
+set --logpath to an empty file for all members of our shard node
+fork the process (--fork)
+
+Answer: provide the --shardsvr flag to mongod
+Note:
+With 3.4 all nodes of a sharded cluster recognize their membership. To support this awareness --shardsvr is now mandatory in all mongod that compose a shard node.
+Therefore the correct answer is:
+To create a sharded cluster in 3.4 it is mandatory to provide the --shardsvr flag to mongod.
+
+
+Targeting Data with Shard Zones Quiz
+
+Which of the following statements are applicable to Zone Sharding?
+Check all that apply:
+
+[Multiple Answers]
+
+Zone ranges can be updated
+Zone ranges cannot overlap
+Zone ranges are immutable
+One shard can only be added to one Zone
+
+Answer:
+Zone ranges can be updated
+Zone ranges cannot overlap
+Note:
+Zone ranges have two significant properties:
+Zone ranges can be updated
+Zone ranges cannot overlap
+We can change a given zone range but they cannot overlap with other existing zone ranges.
+A particular shard can be added to zero, one, or several zones.
+
+
+Facets Single Facet Query Quiz
+
+Which of the following aggregation pipelines are single facet queries?
+Check all that apply:
+
+[Multiple Answers]
+
+[
+  {"$match": { "$text": {"$search": "network"}}},
+  {"$sortByCount": "$offices.city"},
+]
+
+[
+  {"$unwind": "$offices"},
+  {"$project": { "_id": "$name", "hq": "$offices.city"}},
+  {"$sortByCount": "$hq"},
+  {"$sort": {"_id":-1}},
+  {"$limit": 100}
+]
+
+[
+  {"$match": { "$text": {"$search": "network"}}},
+  {"$unwind": "$offices"},
+  {"$sort": {"_id":-1}}
+]
+
+Answer:
+[
+  {"$match": { "$text": {"$search": "network"}}},
+  {"$sortByCount": "$offices.city"},
+]
+
+[
+  {"$unwind": "$offices"},
+  {"$project": { "_id": "$name", "hq": "$offices.city"}},
+  {"$sortByCount": "$hq"},
+  {"$sort": {"_id":-1}},
+  {"$limit": 100}
+]
+
+Note:
+Single query facets are supported by the new aggregation pipeline stage $sortByCount.
+As like any other aggregation pipelines, except for $out, we can use the output of this stage, as input for downstream stages and operators, manipulating the dataset accordingly.
+The correct answers are:
+[
+  {"$match": { "$text": {"$search": "network"}}},
+  {"$sortByCount": "$offices.city"},
+]
+and
+[
+  {"$unwind": "$offices"},
+  {"$project": { "_id": "$name", "hq": "$offices.city"}},
+  {"$sortByCount": "$hq"},
+  {"$sort": {"_id":-1}},
+  {"$limit": 100}
+]
+The pipeline
+[
+  {"$match": { "$text": {"$search": "network"}}},
+  {"$unwind": "$offices"},
+  {"$sort": {"_id":-1}}
+]
+is not a single query facet since it does not group any particular data dimension. It simply unwinds an array field and sorts that result set.
+
+
+Facets Manual Buckets Quiz
+
+Assuming that field1 is composed of double values, ranging between 0 and Infinity, and field2 is of type string, which of the following stages are correct?
+Choose the best answer:
+
+[Single Answer]
+
+{'$bucket': { 'groupBy': '$field1', 'boundaries': [ "a", 3, 5.5 ]}}
+{'$bucket': { 'groupBy': '$field1', 'boundaries': [ 0.4, Infinity ]}}
+{'$bucket': { 'groupBy': '$field2', 'boundaries': [ "a", "asdas", "z" ], 'default': 'Others'}}
+
+Answer: {'$bucket': { 'groupBy': '$field2', 'boundaries': [ "a", "asdas", "z" ], 'default': 'Others'}}
+Note:
+The correct answer for this quiz is:
+{'$bucket': { 'groupBy': '$field2', 'boundaries': [ "a", "asdas", "z" ], 'default': 'Others'}}
+The other two options will end up in error.
+{'$bucket': { 'groupBy': '$field1', 'boundaries': [ "a", 3, 5.5 ]}} will generate inconsistent boundary type error. Boundaries are required to have the same type.
+{'$bucket': { 'groupBy': '$field1', 'boundaries': [ 0.4, Infinity ]}} will generate a not matching branch, bucket, to place non matching documents. The default stage option would prevent such errors.
+
+
+Facets Auto Buckets Quiz
+
+Auto Bucketing will ...
+Check all that apply:
+
+[Multiple Answers]
+
+given a number of buckets, try to distribute documents evenly accross buckets.
+adhere bucket boundaries to a numerical series set by the granularity option.
+randomly distributed documents accross arbitrarily defined bucket boundaries.
+count only documents that contain the groupBy field defined in the documents.
+
+Answer:
+given a number of buckets, try to distribute documents evenly accross buckets.
+adhere bucket boundaries to a numerical series set by the granularity option.
+Note:
+The two correct options are:
+Auto Bucketing will, given a number of buckets, try to distribute documents evenly across buckets.
+Auto Bucketing will adhere bucket boundaries to a numerical series set by the granularity option.
+Auto bucketing facets, defined using $bucketAuto stage, will generate buckets accordingly with the number of buckets requested, buckets field, distributing the documents evenly across those buckets, by default.
+In case we define a granularity for this stage, it will use the specified numerical series to determined the boundaries of the buckets and generate buckets according with those boundaries.
+
+
+Facets Multiple Facets Quiz
+
+Which of the following statement(s) apply to the $facet stage?
+Check all that apply:
+
+[Multiple Answers]
+
+The $facet stage allows several sub-pipelines to be executed to produce multiple facets.
+The $facet stage allows the application to generate several different facets with one single database request.
+The output of the individual $facet sub-pipelines can be shared using the expression $$FACET.$.
+We can only use facets stages ($sortByCount, $bucket and $bucketAuto) as sub-pipelines of $facet stage.
+
+Answer:
+The $facet stage allows several sub-pipelines to be executed to produce multiple facets.
+The $facet stage allows the application to generate several different facets with one single database request.
+Note:
+The correct answers are:
+The $facet stage allows several sub-pipelines to be executed to produce multiple facets.
+The $facet stage allows the applications to generate several different facets with one single database request.
+The $facet stage allows other stages to be included on the sub-pipelines, except for:
+$facet
+$out
+$geoNear
+$indexStats
+$collStats
+Also, the sub-pipelines, defined for each individual facet, cannot share their output accross other parallel facets. Each sub-pipeline will receive the same input data set but does not share the result dataset with parallel facets.
+
+
+Spark Connector Setup Quiz
+
+Which of the following is/are new to Spark v2?
+Choose the best answer:
+
+[Single Answer]
+
+SparkSession object
+SparkTool object
+SparkContext object
+SparkLing library
+
+Answer: SparkSession object
+Note:
+The correct answer is SparkSession object.
+SparkContext object already existed in the previous version of Spark.
+SparkLing library and SparkTool object are products of the instructor imagination.
+
+
+Spark Connector Demo Quiz
+
+Which of the following statements are true:
+Check all that apply:
+
+[Multiple Answers]
+
+SparkContext object is available through the SparkSession object
+Using MongoSpark we can load() dataframes.
+DataFrames can only be used with SQL statements.
+SparkContext is no longer available when using MongoDB Spark connector
+
+Answer:
+SparkContext object is available through the SparkSession object
+Using MongoSpark we can load() dataframes.
+Note:
+The correct answers are:
+SparkContext object is available through the SparkSession object
+Using MongoSpark we can load() dataframes.
+Dataframes can be used from MongoDB contexts and SparkContext is still available through SparkSession.
+
+
+Expressions Quiz
+
+Which of the following types can be used in expressions in the aggregation pipeline?
+Check all that apply:
+
+[Multiple Answers]
+
+System variable
+String literal
+Document
+Array
+String
+
+Answer:
+System variable
+String literal
+Document
+Array
+String
+Note:
+An expression can resolve to any object, so all of the answers are correct.
+
+
+String Operators Quiz
+
+Which of the following is/are new string operators?
+Check all that apply:
+
+[Multiple Answers]
+
+$substrCP
+$substrBytes
+$strlenCP
+$splitCP
+
+Answer:
+$substrCP
+$substrBytes
+$strlenCP
+Note:
+All of the answers are correct and in this lesson, except for $splitCP, which is not an operator. We do, however, have $split, which uses a string as a delimiter, so there are no CP or Bytes versions.
+
+
+Array Operators, Part 2 Quiz
+
+Which of the following is an operator that will combine two flat arrays into a single nested array of two-element arrays?
+Choose the best answer:
+
+[Single Answer]
+
+$reduce
+$range
+$zip
+$reverseArray
+$indexOfArray
+
+Answer: $zip
+Note:
+The answer is $zip. None of the other operators have this functionality.
+
+
+Top Level Aggregation Improvements Quiz
+
+Which of the following is/are new stages for the aggregation pipeline?
+Check all that apply:
+
+[Multiple Answers]
+
+$count
+$addFields
+$replaceBranch
+
+Answer:
+$count
+$addFields
+Note:
+The only wrong choice is $replaceBranch, which is not an operator, top level or otherwise.
+
+
+Upgrade Procedure Quiz
+
+While upgrading MongoDB from 3.2.x to 3.4.x, which of following applies?
+Check all that apply:
+
+[Multiple Answers]
+
+A simple switch of binaries enables us to use MongoDB 3.4
+Once we switch the binaries, mongod will run initially in 3.2 compatibility mode.
+A binary switch does not work since 3.4 uses a different binary format.
+After the binary switch we can immediately start creating views
+
+Answer:
+A simple switch of binaries enables us to use MongoDB 3.4
+Once we switch the binaries, mongod will run initially in 3.2 compatibility mode.
+Note:
+The correct statements in this quiz are:
+A simple switch of binaries enables us to use MongoDB 3.4
+Although we are not able to start using the backwards incompatible features, like views, decimal type and collations, 3.4 binaries are able to load any data written by a mongod of version 3.2.8 or greater. To enable these features, we need to change the compatibility mode to 3.4.
+Once we switch the binaries, mongod will run in a 3.2 compatibility mode.
+This is the default behavior for a previously created dataset managed by a 3.2 instance.
+
+
+Downgrade Intro and Steps Quiz
+
+To which of the following versions can we proceed to downgrade a MongoDB 3.4 instance ?
+Check all that apply:
+
+[Multiple Answers]
+
+3.2.9
+3.2.11
+3.0.10
+2.6.12
+3.2.4
+Submit
+
+Answer:
+3.2.9
+3.2.11
+Note:
+We cannot downgrade to a 3.2.7 or earlier version, therefore the correct answers to this quiz are:
+3.2.9
+3.2.11
+
+
+Downgrade Views Quiz
+
+Which of the following commands disables, on a MongoDB 3.4 server, the new 3.4 features incompatible with MongoDB 3.2 ?
+Choose the best answer:
+
+[Single Answer]
+
+db.adminCommand({setFeatureCompatibilityVersion: "3.2"})
+
+db.adminCommand({setFeatureCompatibilityVersion: "3.4"})
+
+db.adminCommand({disableViews: true})
+db.adminCommand({disableCollations: true})
+db.adminCommand({disableDecimalType: true})
+
+db.adminCommand({setMongoDBFeatureVersion: "3.2"})
+
+Answer: db.adminCommand({setFeatureCompatibilityVersion: "3.2"})
+Note:
+To disable 3.4 features we need to enable the feature compatibility version to 3.2. This way we make sure that, even running a MongoDB 3.4 instance, the server will not be enabling features that are not compatible with MongoDB 3.2.
+Therefore the correct answer would be:
+db.adminCommand({setFeatureCompatibilityVersion:"3.2"})
+
+
+Downgrade Collations and Decimal Type Quiz
+
+To downgrade a 3.4 instance to 3.2 we need to attend any potential collation created. Which of the following database objects might have collations in their metadata?
+Check all that apply:
+
+[Multiple Answers]
+
+collections
+indexes
+databases
+cursors
+
+Answer:
+collections
+indexes
+Note:
+There are 3 different objects that may contain a collation defined: - collections - indexes - views
+We do not set collations at database level. Although, we can express a particular query to use a collation, through a cursor method, these are not defined in terms of metadata.
+The correct answers to this quiz are:
+collections
+indexes
+
+
+Downgrade Indexes and Binaries Quiz
+
+MongoDB 3.4 creates indexes with version:
+Check all that apply:
+
+[Multiple Answers]
+
+{v:1} if db.adminCommand({setFeatureCompatibilityVersion: "3.2"})
+{v:2} if db.adminCommand({setFeatureCompatibilityVersion: "3.4"})
+{v:2} regardless of the compatibility mode.
+{v:1} by default in any version.
+
+Answer:
+{v:1} if db.adminCommand({setFeatureCompatibilityVersion: "3.2"})
+{v:2} if db.adminCommand({setFeatureCompatibilityVersion: "3.4"})
+Note:
+MongoDB 3.4, by default, creates indexes with version 2, {v:2}, unless we previously define the compatibility mode to 3.2.
+The correct answers are:
+{v:1} if db.adminCommand({setFeatureCompatibilityVersion:"3.2"})
+{v:2} if db.adminCommand({setFeatureCompatibilityVersion:"3.4"})

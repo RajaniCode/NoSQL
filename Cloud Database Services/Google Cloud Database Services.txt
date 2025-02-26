@@ -1,0 +1,17 @@
+Google Cloud Database Services
+# Highly-scalable NoSQL Database: Cloud Datastore
+# SQL
+  # Relational: Cloud SQL, AlloyDB for PostgreSQL, Spanner, Bare Metal Solution for Oracle, BigQuery
+  # Relational + Horizontal Scale: Cloud Spanner
+# NoSQL
+  # Key-value: Bigtable - MapReduce, Wide-column, [Analytics + Low latency]
+  # Document: Firestore, Firebase Realtime Database
+
+# Additional NoSQL: 
+    # MongoDB Atlas:
+      # Google Cloud Partner Services: Managed offerings from our open source partner network, including MongoDB, Datastax, Redis Labs, and Neo4j
+# In-memory: Memorystore
+# Data Warehouse: BigQuery [Analytics + No low-latency]
+
+# Latency is a measure of the [execution time] of long data retrieval operations such as queries
+# Throughput is a measure of [how much data] can be processed during a specific period of time

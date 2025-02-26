@@ -1,0 +1,14 @@
+4.6 Chalice of Choices
+
+
+Which modeling option would give us all the data we need with a single query, support for atomic writes, and is great for data that is strongly related?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Embedding
+
+Note: Referenced documents require 2 queries and don't support atomic writes between documents.

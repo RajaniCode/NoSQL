@@ -1,0 +1,25 @@
+3.10 The Realm of Requirements
+
+
+We need to create a report detailing all the wand information except for their price and lengths. Since non-developers will be looking at this report, let's remove the _id as well.
+
+Shell Editor
+
+
+1. Write a query for all wands that excludes the price, lengths, and _id field.
+
+Answer:
+
+Shell Editor
+
+db.wands.find( { }, { "price": 0, "lengths": 0, "_id": 0  } ) 
+
+2. The criteria for the report have changed. We need to write a query to include the name and powers fields.
+
+Include only the needed fields, but continue to exclude to _id field.
+
+Answer:
+
+Shell Editor
+
+db.wands.find( { }, { "price": 0, "lengths": 0, "_id": 0, "name": 1, "powers": 1 } )

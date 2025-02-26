@@ -1,0 +1,5 @@
+# zip
+% zip "sampledata.archive.zip" "sampledata.archive"
+
+# split
+% zip "sampledata.archive.zip" --out "Split sampledata.archive.zip" -s 45m

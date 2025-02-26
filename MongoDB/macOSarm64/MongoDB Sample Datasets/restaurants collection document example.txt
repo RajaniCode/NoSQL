@@ -1,0 +1,8 @@
+// restaurants collection document example
+{
+   location: {
+      type: "Point",
+      coordinates: [-73.856077, 40.848447]
+   },
+   name: "Morris Park Bake Shop"
+}

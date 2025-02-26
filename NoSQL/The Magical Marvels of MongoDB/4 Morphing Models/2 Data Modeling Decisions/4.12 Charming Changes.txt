@@ -1,0 +1,14 @@
+4.12 Charming Changes
+
+
+Which modeling route is best when we have data that is constantly changing and will help prevent data inconsistencies from arising?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Referencing
+
+Note: Embedding data often implies that we are duplicating information, which isn't ideal if it changes frequently.

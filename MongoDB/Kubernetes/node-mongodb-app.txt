@@ -1,0 +1,255 @@
+% sw_vers
+
+% arch
+
+% node -v
+
+% npm -v
+
+% nano index.js
+[
+const path = require('path')
+const express = require('express')
+const MongoClient = require('mongodb').MongoClient
+const multer = require('multer')
+const { marked } = require('marked')
+
+const app = express()
+const port = process.env.PORT || 3000
+const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/dev'
+
+async function initMongo() {
+  console.log('Initialising MongoDB...')
+  let success = false
+  while (!success) {
+    try {
+      client = await MongoClient.connect(mongoURL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      success = true
+    } catch {
+      console.log('Error connecting to MongoDB, retrying in 1 second')
+      await new Promise(resolve => setTimeout(resolve, 1000))
+    }
+  }
+  console.log('MongoDB initialised')
+  return client.db(client.s.options.dbName).collection('notes')
+}
+
+async function start() {
+  const db = await initMongo()
+
+  app.set('view engine', 'pug')
+  app.set('views', path.join(__dirname, 'views'))
+  app.use(express.static(path.join(__dirname, 'public')))
+  app.use(express.static(path.join(__dirname, '/images')))
+
+  app.get('/', async (req, res) => {
+    res.render('index', { notes: await retrieveNotes(db) })
+  })
+
+  app.post(
+    '/note',
+    multer({ dest: path.join(__dirname, 'public/uploads/') }).single('image'),
+    async (req, res) => {
+      if (!req.body.upload && req.body.description) {
+        await saveNote(db, { description: req.body.description })
+        res.redirect('/')
+      } else if (req.body.upload && req.file) {
+        const link = `/uploads/${encodeURIComponent(req.file.filename)}`
+        res.render('index', {
+          content: `${req.body.description} ![](${link})`,
+          notes: await retrieveNotes(db),
+        })
+      }
+    },
+  )
+
+  app.listen(port, () => {
+    console.log(`App listening on http://localhost:${port}`)
+  })
+}
+
+async function saveNote(db, note) {
+  await db.insertOne(note)
+}
+
+async function retrieveNotes(db) {
+  const notes = await db.find().toArray()
+  const sortedNotes = notes.reverse()
+  return sortedNotes.map(it => ({ ...it, description: marked(it.description) }))
+}
+
+start()
+]
+% cat index.js
+
+
+% mkdir -p views  
+
+    
+% nano views/index.pug
+[
+html
+  head
+    title= title
+    link(rel="stylesheet", href="tachyons.min.css")
+  body.ph3.pt0.pb4.mw7.center.sans-serif
+    h1.f2.mb0 #[img(src='/images/Node.png')] #[span.green N]ode #[img(src='/images/MongoDB.png')] #[span.green M]ongoDB 
+    <!-- img(src="https://avatars.githubusercontent.com/u/9950313?s=48&v=4") -->
+    // img(src='https://avatars.githubusercontent.com/u/45120?s=48&v=4')
+    p.f5.mt1.mb4.lh-copy A Node MongoDB app.
+    form(action="/note" method="POST" enctype="multipart/form-data")
+      ol.list.pl0
+        li.mv3
+          label.f6.b.db.mb2(for="image") Upload an image
+          input.f6.link.dim.br1.ba.b--black-20.ph3.pv2.mb2.dib.black.bg-white.pointer(type="file" name="image")
+          input.f6.link.dim.br1.ba.bw1.ph3.pv2.mb2.dib.black.bg-white.pointer.ml2(type="submit" value="Upload" name="upload")
+        li.mv3
+          label.f6.b.db.mb2(for="description") Write your content here
+          textarea.f4.db.border-box.hover-black.w-100.measure.ba.b--black-20.pa2.br2.mb2(rows="5" name="description") #{content || ''}
+          input.f6.link.dim.br1.ba.bw1.ph3.pv2.mb2.dib.black.bg-white.pointer(type="submit" value="Publish" name="publish")
+    if notes.length > 0
+      ul.list.pl0
+        p.f6.b.db.mb2 Notes
+        each note in notes
+          li.mv3.bb.bw2.b--light-yellow.bg-washed-yellow.ph4.pv2
+            p.measure!= note.description
+    else
+      p.lh-copy.f6 You don't have any notes yet.
+]
+% cat views/index.pug
+
+
+[
+% mkdir -p public
+]
+% curl -L https://raw.githubusercontent.com/tachyons-css/tachyons/master/css/tachyons.min.css
+% wget https://raw.githubusercontent.com/tachyons-css/tachyons/master/css/tachyons.min.css --directory-prefix=public
+% cat public/tachyons.min.css
+
+
+[
+% wget -O Node.png "https://avatars.githubusercontent.com/u/9950313?s=48&v=4" -P "public/images"
+% wget --output-document=Node.png "https://avatars.githubusercontent.com/u/9950313?s=48&v=4" --directory-prefix="public/images"
+]
+% curl --output Node.png "https://avatars.githubusercontent.com/u/9950313?s=48&v=4" --create-dirs --output-dir public/images
+% ls public/images/Node.png
+% curl --output MongoDB.png "https://avatars.githubusercontent.com/u/45120?s=48&v=4" --create-dirs --output-dir public/images
+% ls public/images/MongoDB.png
+
+
+% nano package.json   
+[
+{
+  "name": "knote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "mongodb": "mongod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "marked": "^4.0.10",
+    "mongodb": "^3.5.2",
+    "mongodb-prebuilt": "^6.5.0",
+    "multer": "^1.4.1",
+    "pug": "^3.0.1"
+  }
+}
+]
+% cat package.json
+
+
+% npm list --global
+% npm list
+
+% npm install
+
+% npm list --global
+% npm list
+
+
+# In another terminal window
+[
+# kill <mongod pid> # % ps -A | grep mongod | awk '{print $1}'
+% ls /opt/homebrew/var/mongodb
+% ls /opt/homebrew/var/log/mongodb/mongo.log
+% mongod --dbpath /opt/homebrew/var/mongodb --logpath /opt/homebrew/var/log/mongodb/mongo.log --fork
+
+# kill <mongod pid> # % ps -A | grep mongod | awk '{print $1}'
+% ls /opt/homebrew/etc/mongod.conf
+% sudo nano /opt/homebrew/etc/mongod.conf
+% cat /opt/homebrew/etc/mongod.conf 
+% mongod --config /opt/homebrew/etc/mongod.conf --fork
+
+# MongoDB Shell % mongosh --version
+% mongosh
+]
+% brew services start mongodb-community
+[
+% brew services stop mongodb-community
+% brew services restart mongodb-community
+]
+
+
+# Switch to original terminal window
+[
+% npm run mongodb -- --dbpath /opt/homebrew/var/mongodb
+[
+throw new Error("unsupported architecture, ia32 and x64 are the only valid options");
+]
+% npm run start
+]
+% node index.js
+
+
+[
+http://localhost:3000/images/Node.png
+http://localhost:3000/images/MongoDB.png
+]
+
+
+# Switch to the terminal where you ran brew services start mongodb/brew/mongodb-community 
+% mongosh
+test> db.version()
+
+# Current storage engine
+test> db.serverStatus().storageEngine
+
+# Configuration details of wiredTiger
+test> db.serverStatus().wiredTiger
+
+test> show databases
+test> show dbs
+test> db.getMongo().getDBNames()
+test> db.adminCommand('listDatabases')
+
+test> use sampledb
+sampledb> db.createCollection("example")
+sampledb> show tables
+sampledb> show collections
+sampledb> db.getCollectionNames()
+sampledb> db.example.insertOne( { "Name" : "Mongo" } )
+sampledb> db.example.find()
+sampledb> db.example.find({}).sort({_id:1}).limit(1).next()._id.getTimestamp()
+sampledb> for (var key in db.example.findOne()) { print (key, typeof key) }
+
+test> var dbs = db.getMongo().getDBNames()
+for (var i in dbs) {
+    db = db.getMongo().getDB( dbs[i] );
+    if(db.getName() != "admin" && db.getName() != "config" && db.getName() != "local") {
+        print( "dropping db " + db.getName() );
+        db.dropDatabase();
+    }
+}
+
+test> exit
+
+
+% ls public/uploads

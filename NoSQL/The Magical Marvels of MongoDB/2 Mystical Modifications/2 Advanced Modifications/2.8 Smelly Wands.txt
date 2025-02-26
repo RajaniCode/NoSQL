@@ -1,0 +1,25 @@
+2.8 Smelly Wands
+
+
+A few of the old wands included a smell field, and we're not exactly sure why anyone thought that would be a relevant field. Let's get rid of it!
+
+Shell Editor
+
+db.wands.update(
+  {},
+  
+  {"multi": true}
+)
+
+Add the update parameter that will remove the smell field from all documents.
+
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {},
+  { "$unset": { "smell": "arbitrary" } },
+  {"multi": true}
+)

@@ -1,0 +1,10 @@
+4.3 Related Realms
+
+
+Fill in the blank with the correct answer.
+
+
+If we take a unique value like an _id from one document and store it as a value within a related document, we have just created a [ ] document.
+
+
+Answer: referenced

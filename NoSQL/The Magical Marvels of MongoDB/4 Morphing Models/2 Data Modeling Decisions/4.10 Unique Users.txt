@@ -1,0 +1,14 @@
+4.10 Unique Users
+
+
+Which data modeling option would be the best fit for storing users and their addresses when we know that the data is used together often, won't be changing regularly, and each user will only be storing a few addresses?
+
+[Single Answer]
+
+Embedding
+Referencing
+
+
+Answer: Embedding
+
+Note: Users and addresses are strongly related and can easily be embedded.

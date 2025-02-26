@@ -1,0 +1,35 @@
+2.10 Abracadabra Array Alterations I
+
+
+We want to be the go-to source for wand information. Currently, we are listing one-word powers for each wand, but we should probably start being more specific. Here's the document we'll be working with:
+
+{
+  "_id": ObjectId("56016414959123c11810f9ad"),
+  "name": "Dream Bender",
+  "creator": "Foxmond",
+  "level_required": 10,
+  "price": 34.9,
+  "powers": ["Fire", "Love"],
+  "damage": {"magic": 4, "melee": 2}
+}
+
+Shell Editor
+
+db.wands.update(
+  {"name": "Dream Bender"},
+  
+)
+
+
+For the wand above, let's add the update parameter to set the value of "Fire" to "Fire Deflection" in the powers array.
+
+Remember that we only want to update a single array value, not all of the values in the array.
+
+Answer:
+
+Shell Editor
+
+db.wands.update(
+  {"name": "Dream Bender"},
+  { "$set": { "powers.0":  "Fire Deflection" } } 
+)

@@ -1,0 +1,3 @@
+db.restaurants.createIndex({ location: "2dsphere" })
+var ONE_KILOMETER = 1000
+db.restaurants.find({ location: { $nearSphere: { $geometry: { type: "Point", coordinates: [ -73.93414657, 40.82302903 ] }, $maxDistance: ONE_KILOMETER } } })
